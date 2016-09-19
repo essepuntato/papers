@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/rash.css"/>
+      <script src="js/jquery.min.js"> </script>
+      <script src="js/bootstrap.min.js"> </script>
+      <script src="js/rash.js"> </script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <title>Enhancing semantic expressivity in the cultural heritage domain: exposing the Zeri Photo Archive as Linked Open Data</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="Department of Classical Philology and Italian Studies, University of Bologna, Italy"/>
+      <meta about="#affiliation-2"
+            property="schema:name"
+            content="Federico Zeri Foundation, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-3"
+            property="schema:name"
+            content="Digital And Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Marilena Daquino"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="marilena.daquino2@unibo.it"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="Francesca Mambelli"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="francesca.mambelli6@unibo.it"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-3"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-3"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-3"
+            property="schema:affiliation"
+            href="#affiliation-3"/>
+      <meta about="#author-4"
+            name="dc.creator"
+            property="schema:name"
+            content="Francesca Tomasi"/>
+      <meta about="#author-4"
+            property="schema:email"
+            content="francesca.tomasi@unibo.it"/>
+      <link about="#author-4"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-5"
+            name="dc.creator"
+            property="schema:name"
+            content="Fabio Vitali"/>
+      <meta about="#author-5"
+            property="schema:email"
+            content="fabio.vitali@unibo.it"/>
+      <link about="#author-5"
+            property="schema:affiliation"
+            href="#affiliation-3"/>
+      <meta property="prism:keyword" content="Scheda F"/>
+      <meta property="prism:keyword" content="Scheda OA"/>
+      <meta property="prism:keyword" content="mapping CIDOC-CRM"/>
+      <meta name="dcterms.subject"
+            content="Information systems, Information systems applications, Digital libraries and archives"/>
+      <meta name="dcterms.subject"
+            content="Information systems, World Wide Web, Web data description languages, Web Ontology Language (OWL)"/>
+      <meta name="dcterms.subject"
+            content="Computing methodologies, Artificial intelligence, Knowledge representation and reasoning, Ontology engineering"/>
+      <meta name="dcterms.subject" content="Applied computing, Arts and humanities"/>
+      <meta name="dcterms.subject"
+            content="Applied computing, Computers in other domains, Digital libraries and archives"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>ABSTRACT</h1>
+         <p>The description of cultural heritage objects in the Linked Open Data (LOD) perspective is not a trivial task. The process often requires not only to choose pertinent ontologies, but also to develop new models that preserve the maximum of information and express the semantic power of cultural heritage data. Indeed, data managed in archives, libraries and museums are complex objects themselves, that need a deep reflection on even non conventional conceptual models. Starting from these considerations, this paper describes a research project: to expose as Linked Open Data the vastness of one of the most important collections of European cultural heritage, the Zeri Photo Archive. We describe here the steps we undertook to this end: we developed two <em>ad hoc</em> ontologies for describing all the issues not completely covered by existent models (the <em>F Entry</em> and the <em>OA Entry Ontology</em>); we mapped into RDF the descriptive elements used in the current Zeri Photo Archive catalog into RDF, converting into CIDOC-CRM, SPAR Ontologies and the two new aforementioned models the source data based on the Italian content standards Scheda F (Photography Entry, in English) and Scheda OA (Work of art Entry, in English). Finally, we created an RDF dataset of the output of the mapping that could show a result capable to demonstrate the complexity of our scenario. </p>
+         <p>
+            <strong>RASH:</strong> 
+            <a href="https://w3id.org/people/essepuntato/papers/zeri-and-lode-jocch.html">https://w3id.org/people/essepuntato/papers/zeri-and-lode-jocch.html</a> 
+         </p>
+      </section>
+      <section>
+         <h1>INTRODUCTION </h1>
+         <p>Libraries, archives and museums are facing a substantial transformation in managing cultural heritage data. In particular, the attempt to express the latent semantic power of data – by creating relations and interconnections between different kind of cultural objects owned by similar cultural institutions – is considered a shared approach in the community. The idea to define an infrastructure for sharing metadata about such objects is needed so as to create comprehensive tools for researchers, to provide innovative environments for users' learning, and, finally, to increase the impact of culture in society. Cultural heritage institutions are dealing with two urgent issues: on the one hand, they need to provide a complete and exhaustive semantic description of their data; on the other hand, they have to open up their data to interchange, interconnection and enrichment.</p>
+         <p>The urgent need for such scenarios has been addressed in the context of a particular project, <em>PHAROS: An International Consortium of Photo Archives </em>
+            <a href="#__RefNumPara__4975_327671333"> </a>. PHAROS is one of the first concrete steps towards the creation of an actual digital infrastructure of the notable photographic archives of works of art in Europe and the United States of America. The Consortium enables the active collaboration between the institutions responsible for fourteen photo archives so as to create a common platform for research on images and metadata of Western and non-Western works of art in all media. One of the most important institutions included in the Consortium is the Zeri Foundation (<a href="http://www.fondazionezeri.unibo.it/en">http://www.fondazionezeri.unibo.it/en</a>). Its Photo Archive is planned to be one of the first assets to be included in PHAROS. </p>
+         <p>In this article we introduce a project called<em> Zeri and LODE</em>, which addresses the enhancement of existing metadata collections of the Zeri Photo Archive by means of Semantic Web technologies, in order to make them easily discoverable, interchangeable, and interlinked with other existing and relevant sources.</p>
+         <p>Our sources were the collections owned by one of the most important art historian of the XX century: Federico Zeri (1921-1998). His extensive library of art books, auction catalogs and individual photos of monuments and artworks was his main instrument of work. He began to collect them in the 1940s and, over time, had it become <q>the world's largest private archive of Italian paintings</q>, an essential reference work for the historical sequencing of out-of-context works. At the time of his death, the archive included more than 46.000 volumes, 37.000 auction catalogs, 60 periodicals and 290.000 individual photographs. In order to preserve his bequest and put it to best use, the Zeri Foundation was set up in his name at the University of Bologna, and it has come to be recognized as one of the most important research and training centres for art historians in the world. </p>
+         <p>Among the activities of its first years, the Zeri Foundation undertook the cataloguing of Zeri's repository, employing to that end two Italian metadata content standards, <em>Scheda F</em>, for <em>Scheda di fotografia </em>(<em>photograph</em>, available at <a href="http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/10">http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/10</a>) and <em>Scheda OA</em>, for <em>Scheda Opera d'Arte</em> (<em>work of art</em>, available at <a href="http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/29">http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/29</a>), which will be respectively called <em>F Entry</em> and <em>OA Entry</em> in the following, both issued by the <em>ICCD</em> (<em>Istituto Centrale per il Catalogo e la Documentazione</em>, Central Institute for the Cataloguing and Documentation) of the Italian Ministry of Cultural Heritage. As a side note, the ICCD coordinates the research in the definition of cataloging standards for all kinds of cultural objects belonging to the archaeological, architectural, artistic and ethno-anthropological areas of interest of the Ministry. </p>
+         <p>The <em>Scheda F </em>includes more than 300 fields recording information about photographers, history of photo production, publication, preservation, changes of location, exhibitions, materials and techniques, reference bibliography, attached documentation and technical data derived from the philological analysis of the item. In the context of the Zeri Photo Archive, the <em>Scheda OA </em>refers to the content of the photography, i.e. the work of art. In particular, it includes more than 200 fields that offer a detailed description of the object depicted and provides similar information to the ones described in the <em>Scheda F</em>. </p>
+         <p>The effort in cataloguing Zeri's collection compliantly with these two Italian standards has resulted in the Zeri Photo Archive catalog, which is stored in a relational database and accessible through a web interface (<a href="http://catalogo.fondazionezeri.unibo.it/">http://catalogo.fondazionezeri.unibo.it</a>). </p>
+         <p>Because of the national and international relevance of this photo archive, the complexity recorded in its heterogeneous catalog, and the explicit request from the PHAROS Consortium, we have started to work on these data as a use case for defining a common model between institutions that could use different descriptive standards for photographs. In particular, our main goal was the development of appropriate Semantic Web models and technologies so as to provide a representation of the Zeri Photo Archive as Linked Open Data (LOD) . </p>
+         <p>The PHAROS Consortium suggested the CIDOC-CRM conceptual reference model <a href="#__RefNumPara__34011_1461357291"> </a> as required representational framework for data to be shared within the Consortium, given its explicit characterization for cultural heritage entities and its widely recognized international standing. CIDOC-CRM has been widely adopted in Italy in the past years and it was considered by PHAROS members a good starting point for addressing dialogue between data sources – even if no photo archive had been described by means of it yet. Thus, the original plan was to map the Scheda F and Scheda OA fields with CIDOC-CRM properties, so as to represent the metadata of the Zeri Photo Archive into machine-readable form according to the required standard. </p>
+         <p>Unfortunately the full mapping was not possible, since many properties of photos and works of art described by Scheda F and Scheda OA, that are necessary for the full and complete description of Zeri's catalog, do not have a natural representation in CIDOC-CRM. For instance, a clear representation of subjective attributions (e.g. authorship attributions, objects appellation, influence between works, and dating) should be handled appropriately by means of dedicated entities, and should also consider the provision of data integration among stakeholders – who may catalog the same object providing contradictory information. Moreover, the network of people and organizations involved in the lifecycle of such cultural objects with different roles required to be represented precisely, together with an explicit representation of the influence a cultural object may have on the conception of another one (e.g. a copy or a derivative work). While all these data are crucial for enabling further relations to otherwise not discoverable information, they cannot be represented in CIDOC-CRM without ambiguities.</p>
+         <p>So as to address all the aforementioned issues, we focussed on the creation of:</p>
+         <ol>
+            <li>
+               <p>two ontologies, i.e. the F Entry Ontology and the OA Entry Ontology, to represent all missing information from CIDOC-CRM;</p>
+            </li>
+            <li>
+               <p>two documents exemplifying the mappings and alignments from Scheda F and Scheda OA to CIDOC-CRM and our ontologies, so as to provide a complete representation of the description requirements for photographs and works of art;</p>
+            </li>
+            <li>
+               <p>an RDF dataset, published as Linked Open Data, describing a huge amount of the available F/OA entries in the Zeri's catalog according to the aforementioned ontologies.</p>
+            </li>
+         </ol>
+         <p>Even if the new entities introduced in the ontologies we have developed mainly comes from terms of two specific national standards (i.e. Scheda F and Scheda OA), entities and properties described in the ontologies are of widespread application and are, to our knowledge, the vastest and most complete model for describing photographs, works of art, and related documentation. Archives planning to describe collections of photos in CIDOC-CRM could immediately find our experience in working with Zeri’s catalog crucial for their own representation purposes.</p>
+         <p>This paper extends and details works already introduced in <a href="#__RefNumPara__32450_1461357291"> </a>. In addition to what described in that paper, we provide a thorough revision of the F Entry Ontology triggered by the OA Entry Ontology development. This includes the addition of topics that had not been tackled previously: a full description of works of art depicted in catalogued photographs, the development of aspects that were deemed secondary when first developing the F Entry in isolation, and the uniformity of choices for RDF representation of both work types (photos and works of art). Then we proceeded with the mapping of terms belonging to Scheda F and Scheda OA used in Zeri Photo Archive into RDF, according to aforementioned ontologies. Finally, we realized the Linked Open Data publication of the first subset of the Zeri catalog, including photos of artworks of 15<sup>th</sup>-16<sup>th</sup> centuries. All the steps of the process, from the mapping to the ontologies development and the LOD publication, have been shared with the ICCD and are still under discussion in order to define a unique general model that could be proposed to all the Italian institutions that have to manage these kind of data.</p>
+         <p>The rest of the paper is organised as follows. In <a href="#__RefHeading__38295_1461357291"> </a> we introduce some related works on these topics. In <a href="#__RefHeading__38203_1477311293"> </a> we present the methodology we adopted for the development of the ontologies, which are introduced in <a href="#__RefHeading__15555_2085944011"> </a>. In <a href="#__RefHeading__8099_2085944011"> </a> we discuss the alignments among the two content standards (i.e., Scheda F and Scheda OA) into RDF. In <a href="#__RefHeading__38297_1461357291"> </a> we describe the LOD dataset we have created that includes all the RDF data obtained from converting the Zeri Photo Catalog. Finally, in <a href="#__RefHeading__38299_1461357291"> </a> we conclude the paper sketching out some future works.</p>
+      </section>
+      <section id="__RefHeading__38295_1461357291">
+         <h1>RELATED WORKS</h1>
+         <p>As said in the introduction, the digital cultural heritage scenario is facing a strong transformation. In particular, publishing strategies of cultural heritage data are changing the traditional methodologies. Cleaning, reconciliation, enrichment and linking <a href="#__RefNumPara__33893_1461357291"> </a> are the new keywords in the domain of libraries, archives and museums. The Semantic Web, and the Linked Open Data theory and practice, have determined a revolution in data production and access, and both machines and final users are experimenting new ways for acquiring knowledge from URIs and typed RDF links (<a href="http://linkeddata.org/">http://linkeddata.org</a>). </p>
+         <p>Many projects, e.g. LODLAM (<a href="http://lodlam.net/">http://lodlam.net</a>) and OpenGlam (<a href="http://openglam.org/">http://openglam.org</a>), demonstrate how much the community is growing around these themes (for an updated survey see the Task force activity on LOD: <a href="https://www.w3.org/wiki/SweoIG/TaskForces/CommunityProjects/LinkingOpenData">https://www.w3.org/wiki/SweoIG/TaskForces/CommunityProjects/LinkingOpenData</a>). Datasets are increasing in number (see the datahub.io classification) and the LOD cloud is larger day after day. Together with the publication of LOD collections, new vocabularies are modelled (see LOV, Linked Open Vocabularies, <a href="http://lov.okfn.org/dataset/lov/">http://lov.okfn.org/dataset/lov/</a>), in order to address the needs of the cultural heritage domain. The scientific literature about methods in producing LOD shows the directions of the research around these themes: authorities reconciliation and linking, but also ontologies reuse and development, are the basis for realizing the idea of LOD.</p>
+         <p>The need to convert flat traditional element schemes, such as the above-mentioned Scheda F and Scheda OA, into ontology terms forced us to develop new models as a result of a reflection on existing conceptualizations and their shortcomings. The adoption of models that were widely appreciated in the specific domain of cultural heritage is the first obvious step, but we considered also other models already capable to address additional important issues.</p>
+         <p>As described in the next sections, many ontologies represent important facets in our ontology development process. Each chosen ontology is used to cover one aspect of our heterogeneous scenario and were therefore first reused, but then also extended. The SPAR ontologies (<a href="http://www.sparontologies.net/">http://www.sparontologies.net</a>), mostly used in academic literature, were necessary in order to describe the documentation used in the cataloguing process. But, by describing even the catalog entries using SPAR, we aimed at making them available also as bibliographic sources. In particular, FaBiO <a href="#__RefNumPara__7567_327671333"> </a> was chosen for managing bibliographies according to the FRBR approach <a href="#__RefNumPara__7570_327671333"> </a>; CiTO <a href="#__RefNumPara__7567_327671333"> </a> was reused for describing the different citations that cataloguers provide to support their attributions, and PRO <a href="#__RefNumPara__7682_327671333"> </a> was fundamental for documenting people's role in photographic, arts, publishing and cataloguing domains. HiCO <a href="#__RefNumPara__34007_1461357291"> </a>, was created by extending PROV-O <a href="#__RefNumPara__34003_1461357291"> </a>, in order to describe the interpretation process relative to subjective attributions, a fundamental aspect of our conceptualization. And of course CIDOC-CRM <a href="#__RefNumPara__34011_1461357291"> </a> was finally used in order to describe all the features directly related to catalogued objects, so as to guarantee semantic interoperability between stakeholders. </p>
+         <p>The need of ontological interconnection represents a trend: as Europeana demonstrates, in particular within the EDM (Europeana Data Model) <a href="#__RefNumPara__34015_1461357291"> </a>, the variety of existing vocabularies in the cultural heritage domain brings the need of reusing and aligning models <a href="#__RefNumPara__10849_327671333"> </a>. The mapping to CIDOC-CRM forced on us an analysis of methodologies in merging and mapping, as technical processes, theoretical activities and common, shared, approaches also in the cultural heritage domain <a href="#__RefNumPara__7794_327671333"> </a>.</p>
+         <p>In addition to the ontologies, we made use of authorities, controlled vocabularies and other datasets (e.g. VIAF, DBpedia, Getty AAT and ULAN, Wikidata, Geonames), in order to define appropriate links for both mutual connections and alignment (a list in <a href="#__RefNumPara__34019_1461357291"> </a>). </p>
+         <p>Other existing datasets in the artworks domain were finally analysed (e.g. Smithsonian Art Museum, <a href="http://americanart.si.edu/collections/search/lod/about/">http://americanart.si.edu/collections/search/lod/about/</a>; Yale Center for British Art, <a href="http://britishart.yale.edu/collections/using-collections/technology/linked-open-data">http://britishart.yale.edu/collections/using-collections/technology/linked-open-data</a>).</p>
+      </section>
+      <section id="__RefHeading__38203_1477311293">
+         <h1>METHODOLOGY AND ONTOLOGY DEVELOPMENT </h1>
+         <p>Modelling complex information provided by Scheda F/OA content standards required to manage different knowledge domains, i.e. bibliographic, archival, photography, arts and cultural heritage domains. Thus, our priority was to enable the coexistence of heterogeneous and existing models, already available and developed for describing one of the aforementioned domains, as big modular consistent ontologies for describing all the entities involved in the Zeri's Catalog. </p>
+         <p>Usually, cultural institutions adopt the most suitable vocabulary for their purpose, without taking care about the way similar concepts are actually modelled in other relevant domains, leaving the possibility of aligning them as possible future work. The same object may be described in different ways according to the data creator's cultural background. For example, Arts and Library Sciences conceive and apply differently the Functional Requirements for Bibliographic Records (FRBR) conceptual model <a href="#__RefNumPara__12582_20859440111"> </a> 
+            <a href="#__RefNumPara__29946_1995777241"> </a> 
+            <a href="#__RefNumPara__17043_2085944011"> </a> 
+            <a href="#__RefNumPara__33903_1461357291"> </a> into their object description. Cataloguing artworks generally entails aggregating under the same label (i.e. type of work) functional, formal, and morphological features of the object, by considering these issues inseparable from the conception of the work itself, i.e. the FRBR Work – which is a peculiarity of the arts domain. In the bibliographic domain instead, such definition may be formalized by considering such features at other levels than the Work, e.g. the Expression and the Manifestation levels. Thus the RDF representation of a painting may significantly vary when defined in one of the two aforementioned domains, which will affect the way how data can be integrated. </p>
+         <p>In addition to pure theoretical and designing consideration, the way different data providers label their data should be taken into account as well. For instance, cataloguers use specific and, often, customised criteria for recording authorship attributions, e.g. by means of their own classification system, that are not immediately sharable to other stakeholders without a reconciliation into a controlled vocabulary. Thus, one of the main aspect we had to address was to provide flexible mechanisms <a href="#__RefNumPara__30108_1995777241"> </a> to record the particular criteria adopted by a cataloguer for cataloguing a work, still allowing their evolution over time if new catalog guidelines would be proposed and substituted to the old one, without any loss of precious information. In addition, keeping track the multiple and even inconsistent interpretations in cataloguing was something that had to be handled properly as well. </p>
+         <p>In order to provide a model to describe the aforementioned cases, we also wanted to rely on existing standards and models, instead of reinventing everything from scratch. The use of FRBR-compliant ontologies (i.e., SPAR Ontologies) for modelling the bibliographic and documental aspects of our domain, the HiCo Ontology to provide attributions of provenance information, and CIDOC-CRM, i.e. the international standard for describing cultural artefacts, appeared to be quite useful for providing a first, even if still partial, description of works of art and photographs and their related data.</p>
+         <p>We initially tried to figure it out if an alignment of Scheda F/OA elements to entities of CIDOC-CRM model could be possible. Usually, the alignment to existing models is not a straightforward operation and could require several iterations and integrations to be prepared properly. We conducted a brief analysis of the CIDOC-CRM data model, which revealed that several concepts we needed in order to describe our domain in a proper way were not available in such reference model.</p>
+         <p>Therefore, our development first proceeded in defining terms and relations so as to accomplish the full description of our domain, and then we refactored and aligned them into CIDOC-CRM. We have also developed two OWL 2 DL ontologies <a href="#__RefNumPara__17045_2085944011"> </a>, released with Creative Commons licenses to foster broad reusability, for expressing concepts and relations of the main descriptive areas of the Italian content standards Scheda F/OA in RDF that were lacking in CIDOC-CRM. The approach we followed was mainly data-centric. In fact, such ontologies have to properly describe all the data represented in a real and representative dataset compliant with F/OA standards, i.e. the Zeri Photo Archive catalog. Thus, the use of such actual dataset allowed us to develop ontologies where their entities have meaningful names, and to provide real examples of their usage at every stage of the development process.</p>
+         <p>The methodology we adopted was the Simplified Agile Methodology for Ontology Development (<em>SAMOD</em>) <a href="#__RefNumPara__33076_1461357291"> </a>. SAMOD is an agile methodology, developed starting from guidelines proposed in well-known and existing ontology development methodologies such as <a href="#__RefNumPara__30026_1995777241"> </a> 
+            <a href="#__RefNumPara__30028_1995777241"> </a>, which allowed us to develop the model by means of several small and iterative steps, and to create documentation by using exemplars of data. In particular, this methodology required us to consider small issues iteratively, and provided us a way to test our under-development model immediately on a real use case in any phase of the development.</p>
+         <p>Good practices in ontology development were respected to ensure semantic interoperability and facilitate the model reuse: concepts and relations defined were refactored, directly reusing most appropriate external entities from established and well known ontologies, or aligning them to the ones of other models. </p>
+         <p>Documentation of both the F Entry and OA Entry ontology development processes is available online, respectively at <a href="http://www.essepuntato.it/2014/03/fentry/samod">http://www.essepuntato.it/2014/03/fentry/samod</a> and <a href="http://oaentry-ontology.sourceforge.net/samod/OAdevelopment.zip">http://oaentry-ontology.sourceforge.net/samod/OAdevelopment.zip</a>.</p>
+         <p>In the next section we provide a complete description of covered aspects and their formalization as ontological entities, accompanied by exemplar of their usage.</p>
+      </section>
+      <section id="__RefHeading__15555_2085944011">
+         <h1>THE F ENTRY ONTOLOGY AND THE OA ENTRY ONTOLOGY</h1>
+         <p>As above said, the main objective of our project is to expose Federico Zeri Foundation data to the world according to the standard CIDOC-CRM, the model chosen as <em>lingua franca</em> for sharing data between stakeholders. However, CIDOC-CRM lacks some peculiar entities of photography and arts domains, as well as several relations that in our opinion would truly make possible an integration between museums, and between museums and other domains.</p>
+         <p>Therefore, we extended the CIDOC-CRM model by creating two complementary ontologies, the F Entry Ontology and the OA Entry Ontology, that are described in the following subsections and that allow one to address the modelling scenarios that are not addressable properly by CIDOC-CRM. Thus, the actual mapping between CIDOC-CRM and the F/OA content standards is described in <a href="#__RefHeading__8099_2085944011"> </a>. </p>
+         <p>The first developed ontology, by using the above described methodology, is the F Entry Ontology, which deals with issues related to photography domain and several aspects that are in common with the OA Entry content standard for describing works of art. The latter ontology, the OA Entry Ontology, is thus very similar to the former one, and basically provides additional entities and relations proper of a comprehensive representation of the arts domain. The development of the OA Entry Ontology also resulted in a revision of the F Entry Ontology, so as to provide a specular description of same issues when appropriate. For the sake of brevity, common aspects of the two ontologies are detailed once in <a href="#__RefHeading__31706_1477311293"> </a>.</p>
+         <section id="__RefHeading__31706_1477311293">
+            <h1>The F Entry Ontology (FEO)</h1>
+            <p>The current version of F Entry Ontology (FEO) revises the previous version introduced in <a href="#__RefNumPara__32450_1461357291"> </a>, and it is available online at <a href="http://www.essepuntato.it/2014/03/fentry">http://www.essepuntato.it/2014/03/fentry</a>. The Graffoo diagram <a href="#__RefNumPara__30866_1995777241"> </a> of FEO in <a href="#refIllustration0"> </a> provides an overview of its classes – i.e., the yellow rectangles –, object properties – i.e., the blue dotted lines beginning with a solid circle and ending with a solid arrow –, and assertions among classes – i.e., the black lines ending with a solid arrow (the full specification of Graffoo graphical elements is available at <a href="http://www.essepuntato.it/graffoo/specification/current.html">http://www.essepuntato.it/graffoo/specification/current.html</a>).</p>
+            <figure id="refIllustration0">
+               <p>
+                  <img src="img/10000000000003D6000003020695AB06.png"
+                       alt="The Graffoo diagram of the F Entry Ontology main classes and properties."/>
+               </p>
+               <figcaption>The Graffoo diagram of the F Entry Ontology main classes and properties.</figcaption>
+            </figure>
+            <p>FEO introduces classes and properties needed to characterize three main concepts: the photograph, the subject portrayed in the photograph and the F Entry describing the photograph and its subjects. Each of the aforementioned entities is characterised in terms of FRBR. In particular:</p>
+            <ul>
+               <li>
+                  <p>the photograph is represented as a FRBR Work when describing its essence, as a FRBR Expression when dealing with information about its realization (i.e. the shot), as a FRBR Manifestation when describing each tangible form of the photograph, and as FRBR Item for each individual copy with different features;</p>
+               </li>
+               <li>
+                  <p>in the Zeri Photo Archive the portrayed subject of a photograph is always a concrete work of art. Therefore, it can be represented as a FRBR Work for defining its essence, and as FRBR Item for describing the concrete object. The entities representing this sort of subject have been refined when the OA Entry Ontology was created, explained in details in <a href="#__RefHeading__7457_2085944011"> </a>. When the subject is not identified as a concrete object, a place or an agent, it can be simply considered as a term from an open/controlled vocabulary or thesaurus;</p>
+               </li>
+               <li>
+                  <p>the F Entry is a work containing metadata about a photograph and its cataloguing; it is subject of several revisions, each of them related to responsible entities (i.e. cataloguers and supervisors); we are not interested in how it is preserved, in which formats and in how many copies. Thus a F Entry is represented as a FRBR Work when describing its creation and as a FRBR Expression when describing its contents and revisions. </p>
+               </li>
+            </ul>
+            <p>Existing ontologies have been imported in FEO so as to provide a precise description of specific aspects of the domain in consideration. In particular, we imported the FRBR-aligned Bibliographic Ontology (FaBiO, prefix <em>fabio</em>) <a href="#__RefNumPara__7567_327671333"> </a>, the Publishing Roles Ontology (PRO, prefix <em>pro</em>) <a href="#__RefNumPara__7682_327671333"> </a>, the Historical Context Ontology (HiCO, prefix <em>hico</em>) <a href="#__RefNumPara__34007_1461357291"> </a>, and the Citation Typing Ontology (CiTO, prefix <em>cito</em>) <a href="#__RefNumPara__7567_327671333"> </a>. In addition to the terms from these ontologies, terms from an OWL 2 DL version of FRBR (prefix <em>frbr</em>, <a href="http://purl.org/spar/frbr">http://purl.org/spar/frbr</a>, imported by FaBiO) are used, so as to represent hierarchical and associative relations between the main entities, as well as terms defined in the Provenance Ontology (PROV-O, prefix <em>prov</em>) <a href="#__RefNumPara__34003_1461357291"> </a>.</p>
+            <p>In the next sections we describe, with more details, how we use and extend the imported ontologies – i.e., FaBiO, PRO, CiTO, HiCO – for describing the different aspects of the domain. The complete RDF example of the excerpts provided in the following sub-sections is available at <a href="http://dx.doi.org/10.6084/m9.figshare.3175252">http://dx.doi.org/10.6084/m9.figshare.3175252</a>.</p>
+            <section>
+               <h1>Extending FaBiO for defining the cultural object </h1>
+               <p>FaBiO has been originally developed for describing bibliographic entities according to FRBR conceptual model. It mainly addresses issues related to published texts, by introducing wide taxonomies of possible kind of works, expressions, manifestation and items, also defining them by means of several object properties domain and range constrains. Therefore it was a good starting point that we have refined for modelling our main entities (i.e. F/OA entries, photographs, and works of art), so as to enable a deeper characterization of them according to well-known and used models.</p>
+               <p>An F Entry can describe a photograph in each phase of its lifecycle: from its creation (i.e. the essence of the photograph) to its realization (i.e. the shot), from its development into a visible image (i.e. negative, positive, slide, digital image) to its publishing and reproduction. Each phase of the lifecycle of the photograph corresponds to an instance of a class defined in terms of FRBR as defined in FaBiO. </p>
+               <p>An F Entry is a document containing metadata about a photograph and its cataloguing. Therefore it is defined in terms of FRBR Work (i.e. an instance of the class <em>fentry:FEntry</em>, subclass of <em>fabio:EntityMetadata</em>). Subjects of the entry are considered as FRBR Works as well: the photograph (i.e. an instance of the class <em>fentry:Photograph</em>, subclass of <em>fabio:StillImage</em>) and, in the Zeri Photo Archive context, the work of art portrayed in the photograph (i.e. an instance of the class <em>fabio:ArtisticWork</em>). </p>
+               <p>The object property <em>fentry:describes</em> links an instance of the class <em>fentry:FEntry</em> to instances of the proper class defining its subject, among which there are classes <em>fentry:Photograph</em> and <em>fabio:ArtisticWork</em>. For example, the natural language scenario “a F Entry describes the photograph portraying the <em>Jesus's baptism</em> painting”, may be expressed, in Turtle syntax, as follows:</p>
+               <pre>
+                  <code>
+:fentry-72486 a fentry:FEntry ;
+  fentry:describes   
+    :jesus-baptism-photo-work , :jesus-baptism-photo-item , 
+    :jesus-baptism-work , :jesus-baptism-item .
+:jesus-baptism-photo-work a fentry:Photograph .
+:jesus-baptism-photo-item a fabio:AnalogItem .
+:jesus-baptism-work a fabio:ArtisticWork .
+:jesus-baptism-item a fabio:AnalogItem .</code>
+               </pre>
+               <p>Thus, the shot (i.e. an instance of the class <em>fentry:Shot</em>, subclass of <em>fabio:Expression</em>) is a realization of a photograph, which can take several forms when developed, principally distinguished by means of their analog/digital formats (i.e. instances of the classes <em>fabio:AnalogManifestation</em> or <em>fabio:DigitalManifestation</em>) and be individually described (i.e. an instance of the classes <em>fabio:AnalogItem</em> or <em>fabio:DigitalItem</em>). </p>
+               <p>For example, the natural language scenario “The shot of the photograph portraying the <em>Jesus's baptism</em> painting that had been taken by Brogi before 1940 was published by himself in 1940”, can be expressed, in Turtle syntax, as follows:</p>
+               <pre>
+                  <code>
+:jesus-baptism-photo-work 
+  frbr:realization :jesus-baptism-photo-shot .
+:jesus-baptism-photo-shot a fentry:Shot ;
+  frbr:embodiment :jesus-baptism-photo-positive .
+:jesus-baptism-photo-positive a fabio:AnalogManifestation .</code>
+               </pre>
+            </section>
+            <section>
+               <h1>Using PRO for describing the lifecycle of the object</h1>
+               <p>PRO allows one to describe scenarios where agents hold roles with respect to a particular time and context, e.g. the fact that a person has been (property <em>pro:holdsRoleInTime</em>) the owner (the role in consideration, specified through the property <em>pro:withRole</em>) of a certain photograph (the context, linked with the property <em>pro:relatesTo</em>) from the 27<sup>th</sup> of November 2002 to the 16<sup>th</sup> of June 2015 (the time interval, specified by means of the property <em>tvc:atTime</em>). An instance of the class <em>pro:RoleInTime</em> is created every time we need to specify such kinds of roles. </p>
+               <p>For instance, in our context, the role of Brogi as photographer is held on the shot, i.e. a FRBR Expression, and the publisher role is held on the positive of the photograph, i.e. a FRBR Manifestation. These relations can be represented as follows:</p>
+               <pre>
+                  <code>
+:brogi a foaf:Agent ;
+  pro:holdsRoleInTime :brogi-photographer-jesus-baptism-photo-shot ;
+  pro:holdsRoleInTime :brogi-publisher-jesus-baptism-photo-positive .
+:brogi-photographer-jesus-baptism-photo-work a pro:RoleInTime ;
+  pro:withRole scoro:photographer ;
+  pro:relatesTo :jesus-baptism-photo-shot ;
+  tvc:atTime :jesus-baptism-photo-shot-date .
+:brogi-publisher-jesus-baptism-photo-positive a pro:RoleInTime ;
+  pro:withRole pro:publisher ;
+  pro:relatesTo :jesus-baptism-photo-positive ;
+  tvc:atTime :jesus-baptism-photo-publishing-date .</code>
+               </pre>
+               <p>A particular situation is when the creator and the realizer of the shot may not be the same person. Therefore the main photographer is described by means of the provided CIDOC-CRM terms for representing a creation of a work (explained in next <a href="#__RefHeading__8099_2085944011"> </a>) and the terms belonging to PRO (or to ScoRO, <a href="http://purl.org/spar/scoro">http://purl.org/spar/scoro</a>, which extends PRO with additional roles) for describing other roles than the <em>creator</em> role. </p>
+            </section>
+            <section>
+               <h1>Using HiCO for providing provenance of assertions</h1>
+               <p>HiCO has been developed for describing the interpretative process underlying questionable information, by means of a provenance statement characterizing the entity that may be contradicted by another data provider. Each questionable information is, thus, defined by an individual of the class <em>hico:InterpretationAct</em>, which allows one to specify the scope (property <em>hico:hasInterpretationType</em>) for the current interpretation, and the criteria (<em>hico:hasInterpretationCriterion</em>) underlying such interpretative choice. </p>
+               <p>In addition, each instance of <em>hico:InterpretationAct</em> is also linked (property <em>hico:isExtractedFrom</em>) to the text source where such questionable information is stated in natural language. In our domain, such source is always the content of the F Entry, subclass of <em>fabio:MetadataDocument</em> – i.e., a FRBR Expression. Thus, it is worth mentioning that the creator (property <em>prov:wasAssociatedWith</em>, defined in PROV-O <a href="#__RefNumPara__34003_1461357291"> </a>) of the RDF statements describing an interpretation act and the author of the original text they were extracted from are not necessarily the same person. Finally, the relation between the agent holding a certain role (an individual of the class <em>pro:RoleInTime</em>, described in the previous sub-section) and such RDF-defined interpretation act is introduced by means of the object property <em>prov:wasGeneratedBy</em>. </p>
+               <p>For instance, consider the following natural language text derived from an existing F Entry and describing some information about the photograph portraying the <em>Jesus's baptism</em> painting by Leonardo da Vinci: </p>
+               <blockquote>
+                  <p>the attribution of Brogi as the publisher of the photograph portraying the <em>Jesus's baptism</em> painting, was motivated by a formal analysis of the photograph itself, which revealed on its verso an inscription naming Brogi as publisher.</p>
+               </blockquote>
+               <p>Such natural language scenario can be expressed in RDF, by using the ontological entities introduced above, as follows (in Turtle syntax):</p>
+               <pre>
+                  <code>
+:brogi-publisher-jesus-baptism-photo-positive 
+  prov:wasGeneratedBy :jesus-baptism-photo-publisher-attribution .
+:jesus-baptism-photo-publisher-attribution a hico:InterpretationAct ;
+  hico:hasInterpretationType :role-attribution ;
+  hico:hasInterpretationType :zeri-preferred-attribution ;
+  hico:hasInterpretationCriterion :formal-analysis ;
+  hico:hasInterpretationCriterion :inscription ;
+  hico:isExtractedFrom :fentry-72486-expression ;
+  prov:wasAssociatedWith :crr-mm .
+:role-attribution a hico:InterpretationType .
+:zeri-preferred-attribution a hico:InterpretationType .
+:formal-analysis a hico:InterpretationCriterion .
+:inscription a hico:InterpretationCriterion .
+:fentry-72486-expression a fabio:MetadataDocument .
+:crr-mm a foaf:Agent .</code>
+               </pre>
+               <p>In the excerpt, the instance <code>:zeri-preferred-attribution</code> is provided in order to further distinguish the current interpretation as the one chosen by the cataloguing institution – so as to distinguish it from other possible alternative interpretations specified.</p>
+            </section>
+            <section>
+               <h1>Using CiTO for relating documents and attributions</h1>
+               <p>The relation between an interpretation and a heterogeneous source supporting a certain cataloguer's interpretation can be defined as proper (even implicit) citation. CiTO allows one to mark citation links between authors, and to specify the intent of such citation by providing a wide set of object properties relating citing and cited entities. To this end, we can use the object properties provided in CiTO for linking an individual of the class <em>hico:InterpretationAct</em> to the original textual interpretation from which such interpretation act has been derived. </p>
+               <p>For instance, the fact the cataloguer is citing as evidence an inscription recognized on the verso of the photograph, can be represented by means of the object property <em>cito:citesAsEvidence</em> as follows:</p>
+               <pre>
+                  <code>
+:jesus-baptism-photo-publisher-attribution
+  cito:citesAsEvidence :jesus-baptism-photo-verso .</code>
+               </pre>
+            </section>
+         </section>
+         <section id="__RefHeading__7457_2085944011">
+            <h1>The OA Entry Ontology</h1>
+            <p>The Scheda F content standard provides just few elements regarding the work of art that may be portrayed in a photograph. However, there exists another content standard, i.e. the Scheda OA, that aims at giving an exhaustive reference document for the complete description of any work of art – not only those portrayed in photographs. Therefore, all the peculiar aspects of the work of art portrayed in a photograph have been modelled in the OA Entry Ontology (available at <a href="http://purl.org/emmedi/oaentry">http://purl.org/emmedi/oaentry</a>). The Graffoo diagram in <a href="#refIllustration1"> </a> provides an overview of its main classes and properties.</p>
+            <figure id="refIllustration1">
+               <p>
+                  <img src="img/100000000000036F00000198AEE2B5A1.png"
+                       alt="The Graffoo diagram of the OA Entry Ontology main classes and properties."/>
+               </p>
+               <figcaption>The Graffoo diagram of the OA Entry Ontology main classes and properties.</figcaption>
+            </figure>
+            <p>The OA Entry Ontology introduces three main concepts: the work of art, the OA Entry that contains metadata about the work of art, and the influence between works of art. In particular:</p>
+            <ul>
+               <li>
+                  <p>a work of art that can be described in different phases of its lifecycle (creation, restoration, location, ownership, custody etc.). Thus, we decided to represent a work of art as a FRBR Work to describe its essence, as a FRBR Manifestation to provide information about its physical features that may vary over time, and as a FRBR Item when dealing with information about legal aspects and its location. Modelling works of art in these terms required to take into account established considerations in the arts domain <a href="#__RefNumPara__12582_20859440111"> </a> 
+                     <a href="#__RefNumPara__29946_1995777241"> </a>;</p>
+               </li>
+               <li>
+                  <p>the OA entry is a document containing metadata about a work of art and its cataloguing: in the Zeri Photo Archive an OA entry is always created when a F entry describes a work of art portrayed in a photograph. This means that several metadata of such entries are shared, e.g., same authors of the entries, updating and described entities. In our ontology, an OA entry is defined as a FRBR Work when describing its creation and with an FRBR Expression when addressing issues related to its content;</p>
+               </li>
+               <li>
+                  <p>the influence between two works of art concerns the way one affects (the conception of) the other. Such influence has an effect mainly between conceptual entities (i.e., considering the FRBR Work level) rather than their concrete objects realization (i.e., the FRBR Expression level). For instance a sinopia or a preliminary drawing of a work of art is considered a proper work of art <em>per se</em>, even if it is strictly related to the final work created by an artist.</p>
+               </li>
+            </ul>
+            <p>As before, in the OA Entry Ontology we reuse the models introduced for the F Entry Ontology – i.e. FaBiO, PRO, CiTO, HiCO, FRBR and PROV-O – so as to provide a precise description of specific aspects of the domain in consideration.</p>
+            <p>An OA Entry is a document containing metadata about a work of art and its cataloguing. Therefore, the OA Entry Ontology defines it in terms of a FRBR Work (i.e. an instance of the class <em>oaentry:OAEntry</em>, subclass of <em>fabio:EntityMetadata</em>). The work of art (class <em>fabio:ArtisticWork</em>) described by the entry is considered as a FRBR Work as well.</p>
+            <p>The object property <em>oaentry:describes</em> allows one to link an OA Entry to its the work of art it describes. Its range involves all the four FRBR levels, since, as introduced above, several metadata in the Zeri Photo Archive actually refers to peculiar aspects related with the material used for embodying the work of art (i.e., FRBR Manifestation level) as well as its current physical location (i.e., FRBR Item level).</p>
+            <section>
+               <h1>Extending PROV-O and HiCO for describing the influence between works</h1>
+               <p>Original-to-derivative relations between two works of art can be represented by means of the class <em>prov:Influence</em>. In order to enable the description of different kinds of influence that can exist between works of art, the OA Entry Ontology extends PROV-O by adding appropriate subclasses to <em>prov:Influence</em> (<em>oaentry:Cartoon</em>, <em>oaentry:Copy</em>, <em>oaentry:Derivation</em>, etc.) – derived by analysing the field <q>ROFF</q> (i.e., the <em>status of work</em>) in all the concrete OA entries available in the Zeri Photo Catalogue and considering terms of the controlled vocabulary provided by the Scheda OA content standard. </p>
+               <p>The object property <em>oaentry:hasFormerWork</em> (i.e. a sub-property of <em>prov:entity</em>) allows one to link an individual of any of the influence classes to the original work of art. The object property <em>oaentry:hasConceived</em> enables one to link an individual of any of the influence classes to the derivative work of art in consideration. </p>
+               <p>By means of the aforementioned ontological entities, it is possible to model properly a scenario described in the sentence <q>the anonymous drawing of Sistine Chapel is conceived as a drawing of Michelangelo Buonarroti's frescos in Sistine Chapel</q> as shown in the following excerpt in Turtle syntax (the complete example is available at <a href="http://dx.doi.org/10.6084/m9.figshare.3175048">http://dx.doi.org/10.6084/m9.figshare.3175048</a>):</p>
+               <pre>
+                  <code>
+:anonymous-drawing-sistine-chapel-work 
+  oaentry:isConveivedByMeansOf :michelangelo-fresco-sistine-chapel-drawing .
+:michelangelo-fresco-sistine-chapel-drawing a oaentry:Drawing ;
+  oaentry:hasFormerWork :michelangelo-fresco-sistine-chapel-work ;
+  oaentry:hasConceived :anonymous-drawing-sistine-chapel-work .</code>
+               </pre>
+               <p>It is worth noticing that such influence assertion can be even defined as a questionable information. In this case, an instance of the class <em>hico:InterpretationAct</em> can be created to specify explicitly that the claimed influence was actually derived from a cataloguer's subjective choice. To this end, the OA Entry Ontology extends HiCO by providing terms for defining types of interpretation strictly related to the arts domain – e.g. the attribution of an influence between works may be represented as the individual <em>oaentry:influence-between-works-attribution</em>. This can be defined in RDF as follows:</p>
+               <pre>
+                  <code>
+:michelangelo-fresco-sistine-chapel-drawing a oaentry:Drawing ;
+  prov:wasGeneratedBy :michelangelo-fresco-sistine-chapel-drawing-attribution .
+:michelangelo-fresco-sistine-chapel-drawing-attribution a hico:InterpretationAct ;
+  hico:hasInterpretationType oaentry:<code>influence-between-works-attribution</code>
+                     <code> ;</code>
+                     <code>  </code>hico:hasInterpretationType :zeri-preferred-attribution ;
+  hico:hasInterpretationCriterion :cataloguer-choice ;
+  hico:isExtractedFrom :oaentry-15429-expression ;
+  prov:wasAssociatedWith :crr-mm .
+oaentry:<code>influence-between-works-attribution</code> a hico:InterpretationType .
+:zeri-preferred-attribution a hico:InterpretationType .
+:cataloguer-choice a hico:InterpretationCriterion .
+:oaentry-15429-expression a fabio:Expression .
+:crr-mm a foaf:Agent .</code>
+               </pre>
+            </section>
+            <section>
+               <h1>Extending PRO for providing a controlled vocabulary of roles in the Arts domain</h1>
+               <p>In addition to information about a work of art, the OA Entry generally requires the cataloguer to provide several information also about the artist responsible for the creation of the work, including the actual role he/she had in that creative process. Moreover, when cataloguing the work of art, several responsibilities are attributed to cataloguers as well. Therefore, in the OA Entry Ontology we added appropriate individuals to the class <em>pro:Role</em> so as to describe additional roles proper to the arts and cataloguing domains. In particular, we have created two new subclasses of <em>pro:Role</em>, i.e. <em>oaentry:ArtisticRole</em> and <em>oaentry:CataloguingRole</em>, each including specific individuals:</p>
+               <ul>
+                  <li>
+                     <p>those defined as instances of <em>oaentry:ArtisticRole</em> have been recognized by means of the open vocabulary adopted by the Zeri Foundation for describing roles of artists and the controlled vocabulary provided by Scheda OA, such as <em>oaentry:antiquarian</em>, <em>oaentry:architect</em>,<em> oaentry:art-dealer</em>, etc.;</p>
+                  </li>
+                  <li>
+                     <p>those defined as instances of <em>oaentry:CataloguingRole</em> have been recognized as the main roles involved into the cataloguing process: <em>oaentry:catalogue</em>r, <em>oaentry:cataloguing-institution</em>, <em>oaentry:cataloguing-supervisor</em>, and <em>oaentry:competent-institution</em>.</p>
+                  </li>
+               </ul>
+            </section>
+         </section>
+      </section>
+      <section id="__RefHeading__8099_2085944011">
+         <h1>MAPPING F/OA ENTRY TO RDF</h1>
+         <p>Each Scheda F/OA content standard is organized in sections. Each section contains data about a work (a photograph, a work of art) that can be described in terms of one of the four FRBR entities (Work, Expression, Manifestation, Item). </p>
+         <p>In this section we briefly introduce the mapping we propose between the fields in the Scheda OA and Scheda F content standards and RDF according to the ontologies introduced in the previous section, and by enriching such description with terms coming from the CIDOC-CRM specification. It is worth mentioning that a complete mapping is not in the scope of this paper. In particular, in this work we focus on the mapping between all the fields in Scheda F/OA that are actually used in the Zeri Photo Archive Catalogue – which counts about 118 fields out of more than 300 provided by Scheda F, and about 97 fields out of 280 provided by Scheda OA. Thus, the mappings defined include all the mandatory elements prescribed by the standard creators (called <em>inventory level of description</em>), and a selection of other significant fields. </p>
+         <p>Operatively, one author (i.e. Marilena Daquino) performed a first round of the mapping by looking at all the aforementioned fields in the Scheda F and Scheda OA content standards one by one. For each field she provided a first mapping to RDF accompanied by a meaningful example of use. After this initial process, another author (i.e. Silvio Peroni) checked again the whole mapping document produced in order to correct mistakes, to suggest modifications, and to harmonize it where ambiguous mappings were introduced. After another iteration by the first author, so as to address all the suggestions introduced by the second one, the resulting mapping document was analysed by the other three authors – i.e. a member of the Zeri Foundation responsible for the Zeri's catalog (Francesca Mambelli), a digital humanist (Francesca Tomasi), and a computer scientist with strong background in markup languages (Fabio Vitali) – so as to gather additional feedback. A new version of the mapping document was, thus, finally released by the first author.</p>
+         <p>The mapping process resulted in the creation of two distinct documents, i.e., <em>F Entry to RDF</em> (<a href="https://dx.doi.org/10.6084/m9.figshare.3175273">https://dx.doi.org/10.6084/m9.figshare.3175273</a>) and <em>OAEntry to RDF</em> (<a href="https://dx.doi.org/10.6084/m9.figshare.3175057">https://dx.doi.org/10.6084/m9.figshare.3175057</a>), accompanied by exemplar data that represent an F Entry (<a href="http://dx.doi.org/10.6084/m9.figshare.3175252">http://dx.doi.org/10.6084/m9.figshare.3175252</a>) and an OA Entry (<a href="https://dx.doi.org/10.6084/m9.figshare.3175048">https://dx.doi.org/10.6084/m9.figshare.3175048</a>) in RDF created according to such mappings. All the mapping documents contain tables structured as shown in <a href="#refIllustration2"> </a>. Such tables reproduce the structure of related content standard they refer to, and are organized in three columns. The first and the second column contain the name of the field in the Scheda F/OA and a brief description. The third column details the mapping with RDF terms and accompanies it with examples of usage.</p>
+         <figure id="refIllustration2">
+            <p>
+               <img src="img/10000201000004F2000004A45B066FBF.png"
+                    alt="An excerpt of the mapping document “Mapping OA Entry to RDF”."/>
+            </p>
+            <figcaption>An excerpt of the mapping document <q>Mapping OA Entry to RDF</q>.</figcaption>
+         </figure>
+         <p>The following sections are organized on the basis of the four FRBR level, with an introduction about the representation of top-level relations between entries and subjects therein described. The ontological entities related with the F Entry Ontology and the OA Entry Ontology (presented in <a href="#__RefHeading__15555_2085944011"> </a>) are directly used without further explanation, while the use of CIDOC-CRM in the RDF excerpts is detailed. </p>
+         <section>
+            <h1>The entry and its subject </h1>
+            <p>Any F/OA Entry can be defined in CIDOC-CRM as instance of the class <em>E31 Document</em>, and it is related to their respective subjects by means of the object property <em>P70 documents</em>. An explicit relation between the F Entry describing a photograph and an OA Entry describing the work of art portrayed in the mentioned photograph can be represented by using <em>P67 refers to</em>. </p>
+            <p>Identifiers of the entries are represented by means of an instance of the class <em>E42 Identifier</em>. An entry can have several identifiers, and all the identifiers can be represented in the same way and then characterized with the property <em>P2 has type</em>, so as to specify which type of identifier is associated (levels of cataloguing, regional codes, general catalog numbers, etc.).</p>
+            <p>We decided to use terms belonging to PRO as well as the individuals of the class <em>oaentry:CataloguingRole</em> for describing the cataloguing process, which involves different roles at different times.</p>
+            <p>The following Turtle excerpt below introduces an example of all the aforementioned aspects:</p>
+            <pre>
+               <code>
+:fentry-72486 a fentry:FEntry , crm:E31_Document ;
+  fentry:describes :photo-72486 , :oa-47172 ;
+  crm:P67_refers_to :oaentry-43677 .
+:fentry-72486-creation a crm:E65_Creation ;
+  crm:P14_carried_out_by :cataloguer ;
+  crm:P4_has_time_span :2016-
+:oaentry-43677 a oaentry:OAEntry , fabio:Work , crm:E31_Document ;
+  oaentry:describes :oa-47172 ;
+  crm:P140i_was_attributed_by 
+    :oaentry-43677-catalog-level-assignment , 
+    :oaentry-43677-nctr-assignment , :oaentry-43677-nctn-assignment ;
+:md-cataloguer-oaentry-43677 a pro:RoleInTime ;
+  pro:relatesTo :oaentry-43677 ;
+  pro:isHeldBy :md ;
+  pro:withRole oaentry:cataloguer ;
+  tvc:atTime :2012-11-04 .</code>
+            </pre>
+         </section>
+         <section>
+            <h1>The Work level</h1>
+            <p>Both the photograph (described in a F Entry) and the work of art (described in an OA Entry) are defined in CIDOC-CRM terms as instances of the class <em>E28 Conceptual Object</em> when describing their essence and their creation. </p>
+            <p>The class <em>E65 Creation</em> is required to define the authorship of photographs and works of art, i.e. to identify the main photographer of the photograph and the main artist or group of artists of the work of art. The actors (<em>E39 Actor</em>, or one of its subclasses, i.e., <em>E21 Person</em> and <em>E74 Group</em>) involved in this authorship attribution are specified by using the object property <em>P14 carried out by</em>. The object property <em>P4 has time span</em> is used for specifying the duration of the creation event. </p>
+            <p>Moreover, the shot can be associated to a place (the class <em>E53 Place</em>) by using the object property <em>P8 took place at</em>, and can be associated to a specific occasion, i.e. an instance of the class <em>E4 Period</em> (further specified in <em>E5 Event</em>) by means of the object property <em>P10 falls within</em>. </p>
+            <p>Both the creators of the two aforementioned works can be associated to a cultural context (for instance a school of painters or a workshop) by using the property <em>P107i is current of former member of</em>, which relates he/she to an individual of the class <em>E74 Group</em>.</p>
+            <p>According to Bountouri and Gergatsoulis <a href="#__RefNumPara__8127_327671333"> </a> 
+               <a href="#__RefNumPara__8129_327671333"> </a>, the archival description of the photograph, i.e. the hierarchical organization of the containers that include the catalogued object, can be described as nested relations by using the object property <em>P106 is composed of</em> for relating conceptual entities. </p>
+            <p>One or more titles can be attributed to the entities, by means of the object property <em>P102 has title</em> associated to an instance of the class <em>E35 Title,</em> which can be further specialized by using <em>P2 has type</em> to define if the title is an attributed, traditional or an alternate one. </p>
+            <p>When bibliography or other sources are provided to support the cataloguing, e.g. letters, audio-recorded works, catalogs, entries etc., a generic relation can be represented with <em>P70i is documented in</em>, by linking to an individual of the broader class <em>E31 Document</em>.</p>
+            <p>A direct relation between the photograph and the depicted work of art can be established relating the photograph (the FRBR Work) at the concrete object of art (an FRBR Item). </p>
+            <p>The following Turtle excerpt introduces an example of part of the aforementioned aspects:</p>
+            <pre>
+               <code>
+:photo-72486 a fentry:Photograph , crm:E28_Conceptual_Object ;
+  crm:P94i_was_created_by :photo-72486-creation ;
+  crm:P106i_forms_part_of :folder-leonardo ;
+  crm:P102_has_title :jesus-baptism-verrocchio ;
+  frbr:subject :oa-47172-item ;
+  crm:P70i_is_documented_in :document-f2336 .
+:photo-72486-creation a crm:E65_Creation ;
+  crm:P94_has_created :photo-72486 , :photo-72486-expression ;
+  crm:P7_took_place_at :florence ;
+  crm:P10_falls_within :exhibition-of-paintings ;
+  crm:P4_has_time_span :1926-1932 ;
+  crm:P14_carried_out_by :brogi-studio .
+:folder-leonardo a fabio:Work , crm:E90_Symbolic_Object ;
+  crm:P106i_forms_part_of :subseries-leonardo .
+:subseries-leonardo a fabio:Work , crm:E90_Symbolic_Object ;
+  crm:P106i_forms_part_of :series-leonardo .
+:series-leonardo a fabio:Work , crm:E90_Symbolic_Object ;
+  crm:P106i_forms_part_of :zeri-photo-archive .
+:zeri-photo-archive a fabio:WorkCollection .
+:oa-47172 a fabio:ArtisticWork , crm:E28_Conceptual_Object ;
+  crm:P94i_was_created_by :oa-47172-creation ;
+  fabio:hasPortrayal :oa-47172-item .</code>
+            </pre>
+         </section>
+         <section>
+            <h1>The Expression level</h1>
+            <p>While in arts domain we are not interested in representing contents of a work of art separately from their conception, in the photography domain we can describe the photograph with regards to its content, i.e. its FRBR Expression, which is realized at the same time of the creation of the work. None of such information are precisely covered by the CIDOC-CRM, then terms from FaBiO and F Entry Ontology are used.</p>
+            <p>The following Turtle excerpt introduces an example of the aforementioned aspects:</p>
+            <pre>
+               <code>
+:photo-72486-creation a crm:E65_Creation ;
+  crm:P94_has_created :photo-72486 , :photo-72486-expression .
+:photo-72486-expression a fentry:Shot ;
+  crm:P94i_was_created_by :photo-72486-creation ;
+  frbr:realizationOf :photo-72486 .</code>
+            </pre>
+         </section>
+         <section>
+            <h1>The Manifestation level</h1>
+            <p>The description about the format used for embodying an object applies to the Manifestation level. </p>
+            <p>On the one hand, in photographs different formats identify several manifestations, e.g. digital images, slides, negatives, and positives. Each manifestation belongs also to the class <em>E22 Man-Made Object</em> and represents a specific form that the work may have, which can be further characterised by means of the object property <em>P2 has type</em>.</p>
+            <p>On the other hand, in works of art the FRBR Manifestation level should be applied any time a relevant change affected the object, e.g. any time a restoration intervention is recorded. </p>
+            <p>Both the photograph and the work of art may be described in terms of the material they are made, i.e. an instance of the class <em>E57 Material.</em> The class <em>E16 Measurement </em>is used to define the various dimensions (<em>E54 Dimension</em>) related with such manifestations (e.g. weight and height). Other specific features characterizing the manifestation, e.g. colour, are linked with the object property <em>P56 bears feature.</em>
+            </p>
+            <p>The following Turtle excerpt introduces an example of all the aforementioned aspects:</p>
+            <pre>
+               <code>
+:photo-72486-positive 
+  a crm:E22_Man-Made_Object , fabio:AnalogManifestation ;
+  crm:P45_consists_of :gelatin-silver ;
+  crm:P56_bears_feature :black-and-white ;
+  crm:P39i_was_measured_by :photo-72486-positive-measurement .
+:photo-72486-positive-measurement a crm:E16_Measurement ;
+  crm:P40_observed_dimension :height-194mm ;
+  crm:P40_observed_dimension :width-250mm .</code>
+            </pre>
+         </section>
+         <section>
+            <h1>The Item level</h1>
+            <p>The photograph is considered as a concrete object that can be defined as an individual of the class <em>E22 Man-Made Object</em> (also inferred as <em>E84 Information Carrier</em>) linked to the portrayed work of art by means of the object property <em>P62 depicts</em>.</p>
+            <p>Specific features regarding the object reported by cataloguers during an assessment (represented with the class <em>E14 Condition Assessment</em>) are defined as instances of the class <em>E3 Condition State</em>. It is worth mentioning that any instance of <em>E3 Condition State</em> can be further specialized by using the <em>P2 has type</em> property, e.g. for defining the status of the object recorded during the assessment.</p>
+            <p>Several situations may be related to the production of the concrete object representing the photograph or the work of art, where several actors with a specific role may be involved. Therefore terms belonging to PRO Ontology are here preferred.</p>
+            <p>Different sorts of location (the class <em>E53 Place</em>) can be attributed to a concrete object by using the object property <em>P55 has current location</em>. When filling the section regarding the geographical and administrative location of an object (either a photograph, a work of art or a related work of one of them), a cataloguer can refer to a place, i.e. class <em>E53 Place, </em>and/or to a current keeper (<em>P50 has current keeper</em>) which resides in such place. In the latter case, the current keeper (<em>E39 Actor</em>) is further related to a place by using the object property<em> P74 has current or former residence</em>, and to an address by using the property <em>P76 has contact point</em>. The place in which the keeper resides is defined by means of a chain of nested places (e.g. village, town, district, region, country), each other related through the object property <em>P89 falls within</em>. </p>
+            <p>Such complete description of the current location of an object, i.e. in terms of a place and an agent keeping it, enables the description of its transfers of custody (<em>E10 Transfer of Custody</em>). If a particular keeper is not identified, the change of location can be simply defined in terms of <em>E9 Move</em>, linked the location the object has been moved (<em>P26 moved</em>) from another one (<em>P27 moved from</em>). </p>
+            <p>The ownership of such concrete object can be defined by using the property <em>P52 has current owner</em>. Each owner (<em>E39 Actor</em>) can have acquired such work (property <em>P22i acquired title through</em>) as consequence of an acquisition event <em>E8 Acquisition</em>, that can be further specialized by using <em>P2 has type</em> to describe ownership specifications.</p>
+            <p>The last considered section regarding the concrete object addresses its participation in exhibitions (<em>E5 Event</em>). Such events can, thus, be linked to the object included in the event (<em>P12 occurred in the presence of</em>) to the location (<em>P7 took place at</em>) and date (<em>P4 has time span</em>) of the event, which can be have a formal appellation (<em>E41 Appellation</em>) specified through the property <em>P1 is identified by</em>. </p>
+            <p>The following Turtle excerpt introduces a partial example of the aforementioned aspects regarding only a photograph, being a work of art described similarly:</p>
+            <pre>
+               <code>
+:photo-72486-positive-item a fabio:AnalogItem , crm:E22_Man-Made_Object ;
+  crm:P62_depicts :oa-47172-item ;
+  crm:P57_has_number_of_parts "1" ;
+  crm:P34i_was_assessed_by :photo-72486-positive-item-condition ;
+  crm:P55_has_current_location :large-formats-room ;
+  crm:P140i_was_attributed_by :photo-72486-invn-assignment ;
+  crm:P52_has_current_owner :university-of-bologna ;
+  crm:P12i_was_present_at :exhibition-london-1987 ;
+  crm:P30i_custody_transferred_through :photo-72486-item-provenance-1 .
+:photo-72486-positive-item-condition a crm:E14_Condition_Assessment ;
+  crm:P35_has_identified :photo-72486-positive-item-condition-state .
+:photo-72486-positive-item-condition-state a crm:E3_Condition_State ;
+  crm:P2_has_type :discrete ;
+  crm:P3_has_note "silver mirror" .
+:large-formats-room a crm:E53_Place ;
+  crm:P89_falls_within :ex-convent-santa-cristina .
+:photo-72486-item-provenance-1 a crm:E10_Transfer_of_Custody ;
+  crm:P28_custody_surrendered_by :villa-i-tatti ;
+  crm:P29_custody_received_by :zeri-foundation ;
+  crm:P30_transferred_custody_of :photo-72486-positive-item ;
+  crm:P4_has_time_span :1989 .</code>
+            </pre>
+         </section>
+      </section>
+      <section id="__RefHeading__38297_1461357291">
+         <h1>THE ZERI PHOTO ARCHIVE RDF DATASET</h1>
+         <p>The specific heterogeneous nature of the domains considered in the <em>Zeri and LODE</em> project (and in the PHAROS project) and the lack of similar Linked Open Data datasets available on the Web have been important issues to address for providing a comprehensive description of such different kind of information by means of Semantic Web technologies. Thus, from our perspective, publishing a dataset about these kinds of objects may be considered a pioneering attempt <em>per se</em>, and it would represent, in principle, an established practice for creating a network of LOD with other Italian cultural institutions. In addition, it can be considered an available source of precious information for linking existing international datasets in the field of Arts.</p>
+         <p>The Zeri Photo Archive RDF dataset we have realized (available online at <a href="https://w3id.org/zericatalog/">https://w3id.org/zericatalog/</a>), which contains data compliant with the ontologies and the mappings described in the previous sections, is the result of an analysis on a dataset originally created for testing purposes in the context of the PHAROS project. In particular, we gathered about 31.000 F Entries and 19.000 OA Entries from Zeri Photo Archive catalog, stored as XML documents (compliant with no particular schema) that contained the data prescribed by the Scheda F and Scheda OA content standards. In particular, XML contents were organized in <em>paragraphs</em>, which correspond to Scheda F/OA descriptive sections. The data gathered have been chosen according to a thematic organisation. The first subset of Zeri catalog considered was based on a collection of OA Entries describing works of XV-XVI centuries, and included all the F Entries describing photographs portraying the aforementioned works. </p>
+         <p>The resulting RDF dataset has been created by means of an XSL transformation of the provided XML documents into RDF statements – where one RDF/XML file has been created for each of the considered entries. RDF statements mainly refer to photographs and works of art, and also include relevant information describing about 4,500 bibliographic entities, 6,000 artists, 2,000 photographers and 2,000 catalogs. Such additional information have been provided by the Zeri Foundation by means of other XML documents representing a local authority files. In particular, such XML files reproduce the fields required by the ICCD guidelines for creating people authority files (<a href="http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/55">http://www.iccd.beniculturali.it/index.php?</a>
+            <a href="http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/55">it/473/standard-catalografici/Standard/55</a>) and bibliographic references authority files (<a href="http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/58">http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/58</a>). The aforementioned authority files have been converted into RDF (by creating one RDF/XML file for each record in an authority file) by means of an XSL transformation as well.</p>
+         <p>All the RDF resources have been labelled in Italian and, when possible, in English, in order to facilitate their understanding to a larger audience. In addition, the IRIs of such resources have been created in English, in order to ensure their easy reuse in other non-Italian datasets. The document describing the IRI design choices is available at the homepage of the project, (<a href="https://w3id.org/zericatalog">https://w3id.org/zericatalog</a>, section <em>Data</em>). </p>
+         <p>All the open vocabularies adopted by cataloguers have been implemented as local controlled vocabularies, which will have to be enhanced when the dataset will be enriched with all the data coming from the full Zeri catalog. </p>
+         <p>All the RDF resources have been further enhanced with direct links to external authority files and datasets, in particular:</p>
+         <ul>
+            <li>
+               <p>the Getty Art &amp; Architecture Thesaurus (<a href="http://www.getty.edu/research/tools/vocabularies/aat/">http://www.getty.edu/research/tools/vocabularies/aat/</a>) was considered for object types, materials and techniques; </p>
+            </li>
+            <li>
+               <p>VIAF (<a href="http://viaf.org/">http://viaf.org</a>), Getty Union List of Artist Names (<a href="http://www.getty.edu/research/tools/vocabularies/ulan/">http://www.getty.edu/research/tools/vocabularies/ulan</a>), Wikidata (<a href="https://www.wikidata.org/">https://www.wikidata.org</a>), and Dbpedia (<a href="http://dbpedia.org/">http://dbpedia.org</a>) have been chosen to identify artists and photographers (the latter still in progress); </p>
+            </li>
+            <li>
+               <p>geoNames (<a href="http://www.geonames.org/">http://www.geonames.org</a>) and, again, Wikidata and Dbpedia were considered for identifying places. </p>
+            </li>
+         </ul>
+         <p>Reconciliation of entities to established authority files like VIAF and geoNames was mainly obtained through a semi-automatic process, by using ad hoc plugins implemented in OpenRefine (<a href="http://openrefine.org/">http://openrefine.org/</a>). Moreover, a PERL script (<a href="http://search.cpan.org/dist/App-wdq/lib/App/wdq.pm">http://search.cpan.org/dist/App-wdq/lib/App/wdq.pm</a>) was useful to access the Wikidata Query Service, which also enabled us to directly link founded entities to Wikipedia pages, Dbpedia and Getty ULAN entities. </p>
+         <p>All the RDF statements have been stored in an Apache Jena Fuseki2 triplestore (<a href="https://jena.apache.org/documentation/fuseki2">https://jena.apache.org/documentation/fuseki2</a>). We chose Fuseki2 since it is easy to deploy and manage even by non-expert users, but it will be probably changed until the end of the PHAROS project, due to its limits in managing huge amounts of data. All the data stored in the triplestore are distributed under the license CC-BY-NC, Creative Commons Attribution-NonCommercial 4.0 International (<a href="http://creativecommons.org/licenses/by-nc/4.0/">http://creativecommons.org/licenses/by-nc/4.0/</a>).</p>
+         <p>As of September 11, 2016, the dataset includes about 11,400,000 RDF statements relating 1,600,000 unique typed entities. Among these, about 3,000 have been linked with external resources already available in the Linked Open Data. In particular, we create links to 2,200 different VIAF resources, 1,200 to Getty ULAN resources, 1,500 different GeoNames resources, and 2,260 different Dbpedia and Wikidata resources. We estimate to have 100 million RDF statements in the dataset once the full Zeri catalog will be processed.</p>
+         <p>All the RDF data can be queried in SPARQL by making appropriate REST requests to the related SPARQL endpoint made available by the triplestore at <a href="https://w3id.org/zericatalog/sparql">https://w3id.org/zericatalog/sparql</a>. We have also prepared a web interface (available at <a href="http://data.fondazionezeri.unibo.it/query/">http://data.fondazionezeri.unibo.it/query/</a>) for allowing users to query the triplestore directly on the Web by means of SPARQL queries. Finally, we have used LODView (<a href="http://lodview.it/">http://lodview.it/</a>) for allowing direct browsing of all the RDF data included in the triplestore – for instance, <a href="#refIllustration3"> </a> shows the HTML visualisation of the resource <a href="https://w3id.org/zericatalog/photo/59972">https://w3id.org/zericatalog/photo/59972</a>, i.e. the photograph <q>Alinari, Fratelli , Perugia, Collegio del Cambio: Cappella di S. Giovanni Battista, volta - S. Giovanni e S. Luca (Giannicola di Paolo)</q>.</p>
+         <p>All F Entries and OA Entries defined in the dataset include links to the current photographic and arts catalog of the Zeri Foundation (available at <a href="http://catalogo.fondazionezeri.unibo.it/">http://catalogo.fondazionezeri.unibo.it</a>), enabling users to go from the LOD-based representation of the catalog to the traditional Web pages presenting the same entities. The inverse link from HTML pages to the related RDF resources has been implemented and it is currently in test phase (and not officially released yet).</p>
+         <figure id="refIllustration3">
+            <p>
+               <img src="img/1000000000000591000002C7A722BAE9.png"
+                    alt="An example of a resource of the Zeri Photo Archive visualized in LODView."/>
+            </p>
+            <figcaption>An example of a resource of the Zeri Photo Archive visualized in LODView.</figcaption>
+         </figure>
+      </section>
+      <section id="__RefHeading__38299_1461357291">
+         <h1>CONCLUSIONS</h1>
+         <p>In this article we have introduced the main current outcomes of the <em>Zeri and LODE</em> project, i.e. the F Entry Ontology, the OA Entry Ontology, the mapping documents between two Italian content standards (i.e. the Scheda F and the Scheda OA) and CIDOC-CRM accompanied by the aforementioned ontologies, and the creation of a real LOD dataset listing about 50,000 entries from the Zeri Photo Archive. Our project is set within the PHAROS project, which groups an international consortium of several institutions for creating a common platform for research on images and metadata of Western and non-Western works. </p>
+         <p>As required by the PHAROS Consortium, the <em>Zeri and LODE</em> project has already produced a first stable outcome that allows the description of a large set of metadata about photographs and works of art. In the next phase, we will drive the adoption of these ontologies by other institutions (a dialog with ICCD has been set up already so as to study a strategy for the adoption of our models at a national level) and we will extend the current LOD dataset with all the data expressed in the other F/OA entries in the Zeri's catalog, so as to make available openly and in machine-readable form the full richness of Federico Zeri's knowledge base. Of course, this extension will require a new hardware architecture – e.g. a new powerful server, the use of a more performant triplestore such as Blazegraph (<a href="https://www.blazegraph.com/">https://www.blazegraph.com/</a>), as well as additional disk space and RAM for storing and managing the new data – which is something we will deal with in the near future.</p>
+         <p>At the same time, the ontologies we developed and the corresponding mapping documents will be revised and extended in order to complete the analysis of the F/OA contents standards, also considering relevant topic introduced in the earliest version of the Scheda F (version 4.00 at <a href="http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/62">http://www.iccd.beniculturali.it/index.php?it/473/standard-catalografici/Standard/62</a>). Therefore a complete mapping will be provided to allow the most comprehensive description of the Photography and Arts domain as addressed in ICCD content standards. </p>
+         <p>It is worth mentioning that, even if the mapping we provided was based on national content standards and required to compare and merge two slightly different perspectives (i.e., the official cataloguing standard requirements and its implementation in a real use case where some customizations and a few new fields were defined by the Zeri Foundation itself), we claim it can be considered an exhaustive resource for any international cultural heritage institution to publish its data as LOD. The large number of models used to map such standards into RDF was useful to define a coherent and comprehensive descriptive scenario, based on state-of-the-art ontologies for the cultural heritage domain.</p>
+         <p>In addition, it is possible that future revisions of the ontologies and of the mapping documents will take into account additional models that were not considered at this stage, such as FRBRoo. While FRBRoo matches well with CIDOC-CRM by design, its adoption in our project was not part of the requirements exposed by the PHAROS Consortium. In addition, at the current stage of our project and according to the domain we have to describe, FRBRoo would not add any meaningful additional detail to the current data, and thus we decided to postpone its use in future phases of the project – when at least a formal alignment to it will be provided. In addition to FRBRoo, we are planning to include proper models for archival description, e.g. the Reload Ontologies (<a href="http://labs.regesta.com/progettoReload/">http://labs.regesta.com/progettoReload/</a>), extensively adopted in Italian archives, in order to enable an easier integration of the Zeri catalog to LOD datasets made available by other archival institutions.</p>
+         <p>Finally, once other partners of the PHAROS Consortium publish their data according to the defined models, the second phase of the project will allow us to integrate all the data in a common environment, together with a searchable repository for images (at the monent, a beta version of this application to search on images is available at <a href="http://en.images.pharosartresearch.org/">http://en.images.pharosartresearch.org/</a>).</p>
+      </section>
+      <section role="doc-acknowledgements">
+         <h1>ACKNOWLEDGEMENTS</h1>
+         <p>We would like to thank Ciro Mattia Gonano, who firstly addressed relevant issues in mapping Scheda F to CIDOC-CRM and whose work was the basis for the current evolution of the project, and Raffaele Messuti, who helped us in managing the current RDF dataset, deploying and maintaining the server, and in reconciling data to external vocabularies and datasets. We would also like to thank the editor and the reviewers of the paper, who have provided us with valuable comments and suggestions for improving the article.</p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>REFERENCES</h1>
+         <ol>
+            <li id="__RefNumPara__12582_20859440111" role="doc-biblioentry">
+               <p>Murtha Baca. 2006. <em>Cataloguing Cultural Objects: Cco; a Guide to Describing Cultural Works and Their Images</em>. American Library Association, Chicago, IL.</p>
+            </li>
+            <li id="__RefNumPara__29946_1995777241" role="doc-biblioentry">
+               <p>Murtha Baca and Sherman Clarke. 2007. FRBR and Works of Art, Architecture, and Material Culture. <em>Understanding FRBR: What It Is and How It Will Affect Our </em>
+                  <em>Retrieval Tools.</em> ed. Arlene Taylor (Westport CT: Libraries Unlimited), 227–242.</p>
+            </li>
+            <li id="__RefNumPara__8127_327671333" role="doc-biblioentry">
+               <p>Lina Bountouri and Manolis Gergatsoulis. 2011. Mapping Encoded Archival Description to CIDOC-CRM. In 1st Workshop on Digital Information Management, Corfu, Greece, March 30-31, Ionian University, 8–25.</p>
+            </li>
+            <li id="__RefNumPara__8129_327671333" role="doc-biblioentry">
+               <p>Lina Bountouri and Manolis Gergatsoulis. 2011. The Semantic Mapping of Archival Metadata to the CIDOC-CRM Ontology. <em>Journal of Archival Organization</em>, 9, 3-4, 174–207. </p>
+            </li>
+            <li id="__RefNumPara__17043_2085944011" role="doc-biblioentry">
+               <p>Karen Coyle. 2016. FRBR, Before and After: A Look at Our Bibliographic Models. American Library Association, Chicago.</p>
+            </li>
+            <li id="__RefNumPara__34007_1461357291" role="doc-biblioentry">
+               <p>Marilena Daquino and Francesca Tomasi. 2015. Historical Context (HiCO): a conceptual model for describing context information of cultural heritage objects. In <em>Metadata and Semantics Research, Communication in Computer and Information Science 544</em>, Eds. Emmanouel Garoufallou, Richard J. Hartley and Panorea Gaitanou, 424–436. Springer, Cham. DOI: <a href="http://dx.doi.org/10.1007/978-3-319-24129-6_37">http://dx.doi.org/10.1007/978-3-319-24129-6_37</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__33899_1461357291" role="doc-biblioentry">
+               <p>Victor De Boer, Jan Wielemaker, Judith van Gent, Michiel Hildebrand, Antoine Isaac, Jacco van Ossenbruggen and Guus Schreiber. 2012. Supporting Linked Data Production for Cultural Heritage Institutes: The Amsterdam Museum Case Study. In <em>The Semantic Web: Research and Applications, Lecture Notes in Computer Science 7295</em>, Eds. Elena Simperl, Philipp Cimiano, Axel Polleres, Oscar Corcho and Valentina Presutti, 733–747. Springer, Heidelberg. DOI: <a href="http://dx.doi.org/10.1007/978-3-642-30284-8_56">http://dx.doi.org/10.1007/978-3-642-30284-8_56</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__10849_327671333" role="doc-biblioentry">
+               <p>Martin Doerr. 2010. The Europeana Data Model (EDM) mapping to CIDOC-CRM. <a href="http://www.cidoc-crm.org/docs/CRM-EDM_FRBR.ppt">http://www.cidoc-crm.org/docs/CRM-EDM_FRBR.ppt</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__34015_1461357291" role="doc-biblioentry">
+               <p>Europeana. 2016. Definition of the Europeana Data Model v5.2.7. <a href="http://pro.europeana.eu/files/Europeana_Professional/Share_your_data/Technical_requirements/EDM_Documentation//EDM_Definition_v5.2.7_042016.pdf">http://pro.europeana.eu/files/Europeana_Professional/Share_your_data/Technical_requirements/EDM_Documentation//EDM_Definition_v5.2.7_042016.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__30866_1995777241" role="doc-biblioentry">
+               <p>Riccardo Falco, Aldo Gangemi, Silvio Peroni and Fabio Vitali. 2014. Modelling OWL ontologies with Graffoo. In <em>The Semantic Web: ESWC 2014 Satellite Events, Lecture Notes in Computer Science 8798.</em> Eds. Valentina Presutti, Eva Blomqvist, Raphael Troncy, Harald Sack, Ioannis Papadakis and Anna Tordai, 320–325. Springer, Berlin. DOI: <a href="http://dx.doi.org/10.1007/978-3-319-11955-7_42">http://dx.doi.org/10.1007/978-3-319-11955-7_42</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__7794_327671333" role="doc-biblioentry">
+               <p>Achille Felicetti, Tiziana Scarselli, Maria Letizia Mancinelli and Franco Niccolucci. 2013. Mapping ICCD Archaeological Data to CIDOC-CRM: the RA Schema. In <em>Proceedings of the Workshop Practical Experiences with CIDOC-CRM and its Extensions</em>. CEUR-WS.org, Aachen. <a href="http://ceur-ws.org/Vol-1117/paper2.pdf">http://ceur-ws.org/Vol-1117/paper2.pdf</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__30026_1995777241" role="doc-biblioentry">
+               <p>Mariano Fernández, Asunción Gómez-Pérez, Natalia Juristo. 1997. METHONTOLOGY: from ontological art towards ontological engineering. In <em>Proceedings of the AAAI97 Spring Symposium</em>. Stanford, 33–40.</p>
+            </li>
+            <li id="__RefNumPara__32450_1461357291" role="doc-biblioentry">
+               <p>Ciro Mattia Gonano, Francesca Mambelli, Silvio Peroni, Francesca Tomasi and Fabio Vitali. 2014. Zeri e LODE: Extracting the Zeri photo archive to linked open data: formalizing the conceptual model. In <em>Proceedings of the 2014 IEEE/ACM Joint Conference on Digital Libraries (JCDL 2014)</em>. IEEE, Washington, 289–298. DOI: <a href="http://dx.doi.org/10.1109/JCDL.2014.6970182">http://dx.doi.org/10.1109/JCDL.2014.6970182</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__7570_327671333" role="doc-biblioentry">
+               <p>International Federation of Library Associations and Institutions. 2009. Functional Requirements for Bibliographic Records. <em>Final Report, February 2009</em>. <a href="http://www.ifla.org/files/assets/cataloguing/frbr/frbr_2008.pdf">http://www.ifla.org/files/assets/cataloguing/frbr/frbr_2008.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__34019_1461357291" role="doc-biblioentry">
+               <p>Antoine Isaac, William Waites, Jeff Young and Marcia Zeng. 2011. Datasets, Value Vocabularies, and Metadata Element Sets. <em>W3C Incubator Group Report, 25 October 2011</em>. <a href="http://www.w3.org/2005/Incubator/lld/XGR-lld-vocabdataset/">http://www.w3.org/2005/Incubator/lld/XGR-lld-vocabdataset/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__34003_1461357291" role="doc-biblioentry">
+               <p>Timothy Lebo, Satya Sahoo and Deborah McGuinness. 2013. PROV-O: The PROV Ontology. <em>W3C Recommendation 30 April 2013</em>. <a href="http://www.w3.org/TR/prov-o/">http://www.w3.org/TR/prov-o/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__34011_1461357291" role="doc-biblioentry">
+               <p>Patrick Le Boeuf, Martin Doerr, Christian Emil Ore and Stephen Stead. 2015. Definition of the CIDOC Conceptual Reference Model. <a href="http://www.cidoc-crm.org/docs/cidoc_crm_version_6.2.1.pdf">http://www.cidoc-crm.org/docs/cidoc_crm_version_6.2.1.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__33897_1461357291" role="doc-biblioentry">
+               <p>Julia Marden, Carolyn Li-Madeo, Noreen Whysel and Jeffrey Edelstein. 2013. Linked open data for cultural heritage: evolution of an information technology. In <em>Proceedings of the 31</em>
+                  <sup>
+                     <em>st</em>
+                  </sup>
+                  <em> ACM International Conference of Design of Communication</em>, 107–112. ACN, New York. DOI: <a href="http://dx.doi.org/10.1145/2507065.2507103">http://dx.doi.org/10.1145/2507065.2507103</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__17045_2085944011" role="doc-biblioentry">
+               <p>Boris Motik, Peter F. Patel-Schneider and Bijan Parsia. 2012. OWL 2 Web Ontology Language: Structural Specification and Functional-Style Syntax (Second Edition). W3C Recommendation, 11 December 2012. <a href="http://www.w3.org/TR/owl2-syntax/">http://www.w3.org/TR/owl2-syntax/</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__30108_1995777241" role="doc-biblioentry">
+               <p>Michele Pasin and John Bradley. 2015. Factoid-based prosopography and computer ontologies: towards an integrated approach. In <em>Digital Scholarship in the Humanities,</em> 30.1, 86-97. DOI: <a href="http://dx.doi.org/10.1093/llc/fqt037">http://dx.doi.org/10.1093/llc/fqt037</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__33076_1461357291" role="doc-biblioentry">
+               <p>Silvio Peroni. 2016. SAMOD: an agile methodology for the development of ontologies. <em>figshare</em>. <a href="http://dx.doi.org/10.6084/m9.figshare.3189769">http://dx.doi.org/10.6084/m9.figshare.3189769</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__7567_327671333" role="doc-biblioentry">
+               <p>Silvio Peroni and David Shotton. 2012. FaBiO and CiTO: ontologies for describing bibliographic resources and citations. <em>Journal of Web Semantics: Science, Services and Agents on the World Wide Web</em>, 17 (December 2012), 33–43. DOI: <a href="http://dx.doi.org/10.1016/j.websem.2012.08.001">http://dx.doi.org/10.1016/j.websem.2012.08.001</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__7682_327671333" role="doc-biblioentry">
+               <p>Silvio Peroni, David Shotton and Fabio Vitali. 2012. Scholarly publishing and the Linked Data: describing roles, statuses, temporal and contextual extents. In <em>Proceedings of the 8th International Conference on Semantic Systems (i-Semantics 2012)</em>. Eds. Harald Sack and Tassilio Pellegrini, 9–16. ACM, New York. DOI: <a href="http://dx.doi.org/10.1145/2362499.2362502">http://dx.doi.org/10.1145/2362499.2362502</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__4975_327671333" role="doc-biblioentry">
+               <p>Inge Reist, David Farneth, R. Samuel Stein and Remigius Weda. 2015. An Introduction to PHAROS: Aggregating Free Access to 31 Million Digitized Images and Counting. <em>Speech at CIDOC 2015</em>. New Dehli, September 5–9, 2015. <a href="http://network.icom.museum/fileadmin/user_upload/minisites/cidoc/BoardMeetings/CIDOC_PHAROS_Farneth-Stein-Weda_1.pdf">http://network.icom.museum/fileadmin/user_upload/minisites/cidoc/BoardMeetings/CIDOC_PHAROS_Farneth-Stein-Weda_1.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__33895_1461357291" role="doc-biblioentry">
+               <p>Max Schmachtenberg, Chris Bizer and Heiko Paulheim. 2014. State of the LOD Cloud 2014 (version 0.4). <a href="http://linkeddatacatalog.dws.informatik.uni-mannheim.de/state/">http://linkeddatacatalog.dws.informatik.uni-mannheim.de/state/</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__33903_1461357291" role="doc-biblioentry">
+               <p>Richard P. Smiraglia, Pat Riva, Maja Žumer. 2013. <em>The FRBR Family of Conceptual Models: Toward a Linked Bibliographic Future</em> (1st. ed.), Routledge, New York, NY.</p>
+            </li>
+            <li id="__RefNumPara__33901_1461357291" role="doc-biblioentry">
+               <p>Pedro Szekely, Craig A. Knoblock, Fengyu Yang, Xuming Zhu, Eleanor E. Fink, Rachel Allen and Georgina Goodlander. 2013. Connecting the Smithsonian American Art Museum to the Linked Data Cloud. In <em>The Semantic Web: Semantics and Big Data, Lecture Notes in Computer Science 7882</em>, Eds. Philipp Cimiano, Oscar Corcho, Valentina Presutti, Laura Hollink and Sebastian Rudolph, 593–607. Springer, Heidelberg. DOI: <a href="http://dx.doi.org/10.1007/978-3-642-38288-8_40">http://dx.doi.org/10.1007/978-3-642-38288-8_40</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__30028_1995777241" role="doc-biblioentry">
+               <p>Mike Uschold. 1995. Towards a Methodology for Building Ontologies. In <em>Proceedings of IJCAI-95’s Workshop on Basic Ontological Issues in Knowledge Sharing</em>, 82, 74–82.</p>
+            </li>
+            <li id="__RefNumPara__33893_1461357291" role="doc-biblioentry">
+               <p>Seth Van Hooland and Ruben Verborgh. 2014. Linked Data for Libraries, Archives and Museums. How to clean, link and publish your metadata. Amer Library Assn Editions. ISBN: 978-0838912515</p>
+            </li>
+         </ol>
+      </section>
+   </body>
+</html>
