@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/rash.css"/>
+      <script src="js/jquery.min.js"> </script>
+      <script src="js/bootstrap.min.js"> </script>
+      <script src="js/rash.js"> </script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <title>FOOD: FOod in Open Data</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-2"
+            property="schema:name"
+            content="STLab, ISTC, CNR, Rome, Italy"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="Giorgia Lodi"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="giorgia.lodi@istc.cnr.it"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-3"
+            name="dc.creator"
+            property="schema:name"
+            content="Luigi Asprino"/>
+      <meta about="#author-3"
+            property="schema:email"
+            content="luigi.asprino@istc.cnr.it"/>
+      <link about="#author-3"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-4"
+            name="dc.creator"
+            property="schema:name"
+            content="Aldo Gangemi"/>
+      <meta about="#author-4"
+            property="schema:email"
+            content="aldo.gangemi@istc.cnr.it"/>
+      <link about="#author-4"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-5"
+            name="dc.creator"
+            property="schema:name"
+            content="Valentina Presutti"/>
+      <meta about="#author-5"
+            property="schema:email"
+            content="valentina.presutti@istc.cnr.it"/>
+      <link about="#author-5"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta property="prism:keyword" content="Linked Open Data"/>
+      <meta property="prism:keyword" content="Ontologies"/>
+      <meta property="prism:keyword" content="Ontology Design Patterns"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>Abstract</h1>
+         <p>This paper describes the outcome of an e-government project named FOOD, FOod in Open Data, which was carried out in the context of a collaboration between the Institute of Cognitive Sciences and Technologies of the Italian National Research Council, the Italian Ministry of Agriculture (MIPAAF) and the Italian Digital Agency (AgID). In particular, we implemented several ontologies for describing protected names of products (wine, pasta, fish, oil, etc.). In addition, we present the process carried out for producing and publishing a LOD dataset containing data extracted from existing Italian policy documents on such products and compliant with the aforementioned ontologies.</p>
+      </section>
+      <section>
+         <h1>Introduction</h1>
+         <p>The recent <a href="http://opendatabarometer.org/">Open Data Barometer report</a> states that <q>open data is entering the mainstream</q> and <q>the demand is high</q>. Several concrete initiatives and assessments witness that open data, if correctly adopted, can be an extremely powerful driver of innovation for improving different public sectors as well as impacting scientific progresses. Nevertheless, the presence of (linked) open data is not equally distributed in all public sectors. For instance, in the context of the agriculture and food sector in Italy – that has seen some recent development in other European countries, such as Russia <a href="#__RefNumPara__47790_1461357291"> </a> – the management of the European Union (EU) quality schemes for agricultural and food products – i.e., PDO (Protected Designation of Origin), PGI (Protected Geographical Indication) and TSG (Traditional Speciality Guaranteed) – is not fully automatized, and no standards are used in the definition of policy documents (or product specifications) that regulate them.</p>
+         <p>In this context, the Ministry of Agriculture (MIPAAF), the Italian Digital Agency (AgID), and our laboratory conceived and carried out a project named <a href="https://w3id.org/food">FOod in Open Data (FOOD)</a>. The main goal of FOOD was to extract the data contained in the textual content of the policy documents of Italian agricultural PDO, PGI and TSG products that were available online in PDF, and to make them available as LOD. According to informal interviews done by the MIPAAF, the potential impact and the advantages perceived by all the actors of the project are threefold. On the one hand, the availability of interoperable LOD can pave the way to the construction of new applications, targeting for instance food frauds detection, and production and distribution traceability of quality products. On the other hand, it poses the basis for outlining a proper standardization process for the definition of product specifications. Finally, the use of common models for describing such data can improve the interoperability achievable in the data exchange between MIPAAF and other Public Administrations, which may publish the same type of data on a territory base.</p>
+         <p>In this paper we describe the artefacts (available in <a href="#__RefNumPara__390_1461357291"> </a>) produced as outcomes of the FOOD project, ended in 2015. First, a set of ontologies were developed following a methodology that makes use of well-known Ontology Design Patterns (ODPs). Second, a semi-automatic process for producing and publishing LOD, compliant with the developed ontologies, was carried out on more than 800 policy documents of the Italian quality products. </p>
+         <p>The rest of paper is structured as follows. <a href="#__RefHeading__2139_1429273589"> </a> introduces the ontologies and the methodology that was adopted. <a href="#__RefHeading__1462_1310534307"> </a> describes the process we employed to produce and publish the LOD datasets, compliant with the defined ontologies. <a href="#__RefHeading__1464_1310534307"> </a> discusses examples of reuse of FOOD's ontologies and data and finally, <a href="#__RefHeading__1466_1310534307"> </a> concludes the paper.</p>
+      </section>
+      <section id="__RefHeading__2139_1429273589">
+         <h1>FOOD ontologies</h1>
+         <p>The process adopted for the development of the ontologies for describing the Italian policy documents was mainly based on the <em>eXtreme Design</em> methodology <a href="#__RefNumPara__421_1461357291"> </a>, which is a a collaborative, incremental, iterative method for pattern-based ontology design, which we used in several projects in the past. The ontologies developed were also aligned with other existing models, i.e. AGROVOC, DOLCE, DBpedia and Wordnet. The development process was organised in few steps, illustrated as follows.</p>
+         <p>In the first step, two ontology engineers analysed the large set of source policy documents about agricultural products – more than 800 documents available in either PDF or DOCX – involving domain experts of MIPAAF and AgID so as to identify the main high-level concepts characterising the domain. In addition, they also considered the <a href="http://ec.europa.eu/agriculture/quality/schemes/index_en.htm">EU schemes for protected names</a> so as to take into account how they are organized at the European level. Three main interlinked classes have been defined as result of this analysis: </p>
+         <ul>
+            <li>
+               <p>
+                  <em>ProtectedName</em>, i.e., a trademark label (e.g., <q>Abruzzo DOC</q> for a particular Italian wine), issued by an authority granted for certifying agricultural products and foodstuffs, that typically belongs to a certification scheme (i.e., PDO, PGI, TSG);</p>
+            </li>
+            <li>
+               <p>
+                  <em>Type</em>, i.e., a possible type for certain products (e.g., <q>white</q> or <q>red</q> for wines);</p>
+            </li>
+            <li>
+               <p>
+                  <em>Product</em>, i.e., the agricultural product or foodstuff (e.g., <q>Abruzzo DOC red wine</q>) which has a type, refers to a protected name disciplined by a certain policy document, and is described in terms of its raw materials (the particular wine varietal used) and physical/chemical/organolectic characteristics (colour, smell, flavour, etc.).</p>
+            </li>
+         </ul>
+         <p>As shown in the Graffoo <a href="#__RefNumPara__506_1461357291"> </a> diagram in <a href="#refIllustration0"> </a> (on the left), in addition to the aforementioned classes, we also modelled several concepts for describing particular features, i.e., the raw material (classes <em>RawMaterial</em> and <em>DescriptionOfRawMaterial</em>), the characteristics (classes <em>Characteristic</em> and <em>DescriptionOfCharacteristic</em>), the producer (an <em>Agent</em> link with the property <em>hasProducer</em>) related to the products. Similarly, other classes and properties defining contextual information of the protected name such the production place (the class <em>Place</em> linked by the property <em>hasProductionPlace</em>), the logo (the class <em>Image</em> linked by the property <em>hasLogo</em>), the control authority (another <em>Agent</em> linked by the property <em>hasControlAuthority</em>) responsible for certifying products of such protected name, and the particular version of the policy document (the class <em>PolicyDocumentVersion</em>) source of all the information related.</p>
+         <p>It is worth noticing that such <q>upper</q> ontology reuses several existing ontology design patterns that were considered also during the development, i.e., the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Description">Description</a> (for representing raw materials and other product characteristics), the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Place">Place</a> (for modelling the production place), the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Classification">Classification</a> (for expressing both the different characteristics of the products and the quality schemes defined at EU level), and the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Information_realization">Information Realization</a> (for relating policy documents with their various versions released during time).</p>
+         <figure id="refIllustration0">
+            <p>
+               <img src="img/10000201000007D8000003669895AADB.png"
+                    alt="The Upper Ontology (left) and one of its extension for wines (right). All the classes and properties are here shown with English names, while their IRI are originally in Italian."/>
+            </p>
+            <figcaption>The Upper Ontology (left) and one of its extension for wines (right). All the classes and properties are here shown with English names, while their IRI are originally in Italian.</figcaption>
+         </figure>
+         <p>Then, since the ontology had to be appropriately extended according to all the twenty kinds of products<a href="#ftn1"> </a> described in the policy documents, we decided to involve three more ontology engineers, with different skills and level of expertise, for speeding up the development process. We provided a generic Graffoo template (shown in <a href="#refIllustration1"> </a>) created starting from the parts of the upper ontology that had to be extended, so as to guide the development of all the other ontologies in an homogeneous way, independently of the particular ontology engineer assigned as developer of the specific ontologies. Each new ontology was assigned to only one ontology engineer, and the idea was that each engineer had to rename the variables within double square brackets (e.g., <q>[[product]]</q>) with the appropriate names, thus adding the related labels and comments. The result of this phase produced twenty new Graffoo diagrams organised as the one for wines shown in <a href="#refIllustration0"> </a> (on the right).</p>
+         <figure id="refIllustration1">
+            <p>
+               <img src="img/10000000000003F700000138FA0F665A.png"
+                    alt="The template reused by developers for creating the various ontologies for each kind of agricultural product described in the policy documents."/>
+            </p>
+            <figcaption>The template reused by developers for creating the various ontologies for each kind of agricultural product described in the policy documents.</figcaption>
+         </figure>
+         <p>Then, one of the ontology engineers took the responsibility of substituting all the raw materials identified during the development process with the appropriate concepts defined in <a href="http://aims.fao.org/standards/agrovoc">AGROVOC</a>, the multilingual agricultural thesaurus created by the Food and Agriculture Organization (FAO).</p>
+         <p>Once all the diagrams were finished and stable, we produced all the related OWL files, one for each diagram, by means of <a href="http://www.essepuntato.it/ditto">DiTTO</a> 
+            <a href="#__RefNumPara__10640_1461357291"> </a>, i.e., a Web application that is able to convert Graffoo diagrams into OWL automatically. Separately, some additional OWL files have been created, so as to map all the developed ontologies with DBpedia, DOLCE, WordNet, and the used ontology design patterns.</p>
+         <p>The documentation of all the ontologies was generated by using <a href="http://www.essepuntato.it/lode">LODE</a> 
+            <a href="#__RefNumPara__10642_1461357291"> </a>, a tool that is able to produce human-readable HTML documents describing an ontology starting from the annotations it contains.</p>
+      </section>
+      <section id="__RefHeading__1462_1310534307">
+         <h1>Linked Open Datasets</h1>
+         <p>The other main goal of the project aimed at creating LOD datasets containing the data extracted from 847 policy documents on protected names – provided by MIPAAF and publicly <a href="https://www.politicheagricole.it/flex/cm/pages/ServeBLOB.php/L/IT/IDPagina/309">available online</a> – according to the ontologies presented in <a href="#__RefHeading__2139_1429273589"> </a>.</p>
+         <p>At a first reading, the main parts of the documents have a pretty similar organisation: each document consists of at least four articles. The first article usually defines the protected name and the types of related products of such name. The second article defines the raw materials which contribute to the products composition. The third article provides a precise description of the production area. Finally, the rest of the articles usually describe physical/chemical/organoleptic characteristics of the products, introduce historical/geographical evidences supporting the described production area, and describe the methods used for producing the products of that protected name.</p>
+         <p>The general structure of the documents is shared in principle. In the light of this observation, our initial idea was to develop some mechanisms for extracting all the relevant information within such documents in an automatic fashion. We started trying to develop scripts for extracting relevant data from all the 563 policy documents about wine we had available in DOCX format – the extraction was carried by looking for textual patterns we knew in advance. However, we realized that it was not possible to address this extraction for all the policy documents automatically and to preserve a good and appropriate quality of the data extracted at the same time. There was a rather high degree of heterogeneity among documents describing different kinds of products (e.g., wines vs. bread), as well as among documents describing products of the same type, mainly due to the fact that no predefined templates was actually used for guiding their creation, and that such authorial activity was held across many years and by several authors. In addition, several documents were actually images derived from scanned copies of old paper policy documents, stored as PDF files. Hence, for the remaining 274 PDF documents regarding agricultural products different from wine, we decided to carry out a manual extraction since the beginning.</p>
+         <p>The pipeline we followed for processing policy documents is shown in the top part of <a href="#refIllustration2"> </a>, and was organised in three main steps:</p>
+         <ol>
+            <li>
+               <p>extraction – we developed scripts and carried out human-based data extractions from policy documents through the use of Excel files; </p>
+            </li>
+            <li>
+               <p>validation – the domain experts from MIPAAF and AgID were involved so as to correct and validate the produced Excel documents (that are included in <a href="#__RefNumPara__390_1461357291"> </a> and briefly summarised in the bottom part of <a href="#refIllustration2"> </a>);</p>
+            </li>
+            <li>
+               <p>conversion – the validated Excel data were, finally, processed by other scripts we developed for converting such data into RDF according to the FOOD ontologies.</p>
+            </li>
+         </ol>
+         <p>In the latter step we also used TagMe <a href="#__RefNumPara__11637_1461357291"> </a> so as to extract DBpedia entities referring to villages, cities and regions from the textual description of the production places. The entities extracted by TagMe were revised by humans as well, so as to remove as more mistakes as possible from the data, and then they were aligned with other existing LOD developed in the past by the Italian Public Administration, i.e., <a href="http://spcdata.digitpa.gov.it/">SPCData</a> and the <a href="http://datiopen.istat.it/">LOD of the Italian National Institute of Statistics</a>. Considering the novelty of these data, we have not found any other relevant dataset to link with.</p>
+         <figure id="refIllustration2">
+            <p>
+               <img src="img/10000201000007FC000003E8B9BD527F.png"
+                    alt="The pipeline for extracting data from the policy documents (top) and an excerpt of the Excel data validated by the experts (bottom) – table headings in English for the sake of clarity."/>
+            </p>
+            <figcaption>The pipeline for extracting data from the policy documents (top) and an excerpt of the Excel data validated by the experts (bottom) – table headings in English for the sake of clarity.</figcaption>
+         </figure>
+         <p>The obtained RDF data contain information defining the protected name and various types of related product, the production area of the protected name, the raw materials and the characteristics related with such kinds of products, as shown in the following excerpt (in Turtle with English IRIs for the sake of clarity – while original IRIs are in Italian):</p>
+         <pre>
+            <code>
+product:wine-abruzzo-red a upper:Product , wine:Wine ;
+  rdfs:label "Vino 'Abruzzo' Rosso" ;
+  upper:hasProtectedName name:wine-abruzzo ;
+  upper:hasDescription 
+    descraw:wine-abruzzo-red-raw-material-1 ,
+    descraw:wine-abruzzo-red-raw-material-2 ;
+  upper:hasType type:red-wine .
+
+descraw:wine-abruzzo-red-raw-material-1 a upper:DescriptionOfRawMaterial ;
+  rdfs:label "Vitigno 'Montepulciano': minimo (&gt;=) 80%" ;
+  upper:hasRawMaterial rawmat:vine-variety-montepulciano ;
+  upper:hasMinimumValue "80%" .</code>
+         </pre>
+         <p>All the produced resources were defined by means of permanent IRIs via <em>w3id.org</em>. The IRI naming convention used for each resource was <code>http://w3id.org/food/data/[[class]]/[[product]]</code> (e.g., <a href="http://w3id.org/food/data/prodotto/vino-abruzzo-rosso">http://w3id.org/food/data/prodotto/vino-abruzzo-rosso</a>). In addition, the datasets also include provenance information (defined using DCAT and PROV-O) about the whole production and publication process. The ontologies, the dataset and the provenance metadata are available in <a href="#__RefNumPara__390_1461357291"> </a> and can be <a href="http://etna.istc.cnr.it/food-sparql/">queried by using the SPARQL endpoint</a> provided by the Fuseki 2 triple store of the project. All the data have been released under the license CC BY 4.0, and can be browsed and retrieved in different formats by means of <a href="https://github.com/dvcama/LodView">LODView</a>.</p>
+      </section>
+      <section id="__RefHeading__1464_1310534307">
+         <h1>Ontologies and data reuse </h1>
+         <p>The LOD paradigm is still not fully adopted in the Italian public sector, although national governmental guidelines encourage public administrations to release their data under the form of LOD for semantic interoperability purposes <a href="#__RefNumPara__13471_1461357291"> </a>. Thus, FOOD represents one of a few very recent LOD initiatives, and the first comprehensive project, in the Italian food domain.</p>
+         <p>In this scenario, early this year we recorded already the reuse of the FOOD upper ontology described in <a href="#__RefHeading__2139_1429273589"> </a>. The Italian region Umbria published, in its regional open data portal, a number of <a href="http://dati.umbria.it/dataset/prodotti-dop-igp-umbria/resource/551c465a-932f-4f10-8b63-8031b15071eb">datasets</a> also available as LOD, and some of these concern PDO/PGI/TSG quality schemes of Umbrian products. In particular, they reused the three main classes of the upper ontology, i.e., <em>Product</em>, <em>ProtectedName</em> and <em>Type</em>.</p>
+         <p>Finally, it is worth mentioning an additional initiative that involved, among the others, the data produced in the context of the FOOD project. In October 2015, AgID carried out a <a href="http://www.agid.gov.it/notizie/2015/10/12/big-hack-agid-premia-unapp-valorizzazione-prodotti-dopigp">national hackathon</a>, where a group of young guys won a price for their idea of an app named <a href="http://eatit.emooh.it/index.html">
+               <em>eat it</em>
+            </a>, based on the FOOD LOD datasets. To the best of our knowledge, at the time of this writing, the application is still under development.</p>
+      </section>
+      <section id="__RefHeading__1466_1310534307">
+         <h1>Conclusions</h1>
+         <p>In this paper we have described the outcomes (available in <a href="#__RefNumPara__390_1461357291"> </a>) of an e-government project named FOOD – FOod in Open Data, which was carried out in the context of a collaboration between ISTC-CNR, MIPAAF and AgID, and that concerned the development of ontologies for describing PDO, PGI and TSG products, and the creation of LOD datasets containing data, extracted from existing Italian policy documents on protected names.</p>
+         <p>The main lesson learnt from the whole process was that the automatic extraction of data from the policy documents – even when they are generally structured similarly and provided in easy-to-process formats (i.e., DOCX), as for wines – it is quite difficult and the results are far from the quality required for being published. In fact, the correction introduced by the experts to the data extracted from such policy documents were quite huge. <em>A posteriori</em>, a manual extraction of such data, that could be possible in the same amount of time, would have prevent the introduction of such a large number of mistakes. However, the analysis done on these policy documents about wines have enabled the refactor of existing templates for policy documents so as to write relevant information in an homogeneous manner – that would be a great simplification for guaranteeing some significant automatic processing of such documents in the future. To this end, we are currently discussing with the MIPAAF about possible strategies for integrating our data extraction process in their workflow.</p>
+      </section>
+      <section role="doc-acknowledgements">
+         <h1>Acknowledgements</h1>
+         <p>The project was partially funded by MIPAAF and AgID in the context of a formal agreement established in accordance to article 15 of the Italian law no. 241/1990 . We would like to thank Andrea Giovanni Nuzzolese, Daria Spampinato and the colleagues of IVALSA Department of the Italian National Research Council for their valuable technical contributions. </p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>References</h1>
+         <ol>
+            <li id="__RefNumPara__506_1461357291" role="doc-biblioentry">
+               <p>Falco, R., Gangemi, A., Peroni, S., Vitali, F. (2014). Modelling OWL ontologies with Graffoo. In The Semantic Web: ESWC 2014 Satellite Events: 320–325. <a href="http://dx.doi.org/10.1007/978-3-319-11955-7_42">http://dx.doi.org/10.1007/978-3-319-11955-7_42</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__10640_1461357291" role="doc-biblioentry">
+               <p>Gangemi, A., Peroni, S. (2013). DiTTO: Diagrams Transformation inTo OWL. In Proceedings of the ISWC 2013 Posters &amp; Demonstrations Track. <a href="http://ceur-ws.org/Vol-1035/iswc2013_demo_2.pdf">http://ceur-ws.org/Vol-1035/iswc2013_demo_2.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__421_1461357291" role="doc-biblioentry">
+               <p>Presutti, V., Daga, E., Gangemi, A., Blomqvist, E. (2009). eXtreme Design with Content Ontology Design Patterns. In Proceedings of the 1<sup>st</sup> Workshop on Ontology Patterns (WOP 2009). <a href="http://ceur-ws.org/Vol-516/pap21.pdf">http://ceur-ws.org/Vol-516/pap21.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__10642_1461357291" role="doc-biblioentry">
+               <p>Peroni, S., Shotton, D., Vitali, F. (2012). The Live OWL Documentation Environment: a tool for the automatic generation of ontology documentation. In Proceedings of the 18<sup>th</sup> International Conference on Knowledge Engineering and Knowledge Management (EKAW 2012): 398–412. <a href="http://dx.doi.org/10.1007/978-3-642-33876-2_35">http://dx.doi.org/10.1007/978-3-642-33876-2_35</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__390_1461357291" role="doc-biblioentry">
+               <p>Peroni, S., Lodi, G., Asprino, L., Gangemi, A., Nuzzolese, A. G., Presutti, V., Spampinato, D. (2016). FOOD resources: ontologies and data. Figshare. <a href="http://dx.doi.org/10.6084/m9.figshare.3187903">http://dx.doi.org/10.6084/m9.figshare.3187903</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__11637_1461357291" role="doc-biblioentry">
+               <p>Ferragina, P., Scaiella, U. (2010). TAGME: On-the-fly Annotation of Short Text Fragments (by Wikipedia Entities). In Proceedings of the 19<sup>th</sup> ACM International Conference on Information and Knowledge Management (CIKM 2010): 1625–1628. <a href="http://dx.doi.org/10.1145/1871437.1871689">http://dx.doi.org/10.1145/1871437.1871689</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__13471_1461357291" role="doc-biblioentry">
+               <p>SPC Board (2012). An Overview of the Italian <q>Guidelines for Semantic Interoperability through Linked Open Data</q>. <a href="http://www.agid.gov.it/sites/default/files/documentazione_trasparenza/semanticinteroperabilitylod_en_3.pdf">http://www.agid.gov.it/sites/default/files/documentazione_trasparenza/semanticinteroperabilitylod_en_3.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__47790_1461357291" role="doc-biblioentry">
+               <p>Kolchin, M., Chistyakov, A., Lapaev, M., Khaydarova, R. (2015). FOODpedia: Russian Food Products as a Linked Data Dataset. In The Semantic Web: ESWC 2015 Satellite Events: 87–90. <a href="http://dx.doi.org/10.1007/978-3-319-25639-9_17">http://dx.doi.org/10.1007/978-3-319-25639-9_17</a> 
+               </p>
+            </li>
+         </ol>
+      </section>
+      <section role="doc-footnotes">
+         <section id="ftn1" role="doc-footnote">
+            <p>Bread, cereal, cheese, essential oil, fish, fruit, honey, liquorice, meat, mollusc, oil, pasta, ricotta, saffron, salt, salume, sweet, vegetable, vinegar, wine.</p>
+         </section>
+      </section>
+   </body>
+</html>

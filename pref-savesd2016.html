@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/rash.css"/>
+      <script src="js/jquery.min.js"> </script>
+      <script src="js/bootstrap.min.js"> </script>
+      <script src="js/rash.js"> </script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <title>SAVE-SD 2016 Workshop -- Semantics, Analytics, Visualisation: Enhancing Scholarly Data</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="Oxford e-Research Centre, University of Oxford, Oxford, UK"/>
+      <meta about="#affiliation-2"
+            property="schema:name"
+            content="Data Science Group, Knowledge Media Institute, The Open University, Milton Keynes, UK"/>
+      <meta about="#affiliation-3"
+            property="schema:name"
+            content="Digital And Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Alejandra Gonzalez-Beltran"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="alejandra.gonzalezbeltran@oerc.ox.ac.uk"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="Francesco Osborne"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="francesco.osborne@open.ac.uk"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-3"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-3"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-3"
+            property="schema:affiliation"
+            href="#affiliation-3"/>
+      <meta property="prism:keyword" content="SAVE-SD 2016"/>
+      <meta property="prism:keyword" content="scholarly data"/>
+      <meta property="prism:keyword" content="WWW 2016"/>
+      <meta property="prism:keyword" content="visualisation"/>
+      <meta property="prism:keyword" content="semantics"/>
+      <meta property="prism:keyword" content="analytics"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>Abstract</h1>
+         <p>The SAVE-SD 2016 workshop took place in Montreal, Canada, on 11th April 2016, co-located with the World Wide Web conference.</p>
+         <p>Here, we provide an overview of the SAVE-SD workshop series and 2016 workshop edition, as well as introduce the manuscripts that were accepted as part of the proceedings.</p>
+      </section>
+      <section>
+         <h1>SAVE-SD Workshops</h1>
+         <p>Supporting new forms of scholarly data publication and analysis is a crucial task for researchers, publishers and companies working in the innovation space. Currently, most research papers are poorly annotated and published as PDF, which makes it hard to extract information from the full text. This hinders discoverability, reproducibility, and reuse of research data and findings. In addition, the content of most papers is only described with simple metadata provided as a set of keywords or topic categories. A more structured and semantic rich representation of the research outcomes could bring significant advantages to various areas: linking more effectively research and industry, supporting researchers’ work, fostering cross-pollination of ideas and methods across different areas, driving research policies, and acting as a source of information for a variety of applications.</p>
+         <p>This topic has attracted high priority attention from both the industrial and the academic worlds. Funding agencies and publishers are now supporting open and accessible data publication – in fact it is one of the major themes in the <a href="http://ec.europa.eu/research/press/2016/pdf/opendata-infographic_072016.pdf">EU Horizon2020 program</a>. International community forums are also working in this direction. <a href="http://www.force11.org/">FORCE11</a>, a community of scholars, librarians, archivists, publishers and research funders, have the aim of facilitating knowledge creation and sharing. Similarly, the <a href="https://www.rd-alliance.org/">Research Data Alliance (RDA)</a>, a community including to <a href="https://rd-alliance.org/node/51727 ">4300 members from 111 countries (as of September 2016)</a>, is working since 2013 on building the social and technical infrastructure to enable open data sharing.</p>
+         <p>At the same time, companies are becoming increasingly active in providing novel and more efficient ways to share and analyse research knowledge. Journals such as <a href="http://nature.com/sdata/">Springer Nature Scientific Data</a> and <a href="http://gigascience.biomedcentral.com/">Biomed Central Gigascience</a>, among others, offer incentives for data publication and sharing. <a href="http://wokinfo.com/">Thomson Reuters</a> and <a href="http://www.scopus.com/">Elsevier</a> offer access to large datasets of scholarly data as a service to university and companies. <a href="http://scholar.google.com/">Google Scholar</a> allows users to browse the large repository of paper indexed by Google. <a href="http://academic.research.microsoft.com/">Microsoft Academic Search</a> offers a system for browsing research data and the Microsoft Academic Search Graph, a structured dataset containing metadata on research publications, authors, venues, organizations, and topics. Repositories supporting data publication and preservation (e.g., <a href="https://zenodo.org/">Zenodo</a>, <a href="https://datadryad.org/">Dryad</a> and <a href="http://figshare.com/">Figshare</a>) allow to make publicly available both documents and datasets in a citable, shareable and discoverable manner. Research social networks <a href="http://researchgate.net/">(ResearchGate</a>, <a href="https://www.academia.edu/">Academia.edu</a>) allow research to share and discuss they work with colleagues from all over the word. <a href="http://altmetrics.org/">Altmetrics</a> and <a href="https://impactstory.org/">ImpactStory</a> offer a service based on the analysis of social network for computing alternative metrics with the aim of assessing academic performance. Finally, a number of companies in the field of innovation brokering and <q>horizon scanning</q> (<a href="https://www.idexx.com/">Idex Labs</a>, <a href="http://www.linknovate.com/">Linknovate</a>) constantly analyse the research landscape for finding relevant expert and informing the strategies of client companies. Hence, the interest from the business world presents an unprecedented opportunity for rapidly transforming academic knowledge into practice and achieving the data-driven science and innovation that is promised by the Big Data era.</p>
+         <p>With respect to academia, several conferences related to the World Wide Web and the Semantic Web offered a number of workshops on related topics – such as:</p>
+         <ol>
+            <li>
+               <p>Sepublica 2011-2016 on semantic publishing at European Semantic Web Conference, </p>
+            </li>
+            <li>
+               <p>BigScholar 2014-2016 at the International World Wide Web Conference (on exploration and management of the Web of Scholars), </p>
+            </li>
+            <li>
+               <p>Linked Science 2011-2016 at the International Semantic Web Conference (on the use of Semantic Web technologies for integrating scientific data) and</p>
+            </li>
+            <li>
+               <p>the previous edition of this workshop, SAVE-SD 2015 at the International World Wide Web Conference. </p>
+            </li>
+         </ol>
+         <p>We have also observed active participation in challenges such as the <a href="https://github.com/ceurws/lod/wiki/SemPub2015">ESWC Semantic Publishing Challenge 2015</a> and <a href="https://github.com/ceurws/lod/wiki/SemPub2016">2016</a>. </p>
+         <p>However, despite the rapid developments in this area, there is still a need for further dialogue between academia and industry, as well as other stakeholders working towards the vision of enhanced research data. In particular, the exchange of knowledge between the communities of <em>scholarly</em> 
+            <em>data representation</em>, <em>research data</em> 
+            <em>analytics</em> and <em>human computer interaction</em> is still lacking. Indeed, research data need to be first annotated and enhanced semantically, then analysed, indexed, classified and enriched, and finally the resulting structured information should be conveyed to different kind of stakeholders in a user friendly and intuitive manner. Starting a dialogue between the experts in areas such as Knowledge Engineering, Semantic Web, Natural Language Processing (NLP), Scholarly Communication, Bibliometrics, Human-Computer Interaction, Information Visualisation is thus vital for realizing a comprehensive workflow for sharing scientific knowledge. </p>
+         <p>The aim of the SAVE-SD workshops is to offer a forum to bring together researchers, publishers and other companies, to discuss the present scenarios concerning the production and use of scholarly data, and to strategise future research and industrial directions. We believe that the combination of different expertise and perspective could be a fertile ground for the creation of innovative and scalable solutions for sharing, reusing and processing research knowledge.</p>
+         <p>In particular, The SAVE-SD Workshops focus on the following topics:</p>
+         <ol>
+            <li>
+               <p>
+                  <em>semantics</em> of scholarly data, i.e. how to categorise, connect, integrate and represent scholarly data and its provenance information semantically, in order to foster data sharing, interoperability, reusability and reproducibility;</p>
+            </li>
+            <li>
+               <p>
+                  <em>analytics</em> on scholarly data, i.e. designing and implementing novel and scalable algorithms for knowledge extraction with the aim of understanding research dynamics, forecasting research trends, fostering connections between groups of researchers, informing research policies, analysing and interlinking experiments and deriving new knowledge;</p>
+            </li>
+            <li>
+               <p>
+                  <em>visualisation</em> of and interaction with scholarly data, i.e. providing novel user interfaces and applications for navigating and making sense of scholarly data and highlighting their patterns and peculiarities.</p>
+            </li>
+         </ol>
+         <p>This article introduces SAVE-SD 2016 proceedings, which corresponds to the second edition of the workshop. A selection of the papers from the first edition <a href="https://peerj.com/collections/24-save-sd-2015/">was published in the PeerJ Computer Science Journal</a>.</p>
+      </section>
+      <section>
+         <h1>SAVE-SD 2016: the second edition</h1>
+         <p>As the workshop co-chairs, we now give an overview of the 2016 edition of SAVE-SD.</p>
+         <p>The SAVE-SD 2016 workshop <a href="#__RefNumPara__45310_1591320820"> </a> took place in Montreal, Canada, on 11th April 2016, co-located with the <a href="http://www2016.ca/">World Wide Web conference (WWW 2016)</a>. It was attended by about 50 people. The workshop received a total of 16 submissions from authors of 15 countries in three continents: Europe, Asia, Americas. <a href="#refTable1"> </a> shows the number of papers submitted, accepted and the acceptance rate per paper type. The reason why the number of accepted poster and demo papers are higher than the submitted ones is that a number of rejected full papers were actually accepted as poster and demo papers.</p>
+         <figure id="refTable1">
+            <table>
+               <tr>
+                  <th>Type</th>
+                  <th>Number Submitted</th>
+                  <th>Number Accepted</th>
+                  <th>Acceptance Rate</th>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Full papers</p>
+                  </td>
+                  <td>
+                     <p>11</p>
+                  </td>
+                  <td>
+                     <p>6</p>
+                  </td>
+                  <td>
+                     <p>54.5%</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Position papers</p>
+                  </td>
+                  <td>
+                     <p>1</p>
+                  </td>
+                  <td>
+                     <p>2</p>
+                  </td>
+                  <td>
+                     <p>100.0%</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Poster/Demo papers</p>
+                  </td>
+                  <td>
+                     <p>4</p>
+                  </td>
+                  <td>
+                     <p>6</p>
+                  </td>
+                  <td>
+                     <p>100.0%</p>
+                  </td>
+               </tr>
+            </table>
+            <figcaption>Statistics of SAVE-SD 2016 submitted/accepted papers.</figcaption>
+         </figure>
+         <p>The workshop opened by the keynote of Alex Wade, Director of Scholarly Communications at Microsoft Research, who currently works on Microsoft Academic. In particular, the talk presented the novel <a href="https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/">Microsoft Academic Graph</a>, a novel entity graph of research publications, authors, venues, organizations, and topics which are now driving new features in Bing, Cortana, and Microsoft Academic. </p>
+         <section>
+            <h1>Programme Committees</h1>
+            <p>As SAVE-SD aims to address the gap between the theoretical/academic and practical/industrial aspects of scholarly data, the review process ought to consider both perspectives. Thus, SAVE-SD has three different programme committees (PCs), whose members are listed below:</p>
+            <ol>
+               <li>
+                  <p>an Industrial PC, who mainly evaluates the submissions from an industrial perspective – by assessing how much the theories/applications described in the papers do/may influence (positively or negatively) the publishing and technological domain and whether they could be concretely adopted by publishers and scholarly data providers;</p>
+               </li>
+               <li>
+                  <p>an Academic PC, who evaluate the papers mainly from an academic perspective – by assessing the quality of the research described in such papers. </p>
+               </li>
+               <li>
+                  <p>a Senior PC, whose members act as meta-reviewers and have the crucial role of balancing the scores provided by the reviews from the other two PCs; </p>
+               </li>
+            </ol>
+            <p>We, the workshop chairs, are very grateful to all the members of the three PCs for their high quality reviews and constructive feedback, which improved significantly the quality of the papers contained in these proceedings. </p>
+            <section>
+               <h1>Senior Program Committee</h1>
+               <ul>
+                  <li>
+                     <p>Aldo Gangemi (Université de Paris 13, France, and CNR, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Daniel Schwabe (Pontifical Catholic University of Rio de Janeiro, Brazil)</p>
+                  </li>
+                  <li>
+                     <p>Enrico Motta (KMi, The Open University, UK)</p>
+                  </li>
+                  <li>
+                     <p>Fabio Vitali (University of Bologna, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Ivan Herman (Digital Publishing Lead, W3C)</p>
+                  </li>
+                  <li>
+                     <p>Pascal Hitzler (Wright State University, USA)</p>
+                  </li>
+                  <li>
+                     <p>Simone Teufel (University of Cambridge, UK)</p>
+                  </li>
+                  <li>
+                     <p>Susanna Assunta Sansone (University of Oxford and NPG, UK)</p>
+                  </li>
+                  <li>
+                     <p>Timothy W. Clark (Harvard University, USA)</p>
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h1>Industrial Program Committee</h1>
+               <ul>
+                  <li>
+                     <p>Alex Wade (Microsoft Research)</p>
+                  </li>
+                  <li>
+                     <p>Aliaksandr Birukou (Springer)</p>
+                  </li>
+                  <li>
+                     <p>Anita de Waard (Elsevier)</p>
+                  </li>
+                  <li>
+                     <p>Anna Tordai (Elsevier)</p>
+                  </li>
+                  <li>
+                     <p>Christoph Lange (CEUR-WS.org)</p>
+                  </li>
+                  <li>
+                     <p>Eric Prud'hommeaux (W3C)</p>
+                  </li>
+                  <li>
+                     <p>Kris Jack (Mendeley)</p>
+                  </li>
+                  <li>
+                     <p>Laurel L. Haak (ORCID)</p>
+                  </li>
+                  <li>
+                     <p>Lyubomir Penev (Pensoft Publishers)</p>
+                  </li>
+                  <li>
+                     <p>Maarten Fröhlich (IOS Press)</p>
+                  </li>
+                  <li>
+                     <p>Michele Pasin (Springer Nature)</p>
+                  </li>
+                  <li>
+                     <p>Patricia Feeney (CrossRef)</p>
+                  </li>
+                  <li>
+                     <p>Paul Groth (Elsevier Labs, The Netherlands)</p>
+                  </li>
+                  <li>
+                     <p>Petr Knoth (Mendeley)</p>
+                  </li>
+                  <li>
+                     <p>Scott Edmunds (GigaScience and BioMed Central)</p>
+                  </li>
+                  <li>
+                     <p>Thomas Ingraham (F1000Research)</p>
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h1>Academic Program Committee</h1>
+               <ul>
+                  <li>
+                     <p>Alexander García Castro (Florida State University, USA)</p>
+                  </li>
+                  <li>
+                     <p>Andrea Bonaccorsi (University of Pisa, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Andrea Giovanni Nuzzolese (ISTC-CNR Rome, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Angelo Di Iorio (University of Bologna, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Anna Lisa Gentile (University of Mannheim, Germany)</p>
+                  </li>
+                  <li>
+                     <p>Asunción Gómez Pérez (UPM, Spain)</p>
+                  </li>
+                  <li>
+                     <p>Bahar Sateli (Concordia University, Canada)</p>
+                  </li>
+                  <li>
+                     <p>Daniel Garijo (UPM, Spain)</p>
+                  </li>
+                  <li>
+                     <p>Davide Buscaldi (Université de Paris 13, France)</p>
+                  </li>
+                  <li>
+                     <p>Eamonn Maguire (CERN, Switzerland)</p>
+                  </li>
+                  <li>
+                     <p>Francesco Poggi (University of Bologna, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Francesco Ronzano (Universitat Pompeu Fabra, Spain)</p>
+                  </li>
+                  <li>
+                     <p>Ilaria Tiddi (KMi, The Open University, UK)</p>
+                  </li>
+                  <li>
+                     <p>Jodi Schneider (University of Pittsburgh, USA)</p>
+                  </li>
+                  <li>
+                     <p>Leyla Jael García Castro (University of Munich, Germany)</p>
+                  </li>
+                  <li>
+                     <p>Mathieu d'Aquin (KMi, The Open University, UK)</p>
+                  </li>
+                  <li>
+                     <p>Oscar Corcho (UPM, Spain)</p>
+                  </li>
+                  <li>
+                     <p>Paolo Ciancarini (University of Bologna, Italy)</p>
+                  </li>
+                  <li>
+                     <p>Paolo Ciccarese (Harvard University, USA)</p>
+                  </li>
+                  <li>
+                     <p>Philippe Rocca-Serra (University of Oxford, UK)</p>
+                  </li>
+                  <li>
+                     <p>Rinke Hoekstra (VU Amsterdam, The Netherlands)</p>
+                  </li>
+                  <li>
+                     <p>Rob Davey (Genome Analysis Centre, UK)</p>
+                  </li>
+                  <li>
+                     <p>Stefan Dietze (L3S Research Center, Germany)</p>
+                  </li>
+                  <li>
+                     <p>Steffen Lohmann (University of Stuttgart, Germany)</p>
+                  </li>
+                  <li>
+                     <p>Steve Pettifer (University of Manchester, UK)</p>
+                  </li>
+                  <li>
+                     <p>Tom Heath (Open Data Institute, UK)</p>
+                  </li>
+                  <li>
+                     <p>Tomi Kauppinen (Aalto University, Finland, and University of Münster, Germany)</p>
+                  </li>
+                  <li>
+                     <p>Tudor Groza (Garvan Institute of Medical Research, Australia)</p>
+                  </li>
+               </ul>
+            </section>
+         </section>
+         <section>
+            <h1>Sponsors</h1>
+            <p>We are grateful to our sponsors:</p>
+            <ol>
+               <li>
+                  <p>
+                     <a href="http://www.springernature.com/">Springer Nature</a>, who provided a 150 euros voucher to buy Springer Nature’s products for the best RASH paper award;</p>
+               </li>
+               <li>
+                  <p>
+                     <a href="http://pensoft.net/">Pensoft</a>, who hosted a free-of-charge special collection for selected position/poster/demo papers in the Research Idea and Outcomes (RIO) Journal;</p>
+               </li>
+               <li>
+                  <p>
+                     <a href="http://gigascience.biomedcentral.com/">GigaScience</a>, who provided cool <q>Data is coming</q> t-shirts for the workshops attendees. </p>
+               </li>
+            </ol>
+         </section>
+      </section>
+      <section>
+         <h1>SAVE-SD advocating enhanced papers</h1>
+         <p>The adoption of Web-based formats in scientific literature is an important step towards the complex and exciting vision of Semantic Publishing. The goal is to unlock the knowledge hidden in other formats. For this reason SAVE-SD is actively encouraging author to submit their research papers in HTML-based formats. </p>
+         <p>In particular, SAVE-SD explicitly offers support for submission in the <a href="https://github.com/essepuntato/rash">Research Articles in Simplified HTML</a>
+            <a href="https://github.com/essepuntato/rash"> (RASH) format</a>. RASH is a markup language that restricts the use of HTML to 32 elements <a href="#__RefNumPara__45316_1591320820"> </a>. This solution allows authors to include semantic relationships in their work either by associating RDFa annotations or by inserting plain Turtle, RDF/XML or JSON-LD content in a <code>script</code> element. To encourage submission in RASH the organisers introduced a special award for the best submission in RASH, whose criteria are indicated in the next section.</p>
+         <p>SAVE-SD 2015 was the first workshop to accept RASH papers. In the first edition it received 6 out of 23 submissions in RASH and after the review process an additional author chose to prepare the camera ready paper in RASH. Today, together with other HTML-based formats, <a href="https://github.com/essepuntato/rash/#venues-that-have-adopted-rash-as-submission-format">RASH is accepted by the main Semantic Web conferences (ISWC, ESWC, EKAW) and by a number of related workshops and challenges</a>. </p>
+         <p>SAVE-SD 2016 received 6 out of 16 submissions in RASH from 14 authors from Italy, Sweden, Greece, Germany, Belgium, and United States. In total, 5 out of the 14 accepted papers were in RASH, including two full papers, one position paper, and two demo papers.</p>
+      </section>
+      <section>
+         <h1>Selection of best paper and best RASH paper</h1>
+         <p>SAVE-SD 2016 awarded two prizes: one for best paper and another for best RASH paper. The latter was sponsored by Springer Nature. </p>
+         <p>The criteria to select the best paper award considered the reviewers scores and selected the paper with the best score. The best paper award was given to:</p>
+         <blockquote>
+            <p>Salatino, A., Motta, E. (2016). Detection of Embryonic Research Topics by Analysing Semantic Topic Networks <a href="#__RefNumPara__45318_1591320820"> </a>
+            </p>
+         </blockquote>
+         <p>The best RASH paper award is given to the paper that makes best use of the RASH format. This is chosen by an automatic score system which rates all the RASH submissions considering:</p>
+         <ol>
+            <li>
+               <p>the quality of the markup (i.e., how many errors the document has compared with the RASH grammar),</p>
+            </li>
+            <li>
+               <p>the quality of HTML (i.e., how many errors the document has compared with HTML5),</p>
+            </li>
+            <li>
+               <p>the number of RDF statements defined,</p>
+            </li>
+            <li>
+               <p>the number of RDF links to LOD datasets.</p>
+            </li>
+         </ol>
+         <p>The best RASH paper of SAVE-SD 2016 was:</p>
+         <blockquote>
+            <p>Philipson, J. (2016). Citation functions for knowledge export - a question of relevance, or, can CiTO do the trick? <a href="#__RefNumPara__45320_1591320820"> </a>
+            </p>
+         </blockquote>
+      </section>
+      <section>
+         <h1>Short overview of the papers</h1>
+         <p>The articles of this edition focus on the extraction of semantic information from research papers and their use for characterizing citations and analysing research topics and trends. In this section, we will summarize their contents and contributions of all the papers.</p>
+         <p>We believe that this collection of papers constitutes an excellent example of current research in the field of Semantic Publishing, addressing both theoretical and practice issues. We are thus confident that these proceedings will be helpful to researchers and companies interested in this growing research area. </p>
+         <p>Although some papers contain to a degree all the components suggested by the SAVE-SD workshop, i.e., semantics, analytics and visualization, we can classify them in two main categories: the ones that address the extraction of semantic information from full-text or pre-existent datasets and the ones that focus on exploiting semantic techniques for fostering the analysis of citations, researchers and topics. The first category includes two full papers, one position paper and four poster papers.</p>
+         <p>In recent years there has been a number of efforts to extract scientific artefacts (e.g., genes <a href="#__RefNumPara__45322_1591320820"> </a>, chemical components <a href="#__RefNumPara__45328_1591320820"> </a>) and epistemological concepts (e.g., hypothesis, motivation, experiments) <a href="#__RefNumPara__45324_1591320820"> </a> 
+            <a href="#__RefNumPara__45326_1591320820"> </a> from research publications. The following five papers are dedicated to this intriguing task. </p>
+         <p>The paper by Ronzano and Saggion introduces a platform to represent as RDF several aspects of scientific publications, using techniques such as rhetorical sentence classification and text summarisation. The research publications are analysed by relying on the Text Mining Framework developed in the context of the European Project Dr. Inventor <a href="#__RefNumPara__45348_1591320820"> </a>. In line with the SAVE-SD vision, this framework also offers a number of relevant <a href="http://backingdata.org/dri/viz/">web visualizations</a> for exploring the produced RDF dataset.</p>
+         <p>Gábor et al. propose a method for automatically extracting semantic relations from articles in the science/engineering domain. Their approach allows to identify the entities and concepts that describe a scientific field (e.g., methods, problems) and the semantic relations between them (e.g., tackle, develop). The proposed workflow combines natural language processing techniques with statistical term extractors and external ontological resources.</p>
+         <p>Marsi and Øzturk introduce a framework for finding events in natural science literature, such as the increase/decrease of variables. The resulting knowledge base enables semantic search for events and variables, which can be used to assess possible correlations – e.g., the increase in the sea level vs the decrease of the ice sheet. The system offers also a user interface to browse the events and visualize their type, frequency and relation strength.</p>
+         <p>Similarly, Sateli and Witte’s demo paper describes a workflow for converting research paper in a Linked Open Data compliant knowledge base. Their solution includes a NLP pipeline for tokenisation, sentence splitting, part-of-speech (POS) tagging, stemming, and verb group analysis; the Rhetector component for automatically detecting rhetorical entities; LODtagger for linking Dbpedia entities to the paper; and LODeXporter for generating the output RDF.</p>
+         <p>Finally, the poster paper by Alexiou et al. presents the OpenAIRE LOD services, the RDF version of the well known <a href="https://www.openaire.eu/">Open Access Infrastructure for Research in Europe dataset</a>, which includes publications and datasets from more than 100,000 research projects. In particular, the poster describes the scalable workflow used for the RDFization process of such a huge database.</p>
+         <p>The complex research entities extracted by these approaches have the potential to revolutionize the way we analyse scientific literature. However, key phrases are still the most common means to represent the content of articles for the benefits of users, search engine and recommendation systems. For this reason, the paper by Daudaravicius introduces a new statistical approach for extracting key phrases from scientific journals in the fields of astrophysics, mathematics, physics, and computer science. Their method uses the additive smoothing of TF-IDF for improving the quality of key phrases derived from large sample of papers.</p>
+         <p>The task of extracting semantic information from scholarly papers was addressed since 2015 by the Semantic Publishing Challenge (SemPub) at the Extended Semantic Web Conference. SemPub created a framework for comparing in an objective way a number of systems in the semantic publishing domain and encouraged researcher to produce and make available a number of relevant Linked Data dataset. The paper of Vahdati et al. examines the overall organization of the Challenge and the results produced in the 2015 and 2016 editions. It also analyses the different system proposed for the different tasks and discusses a number of good lessons learned by the organizers.</p>
+         <p>Scholarly metadata can also be found on the web, in formats such as as <a href="http://www.w3.org/TR/xhtml-rdfa-primer/">RDFa</a>, <a href="http://www.w3.org/TR/microdata">Microdata</a> and <a href="http://microformats.org/">Microformats</a>. However, it is not always easy to recover and aggregate this data. The position paper by Sahoo et al. contributes to this challenge by presenting an analysis on <a href="http://webdatacommons.org/">Web Data Commons (WDC) dataset</a> with the aim of identifying frequent types and terms, the key providers of bibliographic markup and the most common errors. The findings include the prevalence of statements describing authors, publishers and keywords and the fact that Springer.org appears to be the most active data provider by a large margin in the sample under analysis. </p>
+         <p>The second category of papers addresses the use of semantic technologies for citation and topic analysis and is composed by two full papers, a position paper and a poster paper.</p>
+         <p>The position paper by Philipson addresses the use of citation functions for promoting knowledge export and discusses the use of the Citation Typing Ontology (CiTO) <a href="#__RefNumPara__45350_1591320820"> </a> for this task. Indeed, while in many contexts different kinds of citations are treated as equal, they can be radically different according to their semantics and rhetorical context. The paper examines in particular cross-disciplinary citation functions, such as <q>comparison</q>, <q>evidence</q>, <q>force</q>, <q>method</q> and <q>result</q>. It concludes that currently CiTO is not specific enough to capture the subtle differences between some of citation functions and suggest that a combination of citation functions and subject headings, extracted from both citing and cited entities might offer even better prospects for knowledge export.</p>
+         <p>The rest of the papers highlight the advantage of a semantic characterization of research topics <a href="#__RefNumPara__45374_1591320820"> </a> for describing researcher and analysing the evolution of research trends.</p>
+         <p>Sateli et al. propose a novel method for automatically creating authors’ profiles according to their topics of interest. Indeed, a number of scholarly applications build on a representation of researchers in term of their competence, for supporting services such as expert search and paper recommendation. The automatically extraction of this profile from the full-text of research papers is performed by means of a text mining pipeline, which detects relevant topics as grounded named entities from DBpedia. Interestingly, the evaluation showed that the topic extracted within specific rhetorical zones are more representative of the author’s competences. </p>
+         <p>The paper by Salatino and Motta, which won the best paper award, focuses on the detection of embryonic research topics that can be used for anticipating future research trends. It theorizes that the appearance of novel research areas is anticipated by specific dynamics between existing ones and suggests a method based on the analysis of 3-cliques for detecting these dynamics. The paper presents an experiment on a sample of 3 million research papers which confirms the hypothesis. The main finding is that the pace of collaboration in the subgraphs of topics that will give rise to a new research area is significantly higher than the one in the control group. This knowledge could foster a variety of methods for trend detection which currently focus on topics already associated with a label or a substantial number of documents.</p>
+         <p>Portenoy and West poster paper addresses a similar issue, proposing a new kind of visualization for representing the evolution of a topic and its influence on other fields, according to the citations graph. Their application exploits hierarchical clustering techniques to partition the citation graph into clusters representing fields and subfields. A demo of this visualization is publicly available at <a href="http://scholar.eigenfactor.org/fields">http://scholar.eigenfactor.org/fields</a>.</p>
+      </section>
+      <section>
+         <h1>Journal issues for extended papers and posters </h1>
+         <p>The authors of full papers were invited to submit an extended version of their work to a special issue that will be published as part of the PeerJ Computer Science. The authors of position, demo, and poster papers of the workshop were invited to submit an extended version of their works to a special issue that will be published as part of the Research Ideas and Outcomes (RIO) Journal.</p>
+         <p>The reader will be able to find further information of such extended papers at <a href="http://cs.unibo.it/save-sd/2016/">http://cs.unibo.it/save-sd/2016/</a>.</p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>References</h1>
+         <ol>
+            <li id="__RefNumPara__45322_1591320820" role="doc-biblioentry">
+               <p>Carpenter, B.: LingPipe for 99.99% recall of gene mentions. In Proceedings of the Second BioCreative Challenge Evaluation Workshop (Vol. 23, pp. 307-309). (2007)</p>
+            </li>
+            <li id="__RefNumPara__45328_1591320820" role="doc-biblioentry">
+               <p>Corbett, P., Copestake, A.: Cascaded classifiers for confidence-based chemical named entity recognition. BMC bioinformatics, 9(11), p.1. (2008)</p>
+            </li>
+            <li id="__RefNumPara__45316_1591320820" role="doc-biblioentry">
+               <p>Di Iorio, A., Nuzzolese, A.G., Osborne, F., Peroni, S., Poggi, F., Smith, M., Vitali, F. and Zhao, J.: The RASH Framework: enabling HTML+ RDF submissions in scholarly venues. In 14th International Semantic Web Conference. (2015)</p>
+            </li>
+            <li id="__RefNumPara__45324_1591320820" role="doc-biblioentry">
+               <p>Liakata, M., Teufel, S., Siddharthan, A., Batchelor, C.R.: Corpora for the Conceptualisation and Zoning of Scientific Papers. In Proceedings of the 2010 International Conference on Language Resources and Evaluation. (2010)</p>
+            </li>
+            <li id="__RefNumPara__45310_1591320820" role="doc-biblioentry">
+               <p>Gonzalez-Beltran, A., Osborne, F., and Peroni, S.: SAVE-SD 2016: Second Workshop on Semantics, Analytics and Visualisation: Enhancing Scholarly Data. In Proceedings of the 25th International Conference Companion on World Wide Web (WWW '16 Companion) (pp. 1043-1044). (2016)</p>
+            </li>
+            <li id="__RefNumPara__45326_1591320820" role="doc-biblioentry">
+               <p>Groza, T.: Using Typed Dependencies to Study and Recognise Conceptualisation Zones in Biomedical Literature. PloS one, 8(11), p.e79570. (2013)</p>
+            </li>
+            <li id="__RefNumPara__45374_1591320820" role="doc-biblioentry">
+               <p>Osborne, F., and Motta, E.: Klink-2: integrating multiple web sources to generate semantic topic networks. In International Semantic Web Conference (pp. 408-424). Springer International Publishing. (2015)</p>
+            </li>
+            <li id="__RefNumPara__45350_1591320820" role="doc-biblioentry">
+               <p>Peroni, S., and Shotton, D.: FaBiO and CiTO: ontologies for describing bibliographic resources and citations. Web Semantics: Science, Services and Agents on the World Wide Web, 17, pp.33-43. (2012)</p>
+            </li>
+            <li id="__RefNumPara__45320_1591320820" role="doc-biblioentry">
+               <p>Philipson, J.: Citation functions for knowledge export - a question of relevance, or, can CiTO do the trick? In Proceeding of the SAVE-SD 2016 Workshop. (2016)</p>
+            </li>
+            <li id="__RefNumPara__45348_1591320820" role="doc-biblioentry">
+               <p>Ronzano, F., and Saggion, H.: Dr. Inventor Framework: Extracting Structured Information from Scientific Publications. Discovery Science (pp. 209-220). Springer International Publishing. (2015)</p>
+            </li>
+            <li id="__RefNumPara__45318_1591320820" role="doc-biblioentry">
+               <p>Salatino, A. A. and Motta, E.: Detection of Embryonic Research Topics by Analysing Semantic Topic Networks. In Proceeding of the SAVE-SD 2016 Workshop. (2016)</p>
+            </li>
+         </ol>
+      </section>
+   </body>
+</html>
