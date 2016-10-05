@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="grammar/rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<html
+xmlns="http://www.w3.org/1999/xhtml"
+prefix="
+schema: http://schema.org/
+prism: http://prismstandard.org/namespaces/basic/2.0/">
+<head>
+  <!-- Visualisation requirements (mandatory for optimal reading) -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/rash.css"/>
+
+  <script src="js/jquery.min.js"> </script>
+  <script src="js/bootstrap.min.js"> </script>
+  <script src="js/rash.js"> </script>
+
+  <!-- MathJax for multi-browser support of LaTeX formulas and MathML -->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+  <!-- /END Visualisation requirements (mandatory for optimal reading) -->
+
+  <!-- Metadata -->
+  <title property="dcterms:title">Material for "Towards accessible graphs in HTML-based scholarly articles"</title>
+
+  <!-- Author's data (one or more) -->
+  <meta about="#sm" property="schema:name" name="dc.creator" content="Silvia Mirri"/>
+  <meta about="#sm" property="schema:email" content="silvia.mirri@unibo.it"/>
+  <link about="#sm" property="schema:affiliation" href="#cs"/>
+
+  <meta about="#sp" property="schema:name" name="dc.creator" content="Silvio Peroni"/>
+  <meta about="#sp" property="schema:email" content="silvio.peroni@unibo.it"/>
+  <link about="#sp" property="schema:affiliation" href="#cs"/>
+
+  <meta about="#vr" property="schema:name" name="dc.creator" content="Vincenzo Rubano"/>
+  <meta about="#vr" property="schema:email" content="vincenzo.rubano@studio.unibo.it"/>
+  <link about="#vr" property="schema:affiliation" href="#cs"/>
+
+  <meta about="#ps" property="schema:name" name="dc.creator" content="Paola Salomoni"/>
+  <meta about="#ps" property="schema:email" content="paola.salomoni@unibo.it"/>
+  <link about="#ps" property="schema:affiliation" href="#cs"/>
+
+  <meta about="#fv" property="schema:name" name="dc.creator" content="Fabio Vitali"/>
+  <meta about="#fv" property="schema:email" content="fabio.vitali@unibo.it"/>
+  <link about="#fv" property="schema:affiliation" href="#cs"/>
+
+  <!-- Affiliations -->
+  <meta about="#cs" property="schema:name" content="Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
+
+  <!-- ACM category (one or more) -->
+  <meta name="dcterms.subject" content="Applied computing,Document management and text processing,Document preparation,Markup languages,Accessibility"/>
+  <!-- /END Metadata -->
+</head>
+<body lang="en">
+  <!-- Abstract -->
+  <section role="doc-abstract">
+    <h1>Abstract</h1>
+    <p>This documents introduce the accompanying material for the paper submitted to <a href="http://doceng2016.caa.tuwien.ac.at/">DocEng 2016</a> entitled <a href="index.html"><q>Towards accessible graphs in HTML-based scholarly articles</q></a> by Silvia Mirri, Silvio Peroni, Vincenzo Rubano, Paola Salomoni, and Fabio Vitali.</p>
+  </section>
+
+  <!-- Sections -->
+  <section>
+    <h1>Materials</h1>
+    <p>Here we list the two links to the documents created by using the two extensions of <a href="https://github.com/essepuntato/rash/">RASH</a>, i.e. RASH+evoGraphs and RASH-D3. Both the documents include six different automatically-generated graphs starting from the same CSV document: 2 vertical bar charts, 2 horizontal bar charts, and 2 pie charts.</p>
+    <ul>
+      <li><p><a href="example_evograph.html">RASH-evoGraphs document</a></p></li>
+      <li><p><a href="example_d3.html">RASH-D3 document</a></p></li>
+    </ul>
+  </section>
+
+</body>
+</html>

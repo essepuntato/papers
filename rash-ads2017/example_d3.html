@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="grammar/rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    prefix="
+        schema: http://schema.org/
+        prism: http://prismstandard.org/namespaces/basic/2.0/
+        fabio: http://purl.org/spar/fabio/
+        cito: http://purl.org/spar/cito/
+        rash: http://cs.unibo.it/save-sd/rash/">
+    <head>
+        <!-- Visualisation requirements (mandatory for optimal reading) -->
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/rash.css"/>
+		<link rel="stylesheet" href="css/graph.css"/>
+
+        
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/rash_d3.js"></script>
+		<script src="js/d3.v3.min.js"></script>
+        <!-- /END Visualisation requirements (mandatory for optimal reading) -->
+        
+        <!-- Metadata -->
+        <title>Example RASH + D3</title>
+        
+        <!-- Author's data (one or more) -->
+        <meta about="#jd" name="dc.creator" content="John Doe"/>
+        <meta about="#jd" property="schema:email" content="john.doe@example.com" />
+        <link about="#jd" property="schema:affiliation" href="#cs-unibo" />
+        
+        <!-- Affiliations -->
+        <meta 
+            about="#cs-unibo" property="schema:name" 
+            content="Department of Computer Science and Engineering, University of Bologna, Bologna, Italy" />
+        <!-- /END Metadata -->
+        
+        <!-- Adding CSV data to the document -->
+       <script id="cur_data" type="text/csv">
+            Russian Federation, Italy, France, Luxembourg, Greece, Japan, Others
+            293, 302, 91, 7, 7, 7, 49
+        </script>
+    </head>
+    <body>
+        <!-- Sections -->
+        <section>
+            <h1>Figures</h1>
+            <figure id="figure_1">
+                <p>
+                    <img src="#cur_data" class="horizontal_bar_chart" alt="Let's graph it!"></img>
+                </p>
+               <figcaption>Caption of the figure.</figcaption>
+            </figure>
+            <figure id="figure_2">
+                <p>
+                    <img src="#cur_data" class="vertical_bar_chart" alt="Let's graph it!"></img>
+                </p>
+                <figcaption>Caption of the figure.</figcaption>
+            </figure>
+            <figure id="figure_3">
+                <p>
+                    <img src="#cur_data" class="pie_chart" alt="Let's graph it!"></img>
+                </p>
+                <figcaption>Caption of the figure.</figcaption>
+            </figure>
+            <figure id="figure_4">
+                <p>
+                    <img src="cur_data.csv" class="horizontal_bar_chart" alt="Let's graph it!"></img>
+                </p>
+                <figcaption>Caption of the figure.</figcaption>
+            </figure>
+            <figure id="figure_5">
+                <p>
+                    <img src="cur_data.csv" class="vertical_bar_chart" alt="Let's graph it!"></img>
+                </p>
+                <figcaption>Caption of the figure.</figcaption>
+            </figure>
+            <figure id="figure_6">
+                <p>
+                    <img src="cur_data.csv" class="pie_chart" alt="Let's graph it!"></img>
+                </p>
+                <figcaption>Caption of the figure.</figcaption>
+            </figure>
+        </section>
+    </body>
+</html>
