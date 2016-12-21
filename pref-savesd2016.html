@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
    <head>
-      <meta charset="UTF-8"/> 
+      <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="stylesheet" href="css/bootstrap.min.css"/>
       <link rel="stylesheet" href="css/rash.css"/>
@@ -109,7 +109,7 @@
       <section>
          <h1>SAVE-SD 2016: the second edition</h1>
          <p>As the workshop co-chairs, we now give an overview of the 2016 edition of SAVE-SD.</p>
-         <p>The SAVE-SD 2016 workshop <a href="#__RefNumPara__45310_1591320820"> </a> took place in Montreal, Canada, on 11th April 2016, co-located with the <a href="http://www2016.ca/">World Wide Web conference (WWW 2016)</a>. It was attended by about 50 people. The workshop received a total of 16 submissions from authors of 15 countries in three continents: Europe, Asia, Americas. <a href="#refTable1"> </a> shows the number of papers submitted, accepted and the acceptance rate per paper type. The reason why the number of accepted poster and demo papers are higher than the submitted ones is that a number of rejected full papers were actually accepted as poster and demo papers.</p>
+         <p>The SAVE-SD 2016 workshop <a href="#__RefNumPara__45310_1591320820"> </a> took place in Montreal, Canada, on 11th April 2016, co-located with the <a href="http://www2016.ca/">World Wide Web conference (WWW 2016)</a>. It was attended by about 50 people. The workshop received a total of 16 submissions from authors of 15 countries in three continents: Europe, Asia, Americas. <a href="#refTable1"> </a> shows the number of papers submitted, accepted and the acceptance rate per paper type. The reason why the number of accepted position/poster/demo papers are higher than the submitted ones is that a number of rejected full papers were actually accepted as position/poster/demo papers.</p>
          <figure id="refTable1">
             <table>
                <tr>
@@ -154,7 +154,7 @@
                      <p>4</p>
                   </td>
                   <td>
-                     <p>6</p>
+                     <p>5</p>
                   </td>
                   <td>
                      <p>100.0%</p>
@@ -414,7 +414,7 @@
          <h1>Short overview of the papers</h1>
          <p>The articles of this edition focus on the extraction of semantic information from research papers and their use for characterizing citations and analysing research topics and trends. In this section, we will summarize their contents and contributions of all the papers.</p>
          <p>We believe that this collection of papers constitutes an excellent example of current research in the field of Semantic Publishing, addressing both theoretical and practice issues. We are thus confident that these proceedings will be helpful to researchers and companies interested in this growing research area. </p>
-         <p>Although some papers contain to a degree all the components suggested by the SAVE-SD workshop, i.e., semantics, analytics and visualization, we can classify them in two main categories: the ones that address the extraction of semantic information from full-text or pre-existent datasets and the ones that focus on exploiting semantic techniques for fostering the analysis of citations, researchers and topics. The first category includes two full papers, one position paper and four poster papers.</p>
+         <p>Although some papers contain to a degree all the components suggested by the SAVE-SD workshop, i.e., semantics, analytics and visualization, we can classify them in two main categories: the ones that address the extraction of semantic information from full-text or pre-existent datasets and the ones that focus on exploiting semantic techniques for fostering the analysis of citations, researchers and topics. The first category includes four full papers, one position paper and four demo/poster papers.</p>
          <p>In recent years there has been a number of efforts to extract scientific artefacts (e.g., genes <a href="#__RefNumPara__45322_1591320820"> </a>, chemical components <a href="#__RefNumPara__45328_1591320820"> </a>) and epistemological concepts (e.g., hypothesis, motivation, experiments) <a href="#__RefNumPara__45324_1591320820"> </a> 
             <a href="#__RefNumPara__45326_1591320820"> </a> from research publications. The following five papers are dedicated to this intriguing task. </p>
          <p>The paper by Ronzano and Saggion introduces a platform to represent as RDF several aspects of scientific publications, using techniques such as rhetorical sentence classification and text summarisation. The research publications are analysed by relying on the Text Mining Framework developed in the context of the European Project Dr. Inventor <a href="#__RefNumPara__45348_1591320820"> </a>. In line with the SAVE-SD vision, this framework also offers a number of relevant <a href="http://backingdata.org/dri/viz/">web visualizations</a> for exploring the produced RDF dataset.</p>
@@ -423,6 +423,7 @@
          <p>Similarly, Sateli and Witte’s demo paper describes a workflow for converting research paper in a Linked Open Data compliant knowledge base. Their solution includes a NLP pipeline for tokenisation, sentence splitting, part-of-speech (POS) tagging, stemming, and verb group analysis; the Rhetector component for automatically detecting rhetorical entities; LODtagger for linking Dbpedia entities to the paper; and LODeXporter for generating the output RDF.</p>
          <p>Finally, the poster paper by Alexiou et al. presents the OpenAIRE LOD services, the RDF version of the well known <a href="https://www.openaire.eu/">Open Access Infrastructure for Research in Europe dataset</a>, which includes publications and datasets from more than 100,000 research projects. In particular, the poster describes the scalable workflow used for the RDFization process of such a huge database.</p>
          <p>The complex research entities extracted by these approaches have the potential to revolutionize the way we analyse scientific literature. However, key phrases are still the most common means to represent the content of articles for the benefits of users, search engine and recommendation systems. For this reason, the paper by Daudaravicius introduces a new statistical approach for extracting key phrases from scientific journals in the fields of astrophysics, mathematics, physics, and computer science. Their method uses the additive smoothing of TF-IDF for improving the quality of key phrases derived from large sample of papers.</p>
+         <p>References are one of the most used kind of entities for understanding the research landscape, but extracting and visualizing them is still a challenge. The paper by Požega et al.<a href="#fn1"></a> presents an approach which represents references from scientific papers as a tree-shape ReferenceTree model. The visualisation integrates multiple dimensions related to bibliographic references — such as type of publication, authorship and co-authorship and number of references — into the tree and allows one to easily browse an author's publication history.</p>
          <p>The task of extracting semantic information from scholarly papers was addressed since 2015 by the Semantic Publishing Challenge (SemPub) at the Extended Semantic Web Conference. SemPub created a framework for comparing in an objective way a number of systems in the semantic publishing domain and encouraged researcher to produce and make available a number of relevant Linked Data dataset. The paper of Vahdati et al. examines the overall organization of the Challenge and the results produced in the 2015 and 2016 editions. It also analyses the different system proposed for the different tasks and discusses a number of good lessons learned by the organizers.</p>
          <p>Scholarly metadata can also be found on the web, in formats such as as <a href="http://www.w3.org/TR/xhtml-rdfa-primer/">RDFa</a>, <a href="http://www.w3.org/TR/microdata">Microdata</a> and <a href="http://microformats.org/">Microformats</a>. However, it is not always easy to recover and aggregate this data. The position paper by Sahoo et al. contributes to this challenge by presenting an analysis on <a href="http://webdatacommons.org/">Web Data Commons (WDC) dataset</a> with the aim of identifying frequent types and terms, the key providers of bibliographic markup and the most common errors. The findings include the prevalence of statements describing authors, publishers and keywords and the fact that Springer.org appears to be the most active data provider by a large margin in the sample under analysis. </p>
          <p>The second category of papers addresses the use of semantic technologies for citation and topic analysis and is composed by two full papers, a position paper and a poster paper.</p>
@@ -474,6 +475,11 @@
                <p>Salatino, A. A. and Motta, E.: Detection of Embryonic Research Topics by Analysing Semantic Topic Networks. In Proceeding of the SAVE-SD 2016 Workshop. (2016)</p>
             </li>
          </ol>
+      </section>
+      <section id="fnlist" role="doc-footnotes">
+         <section id="fn1" role="doc-footnote">
+            <p>The authors were unable to present this paper at the workshop due to an unforeseen mishap.</p>
+         </section>
       </section>
    </body>
 </html>
