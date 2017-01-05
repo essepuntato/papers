@@ -1,73 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><html xmlns="http://www.w3.org/1999/xhtml" prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
    <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="stylesheet" href="css/bootstrap.min.css"/>
       <link rel="stylesheet" href="css/rash.css"/>
-      <script src="js/jquery.min.js"> </script>
-      <script src="js/bootstrap.min.js"> </script>
-      <script src="js/rash.js"> </script>
-      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <script src="js/jquery.min.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="js/bootstrap.min.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="js/rash.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><!--//--><![CDATA[ ]]><!--//--></script>
       <title>FOOD: FOod in Open Data</title>
-      <meta about="#affiliation-1"
-            property="schema:name"
-            content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
-      <meta about="#affiliation-2"
-            property="schema:name"
-            content="STLab, ISTC, CNR, Rome, Italy"/>
-      <meta about="#author-1"
-            name="dc.creator"
-            property="schema:name"
-            content="Silvio Peroni"/>
-      <meta about="#author-1"
-            property="schema:email"
-            content="silvio.peroni@unibo.it"/>
-      <link about="#author-1"
-            property="schema:affiliation"
-            href="#affiliation-1"/>
-      <meta about="#author-2"
-            name="dc.creator"
-            property="schema:name"
-            content="Giorgia Lodi"/>
-      <meta about="#author-2"
-            property="schema:email"
-            content="giorgia.lodi@istc.cnr.it"/>
-      <link about="#author-2"
-            property="schema:affiliation"
-            href="#affiliation-2"/>
-      <meta about="#author-3"
-            name="dc.creator"
-            property="schema:name"
-            content="Luigi Asprino"/>
-      <meta about="#author-3"
-            property="schema:email"
-            content="luigi.asprino@istc.cnr.it"/>
-      <link about="#author-3"
-            property="schema:affiliation"
-            href="#affiliation-2"/>
-      <meta about="#author-4"
-            name="dc.creator"
-            property="schema:name"
-            content="Aldo Gangemi"/>
-      <meta about="#author-4"
-            property="schema:email"
-            content="aldo.gangemi@istc.cnr.it"/>
-      <link about="#author-4"
-            property="schema:affiliation"
-            href="#affiliation-2"/>
-      <meta about="#author-5"
-            name="dc.creator"
-            property="schema:name"
-            content="Valentina Presutti"/>
-      <meta about="#author-5"
-            property="schema:email"
-            content="valentina.presutti@istc.cnr.it"/>
-      <link about="#author-5"
-            property="schema:affiliation"
-            href="#affiliation-2"/>
+      <meta about="#affiliation-1" property="schema:name" content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-2" property="schema:name" content="STLab, ISTC, CNR, Rome, Italy"/>
+      <meta about="#author-1" name="dc.creator" property="schema:name" content="Silvio Peroni"/>
+      <meta about="#author-1" property="schema:email" content="silvio.peroni@unibo.it"/>
+      <link about="#author-1" property="schema:affiliation" href="#affiliation-1"/>
+      <meta about="#author-2" name="dc.creator" property="schema:name" content="Giorgia Lodi"/>
+      <meta about="#author-2" property="schema:email" content="giorgia.lodi@istc.cnr.it"/>
+      <link about="#author-2" property="schema:affiliation" href="#affiliation-2"/>
+      <meta about="#author-3" name="dc.creator" property="schema:name" content="Luigi Asprino"/>
+      <meta about="#author-3" property="schema:email" content="luigi.asprino@istc.cnr.it"/>
+      <link about="#author-3" property="schema:affiliation" href="#affiliation-2"/>
+      <meta about="#author-4" name="dc.creator" property="schema:name" content="Aldo Gangemi"/>
+      <meta about="#author-4" property="schema:email" content="aldo.gangemi@istc.cnr.it"/>
+      <link about="#author-4" property="schema:affiliation" href="#affiliation-2"/>
+      <meta about="#author-5" name="dc.creator" property="schema:name" content="Valentina Presutti"/>
+      <meta about="#author-5" property="schema:email" content="valentina.presutti@istc.cnr.it"/>
+      <link about="#author-5" property="schema:affiliation" href="#affiliation-2"/>
       <meta property="prism:keyword" content="Linked Open Data"/>
       <meta property="prism:keyword" content="Ontologies"/>
       <meta property="prism:keyword" content="Ontology Design Patterns"/>
@@ -106,16 +64,14 @@
          <p>It is worth noticing that such <q>upper</q> ontology reuses several existing ontology design patterns that were considered also during the development, i.e., the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Description">Description</a> (for representing raw materials and other product characteristics), the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Place">Place</a> (for modelling the production place), the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Classification">Classification</a> (for expressing both the different characteristics of the products and the quality schemes defined at EU level), and the pattern <a href="http://ontologydesignpatterns.org/wiki/Submissions:Information_realization">Information Realization</a> (for relating policy documents with their various versions released during time).</p>
          <figure id="refIllustration0">
             <p>
-               <img src="img/10000201000007D8000003669895AADB.png"
-                    alt="The Upper Ontology (left) and one of its extension for wines (right). All the classes and properties are here shown with English names, while their IRI are originally in Italian."/>
+               <img src="img/10000201000007D8000003669895AADB.png" alt="The Upper Ontology (left) and one of its extension for wines (right). All the classes and properties are here shown with English names, while their IRI are originally in Italian."/>
             </p>
             <figcaption>The Upper Ontology (left) and one of its extension for wines (right). All the classes and properties are here shown with English names, while their IRI are originally in Italian.</figcaption>
          </figure>
          <p>Then, since the ontology had to be appropriately extended according to all the twenty kinds of products<a href="#ftn1"> </a> described in the policy documents, we decided to involve three more ontology engineers, with different skills and level of expertise, for speeding up the development process. We provided a generic Graffoo template (shown in <a href="#refIllustration1"> </a>) created starting from the parts of the upper ontology that had to be extended, so as to guide the development of all the other ontologies in an homogeneous way, independently of the particular ontology engineer assigned as developer of the specific ontologies. Each new ontology was assigned to only one ontology engineer, and the idea was that each engineer had to rename the variables within double square brackets (e.g., <q>[[product]]</q>) with the appropriate names, thus adding the related labels and comments. The result of this phase produced twenty new Graffoo diagrams organised as the one for wines shown in <a href="#refIllustration0"> </a> (on the right).</p>
          <figure id="refIllustration1">
             <p>
-               <img src="img/10000000000003F700000138FA0F665A.png"
-                    alt="The template reused by developers for creating the various ontologies for each kind of agricultural product described in the policy documents."/>
+               <img src="img/10000000000003F700000138FA0F665A.png" alt="The template reused by developers for creating the various ontologies for each kind of agricultural product described in the policy documents."/>
             </p>
             <figcaption>The template reused by developers for creating the various ontologies for each kind of agricultural product described in the policy documents.</figcaption>
          </figure>
@@ -145,8 +101,7 @@
          <p>In the latter step we also used TagMe <a href="#__RefNumPara__11637_1461357291"> </a> so as to extract DBpedia entities referring to villages, cities and regions from the textual description of the production places. The entities extracted by TagMe were revised by humans as well, so as to remove as more mistakes as possible from the data, and then they were aligned with other existing LOD developed in the past by the Italian Public Administration, i.e., <a href="http://spcdata.digitpa.gov.it/">SPCData</a> and the <a href="http://datiopen.istat.it/">LOD of the Italian National Institute of Statistics</a>. Considering the novelty of these data, we have not found any other relevant dataset to link with.</p>
          <figure id="refIllustration2">
             <p>
-               <img src="img/10000201000007FC000003E8B9BD527F.png"
-                    alt="The pipeline for extracting data from the policy documents (top) and an excerpt of the Excel data validated by the experts (bottom) – table headings in English for the sake of clarity."/>
+               <img src="img/10000201000007FC000003E8B9BD527F.png" alt="The pipeline for extracting data from the policy documents (top) and an excerpt of the Excel data validated by the experts (bottom) – table headings in English for the sake of clarity."/>
             </p>
             <figcaption>The pipeline for extracting data from the policy documents (top) and an excerpt of the Excel data validated by the experts (bottom) – table headings in English for the sake of clarity.</figcaption>
          </figure>
@@ -222,8 +177,8 @@ descraw:wine-abruzzo-red-raw-material-1 a upper:DescriptionOfRawMaterial ;
             </li>
          </ol>
       </section>
-      <section role="doc-footnotes">
-         <section id="ftn1" role="doc-footnote">
+      <section role="doc-endnotes">
+         <section id="ftn1" role="doc-endnote">
             <p>Bread, cereal, cheese, essential oil, fish, fruit, honey, liquorice, meat, mollusc, oil, pasta, ricotta, saffron, salt, salume, sweet, vegetable, vinegar, wine.</p>
          </section>
       </section>

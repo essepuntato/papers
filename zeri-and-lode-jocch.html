@@ -1,88 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><html xmlns="http://www.w3.org/1999/xhtml" prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
    <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="stylesheet" href="css/bootstrap.min.css"/>
       <link rel="stylesheet" href="css/rash.css"/>
-      <script src="js/jquery.min.js"> </script>
-      <script src="js/bootstrap.min.js"> </script>
-      <script src="js/rash.js"> </script>
-      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <script src="js/jquery.min.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="js/bootstrap.min.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="js/rash.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><!--//--><![CDATA[ ]]><!--//--></script>
       <title>Enhancing semantic expressivity in the cultural heritage domain: exposing the Zeri Photo Archive as Linked Open Data</title>
-      <meta about="#affiliation-1"
-            property="schema:name"
-            content="Department of Classical Philology and Italian Studies, University of Bologna, Italy"/>
-      <meta about="#affiliation-2"
-            property="schema:name"
-            content="Federico Zeri Foundation, University of Bologna, Bologna, Italy"/>
-      <meta about="#affiliation-3"
-            property="schema:name"
-            content="Digital And Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
-      <meta about="#author-1"
-            name="dc.creator"
-            property="schema:name"
-            content="Marilena Daquino"/>
-      <meta about="#author-1"
-            property="schema:email"
-            content="marilena.daquino2@unibo.it"/>
-      <link about="#author-1"
-            property="schema:affiliation"
-            href="#affiliation-1"/>
-      <meta about="#author-2"
-            name="dc.creator"
-            property="schema:name"
-            content="Francesca Mambelli"/>
-      <meta about="#author-2"
-            property="schema:email"
-            content="francesca.mambelli6@unibo.it"/>
-      <link about="#author-2"
-            property="schema:affiliation"
-            href="#affiliation-2"/>
-      <meta about="#author-3"
-            name="dc.creator"
-            property="schema:name"
-            content="Silvio Peroni"/>
-      <meta about="#author-3"
-            property="schema:email"
-            content="silvio.peroni@unibo.it"/>
-      <link about="#author-3"
-            property="schema:affiliation"
-            href="#affiliation-3"/>
-      <meta about="#author-4"
-            name="dc.creator"
-            property="schema:name"
-            content="Francesca Tomasi"/>
-      <meta about="#author-4"
-            property="schema:email"
-            content="francesca.tomasi@unibo.it"/>
-      <link about="#author-4"
-            property="schema:affiliation"
-            href="#affiliation-1"/>
-      <meta about="#author-5"
-            name="dc.creator"
-            property="schema:name"
-            content="Fabio Vitali"/>
-      <meta about="#author-5"
-            property="schema:email"
-            content="fabio.vitali@unibo.it"/>
-      <link about="#author-5"
-            property="schema:affiliation"
-            href="#affiliation-3"/>
+      <meta about="#affiliation-1" property="schema:name" content="Department of Classical Philology and Italian Studies, University of Bologna, Italy"/>
+      <meta about="#affiliation-2" property="schema:name" content="Federico Zeri Foundation, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-3" property="schema:name" content="Digital And Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
+      <meta about="#author-1" name="dc.creator" property="schema:name" content="Marilena Daquino"/>
+      <meta about="#author-1" property="schema:email" content="marilena.daquino2@unibo.it"/>
+      <link about="#author-1" property="schema:affiliation" href="#affiliation-1"/>
+      <meta about="#author-2" name="dc.creator" property="schema:name" content="Francesca Mambelli"/>
+      <meta about="#author-2" property="schema:email" content="francesca.mambelli6@unibo.it"/>
+      <link about="#author-2" property="schema:affiliation" href="#affiliation-2"/>
+      <meta about="#author-3" name="dc.creator" property="schema:name" content="Silvio Peroni"/>
+      <meta about="#author-3" property="schema:email" content="silvio.peroni@unibo.it"/>
+      <link about="#author-3" property="schema:affiliation" href="#affiliation-3"/>
+      <meta about="#author-4" name="dc.creator" property="schema:name" content="Francesca Tomasi"/>
+      <meta about="#author-4" property="schema:email" content="francesca.tomasi@unibo.it"/>
+      <link about="#author-4" property="schema:affiliation" href="#affiliation-1"/>
+      <meta about="#author-5" name="dc.creator" property="schema:name" content="Fabio Vitali"/>
+      <meta about="#author-5" property="schema:email" content="fabio.vitali@unibo.it"/>
+      <link about="#author-5" property="schema:affiliation" href="#affiliation-3"/>
       <meta property="prism:keyword" content="Scheda F"/>
       <meta property="prism:keyword" content="Scheda OA"/>
       <meta property="prism:keyword" content="mapping CIDOC-CRM"/>
-      <meta name="dcterms.subject"
-            content="Information systems, Information systems applications, Digital libraries and archives"/>
-      <meta name="dcterms.subject"
-            content="Information systems, World Wide Web, Web data description languages, Web Ontology Language (OWL)"/>
-      <meta name="dcterms.subject"
-            content="Computing methodologies, Artificial intelligence, Knowledge representation and reasoning, Ontology engineering"/>
+      <meta name="dcterms.subject" content="Information systems, Information systems applications, Digital libraries and archives"/>
+      <meta name="dcterms.subject" content="Information systems, World Wide Web, Web data description languages, Web Ontology Language (OWL)"/>
+      <meta name="dcterms.subject" content="Computing methodologies, Artificial intelligence, Knowledge representation and reasoning, Ontology engineering"/>
       <meta name="dcterms.subject" content="Applied computing, Arts and humanities"/>
-      <meta name="dcterms.subject"
-            content="Applied computing, Computers in other domains, Digital libraries and archives"/>
+      <meta name="dcterms.subject" content="Applied computing, Computers in other domains, Digital libraries and archives"/>
    </head>
    <body>
       <section role="doc-abstract">
@@ -159,8 +111,7 @@
             <p>The current version of F Entry Ontology (FEO) revises the previous version introduced in <a href="#__RefNumPara__32450_1461357291"> </a>, and it is available online at <a href="http://www.essepuntato.it/2014/03/fentry">http://www.essepuntato.it/2014/03/fentry</a>. The Graffoo diagram <a href="#__RefNumPara__30866_1995777241"> </a> of FEO in <a href="#refIllustration0"> </a> provides an overview of its classes – i.e., the yellow rectangles –, object properties – i.e., the blue dotted lines beginning with a solid circle and ending with a solid arrow –, and assertions among classes – i.e., the black lines ending with a solid arrow (the full specification of Graffoo graphical elements is available at <a href="http://www.essepuntato.it/graffoo/specification/current.html">http://www.essepuntato.it/graffoo/specification/current.html</a>).</p>
             <figure id="refIllustration0">
                <p>
-                  <img src="img/10000000000003D6000003020695AB06.png"
-                       alt="The Graffoo diagram of the F Entry Ontology main classes and properties."/>
+                  <img src="img/10000000000003D6000003020695AB06.png" alt="The Graffoo diagram of the F Entry Ontology main classes and properties."/>
                </p>
                <figcaption>The Graffoo diagram of the F Entry Ontology main classes and properties.</figcaption>
             </figure>
@@ -271,8 +222,7 @@
             <p>The Scheda F content standard provides just few elements regarding the work of art that may be portrayed in a photograph. However, there exists another content standard, i.e. the Scheda OA, that aims at giving an exhaustive reference document for the complete description of any work of art – not only those portrayed in photographs. Therefore, all the peculiar aspects of the work of art portrayed in a photograph have been modelled in the OA Entry Ontology (available at <a href="http://purl.org/emmedi/oaentry">http://purl.org/emmedi/oaentry</a>). The Graffoo diagram in <a href="#refIllustration1"> </a> provides an overview of its main classes and properties.</p>
             <figure id="refIllustration1">
                <p>
-                  <img src="img/100000000000036F00000198AEE2B5A1.png"
-                       alt="The Graffoo diagram of the OA Entry Ontology main classes and properties."/>
+                  <img src="img/100000000000036F00000198AEE2B5A1.png" alt="The Graffoo diagram of the OA Entry Ontology main classes and properties."/>
                </p>
                <figcaption>The Graffoo diagram of the OA Entry Ontology main classes and properties.</figcaption>
             </figure>
@@ -346,8 +296,7 @@ oaentry:<code>influence-between-works-attribution</code> a hico:InterpretationTy
          <p>The mapping process resulted in the creation of two distinct documents, i.e., <em>F Entry to RDF</em> (<a href="https://dx.doi.org/10.6084/m9.figshare.3175273">https://dx.doi.org/10.6084/m9.figshare.3175273</a>) and <em>OAEntry to RDF</em> (<a href="https://dx.doi.org/10.6084/m9.figshare.3175057">https://dx.doi.org/10.6084/m9.figshare.3175057</a>), accompanied by exemplar data that represent an F Entry (<a href="http://dx.doi.org/10.6084/m9.figshare.3175252">http://dx.doi.org/10.6084/m9.figshare.3175252</a>) and an OA Entry (<a href="https://dx.doi.org/10.6084/m9.figshare.3175048">https://dx.doi.org/10.6084/m9.figshare.3175048</a>) in RDF created according to such mappings. All the mapping documents contain tables structured as shown in <a href="#refIllustration2"> </a>. Such tables reproduce the structure of related content standard they refer to, and are organized in three columns. The first and the second column contain the name of the field in the Scheda F/OA and a brief description. The third column details the mapping with RDF terms and accompanies it with examples of usage.</p>
          <figure id="refIllustration2">
             <p>
-               <img src="img/10000201000004F2000004A45B066FBF.png"
-                    alt="An excerpt of the mapping document “Mapping OA Entry to RDF”."/>
+               <img src="img/10000201000004F2000004A45B066FBF.png" alt="An excerpt of the mapping document “Mapping OA Entry to RDF”."/>
             </p>
             <figcaption>An excerpt of the mapping document <q>Mapping OA Entry to RDF</q>.</figcaption>
          </figure>
@@ -512,8 +461,7 @@ oaentry:<code>influence-between-works-attribution</code> a hico:InterpretationTy
          <p>All F Entries and OA Entries defined in the dataset include links to the current photographic and arts catalog of the Zeri Foundation (available at <a href="http://catalogo.fondazionezeri.unibo.it/">http://catalogo.fondazionezeri.unibo.it</a>), enabling users to go from the LOD-based representation of the catalog to the traditional Web pages presenting the same entities. The inverse link from HTML pages to the related RDF resources has been implemented and it is currently in test phase (and not officially released yet).</p>
          <figure id="refIllustration3">
             <p>
-               <img src="img/1000000000000591000002C7A722BAE9.png"
-                    alt="An example of a resource of the Zeri Photo Archive visualized in LODView."/>
+               <img src="img/1000000000000591000002C7A722BAE9.png" alt="An example of a resource of the Zeri Photo Archive visualized in LODView."/>
             </p>
             <figcaption>An example of a resource of the Zeri Photo Archive visualized in LODView.</figcaption>
          </figure>

@@ -1,56 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="./rash.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><html xmlns="http://www.w3.org/1999/xhtml" prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
    <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="stylesheet" href="css/bootstrap.min.css"/>
       <link rel="stylesheet" href="css/rash.css"/>
-      <script src="js/jquery.min.js"> </script>
-      <script src="js/bootstrap.min.js"> </script>
-      <script src="js/rash.js"> </script>
-      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <script src="js/jquery.min.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="js/bootstrap.min.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="js/rash.js"><!--//--><![CDATA[ ]]><!--//--></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><!--//--><![CDATA[ ]]><!--//--></script>
       <title>SAVE-SD 2016 Workshop -- Semantics, Analytics, Visualisation: Enhancing Scholarly Data</title>
-      <meta about="#affiliation-1"
-            property="schema:name"
-            content="Oxford e-Research Centre, University of Oxford, Oxford, UK"/>
-      <meta about="#affiliation-2"
-            property="schema:name"
-            content="Data Science Group, Knowledge Media Institute, The Open University, Milton Keynes, UK"/>
-      <meta about="#affiliation-3"
-            property="schema:name"
-            content="Digital And Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
-      <meta about="#author-1"
-            name="dc.creator"
-            property="schema:name"
-            content="Alejandra Gonzalez-Beltran"/>
-      <meta about="#author-1"
-            property="schema:email"
-            content="alejandra.gonzalezbeltran@oerc.ox.ac.uk"/>
-      <link about="#author-1"
-            property="schema:affiliation"
-            href="#affiliation-1"/>
-      <meta about="#author-2"
-            name="dc.creator"
-            property="schema:name"
-            content="Francesco Osborne"/>
-      <meta about="#author-2"
-            property="schema:email"
-            content="francesco.osborne@open.ac.uk"/>
-      <link about="#author-2"
-            property="schema:affiliation"
-            href="#affiliation-2"/>
-      <meta about="#author-3"
-            name="dc.creator"
-            property="schema:name"
-            content="Silvio Peroni"/>
-      <meta about="#author-3"
-            property="schema:email"
-            content="silvio.peroni@unibo.it"/>
-      <link about="#author-3"
-            property="schema:affiliation"
-            href="#affiliation-3"/>
+      <meta about="#affiliation-1" property="schema:name" content="Oxford e-Research Centre, University of Oxford, Oxford, UK"/>
+      <meta about="#affiliation-2" property="schema:name" content="Data Science Group, Knowledge Media Institute, The Open University, Milton Keynes, UK"/>
+      <meta about="#affiliation-3" property="schema:name" content="Digital And Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy"/>
+      <meta about="#author-1" name="dc.creator" property="schema:name" content="Alejandra Gonzalez-Beltran"/>
+      <meta about="#author-1" property="schema:email" content="alejandra.gonzalezbeltran@oerc.ox.ac.uk"/>
+      <link about="#author-1" property="schema:affiliation" href="#affiliation-1"/>
+      <meta about="#author-2" name="dc.creator" property="schema:name" content="Francesco Osborne"/>
+      <meta about="#author-2" property="schema:email" content="francesco.osborne@open.ac.uk"/>
+      <link about="#author-2" property="schema:affiliation" href="#affiliation-2"/>
+      <meta about="#author-3" name="dc.creator" property="schema:name" content="Silvio Peroni"/>
+      <meta about="#author-3" property="schema:email" content="silvio.peroni@unibo.it"/>
+      <link about="#author-3" property="schema:affiliation" href="#affiliation-3"/>
       <meta property="prism:keyword" content="SAVE-SD 2016"/>
       <meta property="prism:keyword" content="scholarly data"/>
       <meta property="prism:keyword" content="WWW 2016"/>
@@ -423,7 +393,7 @@
          <p>Similarly, Sateli and Witte’s demo paper describes a workflow for converting research paper in a Linked Open Data compliant knowledge base. Their solution includes a NLP pipeline for tokenisation, sentence splitting, part-of-speech (POS) tagging, stemming, and verb group analysis; the Rhetector component for automatically detecting rhetorical entities; LODtagger for linking Dbpedia entities to the paper; and LODeXporter for generating the output RDF.</p>
          <p>Finally, the poster paper by Alexiou et al. presents the OpenAIRE LOD services, the RDF version of the well known <a href="https://www.openaire.eu/">Open Access Infrastructure for Research in Europe dataset</a>, which includes publications and datasets from more than 100,000 research projects. In particular, the poster describes the scalable workflow used for the RDFization process of such a huge database.</p>
          <p>The complex research entities extracted by these approaches have the potential to revolutionize the way we analyse scientific literature. However, key phrases are still the most common means to represent the content of articles for the benefits of users, search engine and recommendation systems. For this reason, the paper by Daudaravicius introduces a new statistical approach for extracting key phrases from scientific journals in the fields of astrophysics, mathematics, physics, and computer science. Their method uses the additive smoothing of TF-IDF for improving the quality of key phrases derived from large sample of papers.</p>
-         <p>References are one of the most used kind of entities for understanding the research landscape, but extracting and visualizing them is still a challenge. The paper by Požega et al.<a href="#fn1"></a> presents an approach which represents references from scientific papers as a tree-shape ReferenceTree model. The visualisation integrates multiple dimensions related to bibliographic references — such as type of publication, authorship and co-authorship and number of references — into the tree and allows one to easily browse an author's publication history.</p>
+         <p>References are one of the most used kind of entities for understanding the research landscape, but extracting and visualizing them is still a challenge. The paper by Požega et al.<a href="#fn1"/> presents an approach which represents references from scientific papers as a tree-shape ReferenceTree model. The visualisation integrates multiple dimensions related to bibliographic references — such as type of publication, authorship and co-authorship and number of references — into the tree and allows one to easily browse an author's publication history.</p>
          <p>The task of extracting semantic information from scholarly papers was addressed since 2015 by the Semantic Publishing Challenge (SemPub) at the Extended Semantic Web Conference. SemPub created a framework for comparing in an objective way a number of systems in the semantic publishing domain and encouraged researcher to produce and make available a number of relevant Linked Data dataset. The paper of Vahdati et al. examines the overall organization of the Challenge and the results produced in the 2015 and 2016 editions. It also analyses the different system proposed for the different tasks and discusses a number of good lessons learned by the organizers.</p>
          <p>Scholarly metadata can also be found on the web, in formats such as as <a href="http://www.w3.org/TR/xhtml-rdfa-primer/">RDFa</a>, <a href="http://www.w3.org/TR/microdata">Microdata</a> and <a href="http://microformats.org/">Microformats</a>. However, it is not always easy to recover and aggregate this data. The position paper by Sahoo et al. contributes to this challenge by presenting an analysis on <a href="http://webdatacommons.org/">Web Data Commons (WDC) dataset</a> with the aim of identifying frequent types and terms, the key providers of bibliographic markup and the most common errors. The findings include the prevalence of statements describing authors, publishers and keywords and the fact that Springer.org appears to be the most active data provider by a large margin in the sample under analysis. </p>
          <p>The second category of papers addresses the use of semantic technologies for citation and topic analysis and is composed by two full papers, a position paper and a poster paper.</p>
@@ -476,8 +446,8 @@
             </li>
          </ol>
       </section>
-      <section id="fnlist" role="doc-footnotes">
-         <section id="fn1" role="doc-footnote">
+      <section id="fnlist" role="doc-endnotes">
+         <section id="fn1" role="doc-endnote">
             <p>The authors were unable to present this paper at the workshop due to an unforeseen mishap.</p>
          </section>
       </section>
