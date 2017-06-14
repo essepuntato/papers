@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/rash.css"/>
+      <script src="js/jquery.min.js"> </script>
+      <script src="js/bootstrap.min.js"> </script>
+      <script src="js/rash.js"> </script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <title>Interfacing fast-fashion design industries with Semantic Web technologies -- The case of Imperial Fashion</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="Fabio Vitali"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="fabio.vitali@unibo.it"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta property="prism:keyword" content="fast-fashion design"/>
+      <meta property="prism:keyword" content="Semantic Web"/>
+      <meta property="prism:keyword" content="data reengineering"/>
+      <meta property="prism:keyword" content="ontology"/>
+      <meta property="prism:keyword" content="OWL"/>
+      <meta property="prism:keyword" content="data conversion"/>
+      <meta property="prism:keyword" content="data visualisation"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>Abstract</h1>
+         <p>With the advent of the fourth industrial revolution, several enterprises worldwide have started to evolve their production processes with new automation and data exchange policies by means of the adoption of emergent technologies, i.e. knowledge graphs, sensor networks, big data, and cloud computing. While several domains have been already involved in this revolution, others, such as the fast-fashion industries, have started to move the first steps in that direction since few months. In this article we describe the first outcomes of a project, i.e. <em>Refactoring Imperial Selling Data</em> (<em>RISED</em>), which aims at using Semantic Web technologies so as to simplify the management and the enrichment of a huge set of data that are continuously collected by Imperial Fashion, one of the most important fast-fashion companies in Italy. In particular, we introduce the process adopted for the development of a unifying model (i.e. an OWL 2 DL ontology) for the description of all the Imperial Fashion data and we propose some mechanisms for converting the original data stored in existing databases according to the new ontology. Finally, we introduce some prototypical visual tools that use the converted data for addressing some of the questions that have been raised by Imperial Fashion employees during several informal meetings we had about the project RISED.</p>
+      </section>
+      <section>
+         <h1>Introduction</h1>
+         <p>With the advent of the fourth industrial revolution <a href="#__RefNumPara__26264_1591320820"> </a>, several enterprises worldwide have started to evolve their production processes with new automation and data exchange policies by means of the adoption of the emergent technologies, i.e., knowledge graphs, sensor networks, big data, and cloud computing. Several industries in Italy have started to be part of this innovative movement. Among those, one domain deserves particular attention, considering the huge amount of costumers it usually involves: <em>fast-fashion</em>. In practice, the term <em>fast-fashion</em> is used to describe fashion designs that move quickly to capture current fashion trends, and it usually targets mainstream consumers proposing clothes at a lower price. While the most famous retailers worldwide are well-known industries and brands (H&amp;M, Zara, Peacocks, Primark, etc.), there is an incremental interest by the customers on these kinds of companies, in particular if they take in consideration the Made in Italy mark<a href="#ftn1"> </a>.</p>
+         <p>Imperial Fashion is one of the main Made in Italy fast-fashion industries in Italy. In the last years, it has extended its scope worldwide, and it is taking particular attention to the adoption of new technologies for daily production and decision processes. As part of a formal collaboration between Imperial Fashion and the University of Bologna, started in 2015 under the <q>CreativeLab</q> project, several applicative projects have begun, with the idea of experimenting research approaches from different areas (Information and Computer Technologies, Economics, Statistics, Sociology, Management, and Arts) within the context of the company. </p>
+         <p>In particular, we are actively involved in one project that focusses on the use of Semantic Web technologies so as to simplify and enrich the huge management of data that are continuously collected by the company. In this context, the main issue is that Imperial Fashion has built an enormous dataset of all their products (mainly clothes) and related contextual information (e.g. selling data) during several years. However, due to technical reasons, the various databases, where the data have been stored, have been created without following a precise, a priori, and shared model. In the current scenario, the data comes from different sources (business to business (B2B) and business to client (B2C) selling data, online and front-desk orders, several distribution platforms, etc.), and each source has been handled by different people, and even by third-party companies. The result is that the whole amount of data is only partially used in all its potential, due to this heterogeneity.</p>
+         <p>So as to disentangle such a complex situation, Imperial Fashion was looking for a flexible approach that allows them:</p>
+         <ul>
+            <li>
+               <p>to manage and, in particular, to query easily heterogeneous database tables when they actually refer to semantically-homogeneous data;</p>
+            </li>
+            <li>
+               <p>to run interesting computational analysis on the whole set of data in an efficient way;</p>
+            </li>
+            <li>
+               <p>to use interfaces that allow users (e.g. production decision makers and people from the communication department) to interact with the data so as to make sense of them and, thus, to ease crucial strategic decision.</p>
+            </li>
+         </ul>
+         <p>In this article we present the solution we have proposed to the company for addressing all the aforementioned issues, and the first outcomes we have produced after the first year of the project, named <em>Refactoring Imperial Selling Data</em> (a.k.a. <em>RISED</em>). Our solution is mainly based on the use of Semantic Web technologies. In fact, we have developed a unifying model (i.e. an OWL 2 DL ontology) for describing and accessing the data. We have also proposed a conversion strategy so as to translate the original data contained in the existing databases accordingly to the ontology developed. Finally, we have implemented some prototypical interfaces to show how the converted data can be visualised so as to maximise their sense-making.</p>
+         <p>The rest of the paper is organised as follows. In <a href="#__RefHeading__34063_1146418327"> </a> we introduce the main aims of the RISED project and we discuss the proposed solution in the context of Imperial Fashion. In <a href="#__RefHeading__626_1461357291"> </a> we describe the unifying model we have developed to describe Imperial Fashion data. In <a href="#__RefHeading__628_1461357291"> </a> we discuss the strategy we have adopted so as to convert the data available in the existing Imperial Fashion databases into RDF according to the ontology developed. In <a href="#__RefHeading__630_1461357291"> </a> we briefly present some interfaces we have implemented reusing existing libraries for creating interesting and useful representation of RDF-based data. In <a href="#__RefHeading__34065_1146418327"> </a> we discuss some other existing works related to the area. Finally, in <a href="#__RefHeading__632_1461357291"> </a> we conclude the paper sketching out some future works.</p>
+      </section>
+      <section id="__RefHeading__34063_1146418327">
+         <h1>Approaching the refactor of selling data</h1>
+         <p>The use of mechanisms for querying potentially-heterogeneous data by means of a common interface, so as to understand their high-level dynamics, is one of the most important aspects any company should take care of for their business and production processes. In the context of Imperial Fashion, this aspect is even more crucial since it definitely impacts the selling of products. In fact, the time constraints in fast-fashion industries are tight, and taking wrong decisions about what items to produce for the following week can bring to an immediate loss of huge amounts of money.</p>
+         <p>Imperial Fashion gathers real-time data concerning its catalogue and its sales<a href="#ftn2"> </a>. However, depending on the particular distribution platform adopted and the sales channel used, such information are stored in different databases. These databases include several heterogeneous tables and can present fragmented data as well. On the one hand, a common unified model (i.e. an ontology) for describing all these data can be derived from the various databases available – and it could simplify the interaction between all the existing databases by hiding the intrinsic complexities derived from the data fragmentation. On the other hand, the creation of such model is not trivial at all, since one should deal with different kinds of domain experts so as to have a clear picture of all the data that are available. Finally, to complicate even more an already complex scenario, there is the need of sharing and communicating the new development direction with the managers of the company – none of whom has a strong technological expertise – so as to urge them to properly support the work with appropriate funds.</p>
+         <section>
+            <h1>A unifying language for describing fast-fashion data</h1>
+            <p>The communication strategy with Imperial managers was the most urgent issue to address, since a quick positive answer from them would have made possible an immediate uptake of the project. Thus, we decided to narrate the whole idea by means of a metaphor using common languages.</p>
+            <figure id="refIllustration0">
+               <p>
+                  <img src="img/10000201000005900000033E93FA5A7C.png"
+                       alt="A graphical summary of the current scenario at Imperial Fashion. The data contained there can be heterogeneous and, even when homogeneous, they are described in different languages (i.e. by means of different database tables describing semantically-similar data in quite different structural ways). This aspects impact the development and maintenance of tools for the visualisation of, analysis of, and interaction with such data."/>
+               </p>
+               <figcaption>A graphical summary of the current scenario at Imperial Fashion. The data contained there can be heterogeneous and, even when homogeneous, they are described in different languages (i.e. by means of different database tables describing semantically-similar data in quite different structural ways). This aspects impact the development and maintenance of tools for the visualisation of, analysis of, and interaction with such data.</figcaption>
+            </figure>
+            <p>We described each database already (or to be) included in the Imperial Fashion information system as if the data it contains are defined by means of a particular language (i.e. Italian, English, Chinese, German, Russian, and Spanish, in the example introduced in <a href="#refIllustration0"> </a>). In this scenario, the data can be semantically-heterogeneous, i.e. referring to different concepts, as well as structurally-heterogeneous, i.e. describing similar concepts by means of different languages.</p>
+            <p>While the use and analysis of these heterogeneous data is still possible, the effort to put in the development of applications for facilitating the access and the sense-making of the data to humans can be unmanageable. In particular, the long term maintenance of such applications is quite unfeasible. In fact, when a new database has to be included, all the applications developed should be adapted so as to handle the new language properly – and this aspect would have a clear impact in terms of effort, time, and cost for the company.</p>
+            <figure id="refIllustration1">
+               <p>
+                  <img src="img/100002010000058000000350CB9C1DDB.png"
+                       alt="The new architecture proposed for the management of Imperial Fashion data, based on the use of a unifying common language identified by the Esperanto flag (i.e. the green flag with a small green star on the top-left side enclosed by a white square)."/>
+               </p>
+               <figcaption>The new architecture proposed for the management of Imperial Fashion data, based on the use of a unifying common language identified by the Esperanto flag (i.e. the green flag with a small green star on the top-left side enclosed by a white square).</figcaption>
+            </figure>
+            <p>So as to address this issue, we have proposed the use of a unifying language (i.e. the Esperanto in the example provided in <a href="#refIllustration1"> </a>) as a way to describe all the data coming from all the databases, that are converted by means of appropriate interpreters. Such approach would liberate the developed applications that use these data from multilingual dictate of the various databases involved. In addition, it would also facilitate the long-term maintenance of the applications when new databases have to be added to the infrastructure, reducing the amount of work to do for the inclusion to the solely implementation of new interpreters, while leaving the analysis/visualisation/interaction applications as they are in principle – unless new kinds of data (i.e. referring to new concepts) are added.</p>
+         </section>
+         <section id="__RefHeading__41866_1209124841">
+            <h1>Requirements and implementation</h1>
+            <p>We have chosen to use Semantic Web technologies <a href="#__RefNumPara__709_1461357291"> </a> so as to implement the approach presented in the previous sub-section. On the one hand, Semantic Web technologies guarantee a good flexibility when one as to merge heterogeneous data. On the other hand, such technologies ease possible future extensions of the data by reusing or linking other information that can even come from external open data datasets – e.g. DBpedia <a href="#__RefNumPara__711_1461357291"> </a> for gathering information about the particular city where an item has been sold, and the Italian Institute of Statistics <a href="#__RefNumPara__713_1461357291"> </a> for demographic information about the population city by city.</p>
+            <p>Thus, these technologies have been used for:</p>
+            <ol>
+               <li>
+                  <p>developing an ontology to describe coherently all the data included in the several Imperial databases, hiding their intrinsic complexities and easing their comprehension by using diagrams and the related natural language documentation;</p>
+               </li>
+               <li>
+                  <p>developing mechanisms for the automatic conversion of the original data into RDF statements compliant with the developed ontology, so as to enable one to query over the whole dataset hiding their complexities derived from the actual structures they have been originally stored within.</p>
+               </li>
+            </ol>
+            <p>While the proposed approach was a success in terms of responsiveness from the company, there have been two strong requirements that Imperial Fashion desires not to be violated:</p>
+            <ol>
+               <li>
+                  <p>the existing databases should not be affected directly by experimentation of the RISED project, so as to guarantee the correct sustainability of the current Imperial Fashion information system;</p>
+               </li>
+               <li>
+                  <p>the conversion must not compromise the status of the whole system, and, in particular, it cannot be the cause for any database crash in any way.</p>
+               </li>
+            </ol>
+            <figure id="refIllustration2">
+               <p>
+                  <img src="img/10000201000001D2000004206E69FB61.png"
+                       alt="The architecture for handling the creation of the RISED triplestore without affecting the load-charge of the existing databases db 1, ..., db n."/>
+               </p>
+               <figcaption>The architecture for handling the creation of the RISED triplestore without affecting the load-charge of the existing databases db 1, ..., db n.</figcaption>
+            </figure>
+            <p>The architecture illustrated in <a href="#refIllustration2"> </a> has been proposed together with the Imperial Fashion Information and Computer Technology department. It has been studied in order to follow all the aforementioned constraints. Summarising, every time some input data (e.g. selling data) are added to the existing databases, they are copied in a mirror database as well. This database is just a temporal storage for new data, and it is emptied once its data are ingested by the RISED triplestore. This triplestore is the resource that can be queried by the new applications without affecting the common run of the existing information infrastructure – guaranteed by the original databases.</p>
+            <p>In the following sections, we introduce the methodology and the outcomes of the first year of RISED, which has produced an ontology for uniformly described all the Imperial Fashion data, a conversion strategy based on well-known software extended as needed by our project, and some prototypical interfaces for accessing and browsing an exemplar of existing data.</p>
+         </section>
+      </section>
+      <section id="__RefHeading__626_1461357291">
+         <h1>The Imperial Data Ontology</h1>
+         <p>As already discussed in the previous section, the first goal of the RISED project has been the development of a unifying model, i.e. the <em>Imperial Data Ontology</em> (<em>IDO</em>, <a href="https://w3id.org/ido">https://w3id.org/ido</a>). This ontology is responsible for the description of all the data gathered by the various selling events of the products included in the Imperial Fashion catalogue. The current version of IDO (version 0.5.1) has been released with a Creative Commons Attribution License 4.0, so as to guarantee its reuse in similar contexts by other interested companies. IDO has been created by means of an efficient agile ontology development methodology that has been already used in several applicative domains, which we discuss with more detail in the following subsections. In addition, we also introduce other tools that have been used for producing specific artefacts related to the final model. Thus, we provide a detailed description of all the ontological models developed.</p>
+         <section>
+            <h1>Methods and materials</h1>
+            <section>
+               <h1>SAMOD</h1>
+               <p>Several ontology development methodologies have been proposed in the past, such as those developed starting from standard software engineering methodologies (e.g. <em>Neon Methodology</em> 
+                  <a href="#__RefNumPara__872_1461357291"> </a> and <em>Methontology</em> 
+                  <a href="#__RefNumPara__874_1461357291"> </a>), and others inspired to novel agile processes (e.g. <em>eXtreme Design</em> 
+                  <a href="#__RefNumPara__876_1461357291"> </a>). Recently, we have proposed and used a new agile development methodology, experimented in different projects during the past six years.</p>
+               <p>This methodology is called <em>Simplified Agile Methodology for Ontology Development</em> (<em>SAMOD</em>) <a href="#__RefNumPara__20411_1461357291"> </a>. SAMOD is an agile ontology development methodology that allows the creation of an ontology by executing three steps within one or more iterations. The final outcome of each of these iteractions is the formal implementation of the ontology accompanied by additional information, such as documentation, diagrams, and implemented examples, so as to make the whole model easier to understand by the final users.</p>
+               <p>Each iteration involves two type of users: the Domain Expert (DE) and the Ontology Engineer (OE). Usually, the DE is an expert who has a profound knowledge of the domain described by the ontology to develop. However, she does not usually has appropriate skills in ontology languages nor other Semantic Web technologies. In fact, her main activities are to provide natural language descriptions of the domain to model. The OE, instead, is responsible for the creation of the ontology by means of a specific formal language, such as OWL <a href="#__RefNumPara__20595_1461357291"> </a>, starting from the description provided by the DE.</p>
+               <p>These users are involved in a process (summarised in <a href="#refIllustration3"> </a>) composed by the following three sequential steps, each ending with the release of a snapshot of the current status of the development process called <em>milestone</em>:</p>
+               <ol>
+                  <li>
+                     <p>The DE helps the OE for collecting all the information on the domain to model, so as to create a small self-contained ontology (called <em>modelet</em>) that describes such domain. In this phase, the DE has to follow some specific ontology modelling principles, so as to include, finally, the modelet in a specific <em>test bed</em>, i.e. a bag of objects that has to be validated and approved for the release and that includes exemplar data compliant with the modelet. Then, if the test bed passes a series of tests without incurring in any meaningful issue, a milestone is released and the process continues to the next step – otherwise the OE has to go back to the previous milestone.</p>
+                  </li>
+                  <li>
+                     <p>The OE merges the modelet included in the earliest test bed within the current model produced as outcome of the last iteration of SAMOD<a href="#ftn3"> </a>, changing (if needed) the entities specified in the test bed so as to comply it with the updated model. If these changes do not affect the current status of the test bed, a milestone is released and the process continues to the next step – otherwise one has to come back to the previous milestone.</p>
+                  </li>
+                  <li>
+                     <p>The OE refactors the current model taking particular attention to the part added in the previous step. In particular, she has to follow specific guidelines and shared practices for ontology development, such as the specification of intelligible annotations for easing the understanding of the ontology by humans, and the reuse of existing ontologies for maximising the ontology reuse. After the refactoring, all the test beds created in the previous steps/iterations must be modified so as to comply with the refactored model. Thus, if all these test beds passes a series of tests without incurring in any issue, a milestone is released and the process either stops or continues with another iteration if needed – otherwise the OE has to go back to the previous milestone.</p>
+                  </li>
+               </ol>
+               <figure id="refIllustration3">
+                  <p>
+                     <img src="img/10000201000008180000044441F74BCB.png"
+                          alt="A summary of the steps of SAMOD, that involve domain experts and ontology engineers in an agile process for the creation of an ontology."/>
+                  </p>
+                  <figcaption>A summary of the steps of SAMOD, that involve domain experts and ontology engineers in an agile process for the creation of an ontology.</figcaption>
+               </figure>
+               <p>The use of SAMOD in the development of IDO has involved only one OE and several DEs, mainly analysts and people responsible for the Web/e-commerce platform in Imperial Fashion. </p>
+            </section>
+            <section>
+               <h1>Supporting applications</h1>
+               <p>During the use of SAMOD, several applications and tools has been considered for facilitating the creation and understanding of the ontology under-development, in particular: </p>
+               <ul>
+                  <li>
+                     <p>the <a href="http://www.essepuntato.it/graffoo">
+                           <em>Graphical Framework For OWL Ontologies</em>
+                        </a>
+                        <a href="http://www.essepuntato.it/graffoo"> (</a>
+                        <a href="http://www.essepuntato.it/graffoo">
+                           <em>Graffoo</em>
+                        </a>
+                        <a href="http://www.essepuntato.it/graffoo">)</a> 
+                        <a href="#__RefNumPara__20961_1461357291"> </a> has been used for the creation of the diagrams of IDO. In particular, it has been adopted during the first and the third step of SAMOD, for creating the modelet diagram and the final diagram of the current model produced as last outcome of an iteration respectively;</p>
+                  </li>
+                  <li>
+                     <p>the <a href="http://www.essepuntato.it/lode">
+                           <em>Live OWL Documentation Environment</em>
+                        </a>
+                        <a href="http://www.essepuntato.it/lode"> (</a>
+                        <a href="http://www.essepuntato.it/lode">
+                           <em>LODE</em>
+                        </a>
+                        <a href="http://www.essepuntato.it/lode">)</a> 
+                        <a href="#__RefNumPara__20963_1461357291"> </a> has been used for the automatic generation of the natural language documentation in HTML of IDO, which has been created starting from the annotation introduced in the last step of each iteration.</p>
+                  </li>
+                  <li>
+                     <p>the <a href="http://www.essepuntato.it/ditto">
+                           <em>Diagrams Transformation inTo OWL</em>
+                        </a>
+                        <a href="http://www.essepuntato.it/ditto"> (</a>
+                        <a href="http://www.essepuntato.it/ditto">
+                           <em>DiTTO</em>
+                        </a>
+                        <a href="http://www.essepuntato.it/ditto">)</a> 
+                        <a href="#__RefNumPara__21072_1461357291"> </a> has been used for automatically creating the appropriate OWL version of the various modelets starting from their diagram created by means of Graffoo.</p>
+                  </li>
+                  <li>
+                     <p>
+                        <a href="http://protege.stanford.edu/">
+                           <em>Protégé</em>
+                        </a> 
+                        <a href="#__RefNumPara__21110_1461357291"> </a> has been used in all the step of each iteration for implementing modification to the current model, for creating the exemplar data compliant with the modelet (step 1) and the current model (steps 2 and 3), and for testing the consistency of the ontology produced.</p>
+                  </li>
+                  <li>
+                     <p>
+                        <a href="http://fuseki.apache.org/documentation/fuseki2/">
+                           <em>Fuseki</em>
+                        </a> has been used in each step for querying the modelet/current model and the related exemplar data so as to answer to particular requirements expressed as competency questions by the methodology.</p>
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h1>Reusing existing models</h1>
+               <p>In the third step of any iteration, SAMOD suggests to adopt existing ontologies if available, so as to maximise the reuse of the ontology under development in different context. Due to the complexity of the domain to address, several models have been considered for inclusion in IDO. However, their adoption had to be regulated by a precise set of guidelines, so as to guarantee a safe reuse of the existing models without making IDO inconsistent and avoiding the addition of axioms that could change the intended semantics of the imported models. In particular, we have considered the following guidelines:</p>
+               <ul>
+                  <li>
+                     <p>some existing models (i.e. <a href="http://www.w3.org/2004/02/skos/core">SKOS</a>, <a href="http://purl.org/spar/frbr">FRBR</a>, <a href="http://rdfs.org/sioc/ns">SIOC</a>, e <a href="http://purl.org/swan/2.0/foaf-essential/">FOAF</a>) have been imported as a whole (by means of the property <em>owl:imports</em>) if we thought that they could be useful for providing a first foundational skeleton to the ontology;</p>
+                  </li>
+                  <li>
+                     <p>ontological entities defined in external models (i.e. <a href="http://www.heppnetz.de/projects/goodrelations/">GoodRelations</a> 
+                        <a href="#__RefNumPara__58711_1461357291"> </a>, <a href="http://schema.org/">Schema.org</a> 
+                        <a href="#__RefNumPara__58713_1461357291"> </a>, and <a href="http://purl.org/dc/terms">DC Terms</a>, referred via <em>rdfs:isDefinedBy</em>) have been included if we thought they could be useful for the description of particular aspects of the domain. In particular, we have adopted the following inclusion strategy:</p>
+                     <ol>
+                        <li>
+                           <p>if two or more entities (i.e. class and properties) are defined in two or more distinct models (e.g. the classes <a href="http://purl.org/goodrelations/v1#PriceSpecification">http://purl.org/goodrelations/v1#PriceSpecification</a> and <a href="http://schema.org/PriceSpecification">http://schema.org/PriceSpecification</a>, defined in GoodRelations e Schema.org respectively) and if they are referring to the same concept, then IDO should include a new entity (e.g. the class <em>Price</em>) subsumed by the other two (or more) entities. If such new entity is a property, domain and range classes must be explicitly defined;</p>
+                        </li>
+                        <li>
+                           <p>if a property defined in an external model is reused with domain and range classes that are not the ones defined originally, the property is included in IDO as it is, and its domain and range classes are explicitly specified if and only if they are already included in IDO (e.g. the property <a href="http://schema.org/referencesOrder">http://schema.org/referencesOrder</a>). Otherwise, the property is included without specifying any particular domain/range class (e.g. the property <a href="http://schema.org/validFrom">http://schema.org/validFrom</a> included in IDO). In addition, if the property included involves classes explicitly defined in IDO, they must be subsumed by appropriate restriction so as to clarify explicitly the use of such property in their context (e.g. see the use of the property <a href="http://schema.org/validFrom">http://schema.org/validFrom</a> in the context of the class <em>Price</em>);</p>
+                        </li>
+                        <li>
+                           <p>in both the aforementioned cases, no inverse of the property included must be defined, unless such inverse property already exists in the external model where the property included is defined. Even if this is in contrast with the guidelines introduced by SAMOD, this constraint is needed so as not to change the original conceptualisation of such properties<a href="#ftn4"> </a>.</p>
+                        </li>
+                     </ol>
+                  </li>
+               </ul>
+            </section>
+         </section>
+         <section id="__RefHeading__20959_1461357291">
+            <h1>Current status</h1>
+            <p>SAMOD has been iterated five times so far. The current structure of IDO is organised in several modules interlinked as shown in <a href="#refIllustration4"> </a>). Each module is responsible for the description of a specific aspect of the domain into consideration.</p>
+            <figure id="refIllustration4">
+               <p>
+                  <img src="img/100000000000053A000003773635A762.png"
+                       alt="The modules included in IDO and the import relations that exist among them."/>
+               </p>
+               <figcaption>The modules included in IDO and the import relations that exist among them.</figcaption>
+            </figure>
+            <p>In particular, IDO imports <a href="http://www.w3.org/2004/02/skos/core">SKOS</a>, <a href="http://purl.org/spar/frbr">FRBR</a>, <a href="http://rdfs.org/sioc/ns">SIOC</a>, e <a href="http://purl.org/swan/2.0/foaf-essential/">FOAF</a>, and includes the following modules::</p>
+            <ul>
+               <li>
+                  <p>module <q>article categories</q> (<em>ido/aco</em> in the diagram), which describes the categories (t-shirt, trousers, etc.) of all the items included in the Imperial Fashion catalogue;</p>
+               </li>
+               <li>
+                  <p>module <q>prices</q> 
+                     <em>(ido/prices</em> in the diagram)<em>,</em> which enable the description of the prices associated to the items, orders, and invoices;</p>
+               </li>
+               <li>
+                  <p>module <q>items</q> (<em>ido/items</em> in the diagram), which describes the main characteristics of the items such as the model, texture, colour, and size;</p>
+               </li>
+               <li>
+                  <p>module <q>orders</q> (<em>ido/orders</em> in the diagram), which defines the orders and the invoices, and relate them to the ordered items;</p>
+               </li>
+               <li>
+                  <p>module <q>users</q> (<em>ido/users</em> in the diagram), which allows one to describe the people and users registered to the various platform.</p>
+               </li>
+            </ul>
+            <p>All these modules are presented in the following subsections in detail. For each module, an ideal descriptive scenario is introduced, as well as a series of related competency questions the module should answer. We accompany such material with a description of all the ontological entities implemented in the module. In addition, the IDO GitHub repository (<a href="https://github.com/essepuntato/ido">https://github.com/essepuntato/ido</a>) contains all the source files of all the modules accompanied by their HTML documentation (directory <q>model</q>, and its subdirectories), as well as examples of usage (directory <q>examples</q>) and the SPARQL queries formalising the competency questions listed in the following sections (directory <q>queries</q>). </p>
+            <section id="__RefHeading__60558_1461357291">
+               <h1>Module <q>article categories</q>
+               </h1>
+               <p>
+                  <strong>Scenario:</strong> The catalogue of Imperial Fashion includes a detailed description of all the articles available (identified by a code). Each item is associated to certain category (e.g., shirt, dress, trousers).</p>
+               <p>Competency questions:</p>
+               <ul>
+                  <li>
+                     <p>What is the most used category in the catalogue?</p>
+                  </li>
+               </ul>
+               <p>
+                  <strong>Description:</strong> We have analysed all the categories that have been used by Imperial Fashion in the past five years, so as to identify the various article types of interest (shirt, trowser, jacket, etc.). This analysis has involved mainly people responsible for the sales of Imperial items through the online platform. Such categories have, thus, been organised in a formal taxonomy (with both Italian and English labels) called the <em>Article Category Ontology</em> (<em>ACO</em>), which describes the article types as individuals of the class <em>ArticleCategory</em>, which is subclass of the class <em>Concept</em> defined by the <em>Simple Knowledge Organization System</em> (<em>SKOS</em>).</p>
+            </section>
+            <section id="__RefHeading__58769_1461357291">
+               <h1>Module <q>prices</q>
+               </h1>
+               <p>
+                  <strong>Scenario:</strong> Each item, a related stock keeping unit, or a specific piece of a stock keeping unit, can have three different kinds of prices assigned: <em>COGS</em> (<em>cost of goods sold</em>), <em>sell-in</em> (i.e. the price reserved to retailers), and <em>sell-out</em> (i.e. the price reserved to final customers). Each of these prices can be either gross or net, and can include the VAT. In addition, such prices can also include a discount percentage, if it has been applied.</p>
+               <p>Consequently, different items of a certain model, as well as different stock keeping units of a particular item or their related pieces, can have different prices associated depending particular contextual characteristics (such as the texture used for a certain item that may cost more than others). In addition, all the prices associated to these objects can vary during time. For instance, an item can cost X at time T, and X+5 at time T+1. Similarly, these prices can vary as well depending on additional contextual reasons, such as the distribution channel used to sell the related items, the season, or other unpredictable parameters.</p>
+               <p>Questions:</p>
+               <ul>
+                  <li>
+                     <p>What are the COGS, sell-in and sell-out (net, with VAT) of all the stock keeping units after the 1th of January?</p>
+                  </li>
+                  <li>
+                     <p>What are the prices of all the pieces that have been bought at a discount price?</p>
+                  </li>
+                  <li>
+                     <p>How did a COGS of a certain stock keeping unit vary in time?</p>
+                  </li>
+                  <li>
+                     <p>What is the total amount of all the sold pieces?</p>
+                  </li>
+               </ul>
+               <p>
+                  <strong>Description:</strong> The module shown in <a href="#refIllustration6"> </a> reuses several classes defined in GoodRelations and Schema.org – even if some are missed in the diagram – and imports the <em>Simple Knowledge Organization System</em> (<em>SKOS</em>) for describing the kinds of price (i.e. gross and net). The main class of the module is <em>Price</em>. It allows the definition of a price (COGS, sell-in, sell-out) and all the information associated to it, in particular:</p>
+               <ul>
+                  <li>
+                     <p>the amount (property <em>hasPriceValue</em>) and the currency (property <em>hasPriceCurrency</em>) that characterises it, e.g. <q>156.67 EUR</q>;</p>
+                  </li>
+                  <li>
+                     <p>the application of a discount percentage (property <em>hasDiscountPrecentage</em>) to a particular price, e.g. <q>15</q>;</p>
+                  </li>
+                  <li>
+                     <p>the type of price (property <em>hasPriceType</em>) that can be, e.g., net (the individual <em>net</em> belonging to the class <em>PriceType</em>) or gross (the individual <em>gross</em>);</p>
+                  </li>
+                  <li>
+                     <p>the inclusion of the VAT (property <em>includesVAT</em>) to the price;</p>
+                  </li>
+                  <li>
+                     <p>the specification of a validity period (property <em>schema:validFrom</em> and <em>schema:validThrough</em>) and/or of some specific contexts where the price must be applied (property <em>isApplicableFor</em>).</p>
+                  </li>
+               </ul>
+               <figure id="refIllustration6">
+                  <p>
+                     <img src="img/10000000000003F6000002607CD90471.png"
+                          alt="The Graffoo diagram of the module related with prices."/>
+                  </p>
+                  <figcaption>The Graffoo diagram of the module related with prices.</figcaption>
+               </figure>
+            </section>
+            <section>
+               <h1>Module <q>items</q>
+               </h1>
+               <p>
+                  <strong>Scenario:</strong> A style is a particular design of an article of a certain category (e.g. shirt, skirt, trowser) and designed for one or more specific genre (male, female, or both). An item is a particular realisation of a style with a certain texture and proposed for a specific season. Each item can be available in different sizes and colours. Any combination of these characteristics defines a stock keeping unit (SKU). Finally, the piece that is produced is an exemplar of a particular stock keeping unit.</p>
+               <p>Consequently, each style can be realised in several items, each item can be available in different stock keeping units, and each stock keeping unit can be produced in multiple pieces. Styles, items, stock keeping units, pieces, colours, sizes, textures, and seasons can have a unique identifier associated.</p>
+               <p>Questions:</p>
+               <ul>
+                  <li>
+                     <p>What is the category of the style, the genre, the season, the texture, the size, and the colour of all the pieces produced?</p>
+                  </li>
+                  <li>
+                     <p>What are best selling colours?</p>
+                  </li>
+                  <li>
+                     <p>What is the size of the stock keeping units being black that have been made available for the item with code <q>AMT3ODO</q>?</p>
+                  </li>
+               </ul>
+               <p>
+                  <strong>Description:</strong> The module summarised in <a href="#refIllustration7"> </a> is entirely based on the classification introduced by the <em>Functional Requirements for Bibliographic Record</em> (<em>FRBR</em>) <a href="#__RefNumPara__59866_1461357291"> </a>. FRBR is a metadata standard proposed for the description of bibliographic resources, such as books, articles, journals. However, its organisation is enough generic that can be applied to other kinds of works, such as cultural heritage objects <a href="#__RefNumPara__60066_1461357291"> </a>, music <a href="#__RefNumPara__60136_1461357291"> </a>, and, of course, fashion design. In particular, FRBR describes each object from four different and interlinked perspectives, defined by the following concepts:</p>
+               <ul>
+                  <li>
+                     <p>Work, i.e. the description of the essence of a particular object – e.g. the style as thought by a fashion designer;</p>
+                  </li>
+                  <li>
+                     <p>Expression, i.e., the realization of a Work in a certain shape – e.g., the proposal of an item (e.g. a sketch) to create with a certain texture;</p>
+                  </li>
+                  <li>
+                     <p>Manifestation, i.e. a particular embodiment of an Expression according to a specific physical format – such as the size and the colour;</p>
+                  </li>
+                  <li>
+                     <p>Item, i.e. the tangible object compliant with a certain Manifestation and with a precise physical location – e.g. a piece of a stock keeping unit in a cloakroom.</p>
+                  </li>
+               </ul>
+               <p>By using FRBR as guiding standard, we have defined four distinct classes for each of the aforementioned FRBR levels:</p>
+               <ul>
+                  <li>
+                     <p>class <em>Style</em>, i.e. the particular design of a certain article, characterised by a category (property <em>hasArticleCategory</em>) as defined in <a href="#__RefHeading__60558_1461357291"> </a>, and by a genre (male, female, or both);</p>
+                  </li>
+                  <li>
+                     <p>class <em>Item</em>, i.e. the specific item related to a certain style (property <em>wasRealisedAs</em>) realised using a particular texture (property <em>wasMadeOf</em>), and proposed for a certain season (property <em>wasProposedFor</em>);</p>
+                  </li>
+                  <li>
+                     <p>class <em>StockKeepingUnit</em>, i.e. a certain item available (property <em>isAvailableAs</em>) in a particular size (property <em>hasSize</em>) and colour (property <em>hasColour</em>);</p>
+                  </li>
+                  <li>
+                     <p>class <em>Piece</em>, i.e. the piece having a particular size and colour and related to a specific item.</p>
+                  </li>
+               </ul>
+               <p>Each of these four classes identifies specific aspects and characteristics of an article. Any individual of these classes can be accompanied by a unique identifier (property <em>dcterms:identifier</em>). In addition, it is possible to associate to the individuals of the classes <em>Item</em>, <em>StockKeepingUnit</em>, and <em>Piece</em> one or more prices (property <em>hasPrice</em>) so as to indicate how such individual is available to the market.</p>
+               <figure id="refIllustration7">
+                  <p>
+                     <img src="img/1000000000000420000002604A1846BB.png"
+                          alt="The Graffoo diagram for the module related to the items and their characteristics."/>
+                  </p>
+                  <figcaption>The Graffoo diagram for the module related to the items and their characteristics.</figcaption>
+               </figure>
+            </section>
+            <section id="__RefHeading__59001_1461357291">
+               <h1>Module <q>orders</q>
+               </h1>
+               <p>
+                  <strong>Scenario:</strong> Any selling mechanism includes the creation of an order (at a certain date), i.e. the specification of the articles that someone wants to order completed with additional information about their characteristics (texture, colour, size), the amount ordered, the price for each piece, and a recap of the total amount needed to buy all the objects indicated in the order. Each order is actually associated to an hypothetical set of items, even if the pieces included in it are immediately available in stock.</p>
+               <p>When all the pieces ordered are sent to the customer, an invoice is generated and it is associated to a particular order. Each invoice includes all the pieces of the item included in the order that have been actually sent to the customer, their prices, and a recap of the value of the invoice. However, it is possible that the products included in the invoice could be different from those that have been originally ordered.</p>
+               <p>Both orders and invoices must contain information about the distribution platform used (either B2B or B2C), and the sales channel used (either e-commerce or front-desk).</p>
+               <p>Questions:</p>
+               <ul>
+                  <li>
+                     <p>What is the sum of all the orders received in January 2016?</p>
+                  </li>
+                  <li>
+                     <p>What is the total value of the invoices associated to all the orders received in January 2016?</p>
+                  </li>
+                  <li>
+                     <p>What is the total cost of each stock keeping unit considering all the orders?</p>
+                  </li>
+                  <li>
+                     <p>What are all the invoices that specify a total value which is different from the one specified in the related orders?</p>
+                  </li>
+                  <li>
+                     <p>What are all the invoices that include a piece of a stock keeping unit that was not included in the related orders?</p>
+                  </li>
+                  <li>
+                     <p>What are the distribution platform and the sales channels used in all the orders?</p>
+                  </li>
+               </ul>
+               <ul>
+                  <li>
+                     <p>What is the best selling colour on January 2015?</p>
+                  </li>
+                  <li>
+                     <p>What is the best selling article on January 2015, and what is the related best-selling colour?</p>
+                  </li>
+                  <li>
+                     <p>What is the best selling article category on January 2, 2015?</p>
+                  </li>
+               </ul>
+               <p>
+                  <strong>Description:</strong> In this module, shown in <a href="#refIllustration8"> </a>, we reuse several entities defined in GoodRelations, Schema.org, and DC Terms – even if some of those are not explicitly shown in the diagram. The main class of the module are <em>Order</em> e <em>Invoice</em>, which are linked between them through the property <em>schema:referencesOrder</em>. These two classes are associated to several other concepts so as to provide a detailed description of all the information related to the selling of product. In particular:</p>
+               <ul>
+                  <li>
+                     <p>each order is characterised by the stock keeping unit ordered (property <em>schema:orderedItem</em>), by their type (property <em>gr:typeOfGood</em>), their amount (property <em>schema:orderQuantity</em>), the price per piece ordered (property <em>hasPricePerPiece</em>), the order date (property <em>schema:orderDate</em>), and the total value of the order (property <em>hasTotalValue</em>);</p>
+                  </li>
+                  <li>
+                     <p>each invoice is characterised by the pieces sold (property <em>includesPiece</em>), their type (property <em>gr:typeOfGood</em>), the price per piece (property <em>hasPricePerPiece</em>), the invoice date (property <em>dcterms:issued</em>), and the total payment related to the invoice (property <em>schema:totalPaymentDue</em>).</p>
+                  </li>
+               </ul>
+               <p>In addition, each order/invoice specifies the distribution platform (property <em>hasDistributionPlatform</em>) as well as the sales channel (property <em>hasSalesChannel</em>) that have been used. </p>
+               <figure id="refIllustration8">
+                  <p>
+                     <img src="img/10000000000004B40000028D0E50C313.png"
+                          alt="The Graffoo diagram summarising the module related to orders and invoices."/>
+                  </p>
+                  <figcaption>The Graffoo diagram summarising the module related to orders and invoices.</figcaption>
+               </figure>
+            </section>
+            <section>
+               <h1>Module <q>users</q>
+               </h1>
+               <p>
+                  <strong>Scenario:</strong> The online sales system allows users of the platform to order an item available as stock keeping unit and to receive it at the specified address (characterised by province and region). Each person having a user account has information associated about her genre, birth date, province and region of residence.</p>
+               <p>Questions:</p>
+               <ul>
+                  <li>
+                     <p>Who is the user that has bought the most in 2015?</p>
+                  </li>
+                  <li>
+                     <p>What is the province where the users have ordered the highest number of articles?</p>
+                  </li>
+                  <li>
+                     <p>What are the best selling article categories in the various regions?</p>
+                  </li>
+                  <li>
+                     <p>What is the best selling article category on January 2, 2015, in Lombardia?</p>
+                  </li>
+               </ul>
+               <p>
+                  <strong>Description:</strong> In this module, briefly summarised in <a href="#refIllustration9"> </a>, we reuse several entities originally defined in Schema.org. In addition, two external models have been explicitly imported, i.e. <em>Friend Of A Friend</em> (<em>FOAF</em>, <a href="#refIllustration5"> </a>for describing people) and <em>Semantically-Interlinked Online Communities</em> (<em>SIOC</em>, for describing users). The main classes of the module are:</p>
+               <ul>
+                  <li>
+                     <p>
+                        <em>Person</em>, which allows us to specify birth date, genre and place of residence of all the people described in the platform;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <em>UserAccount</em>, which is a specific customer included in the platform, referring to a person, which is used for making orders in the platform;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <em>schema:Place</em> (defined in Schema.org), which allows us to specify the place where a person stay or where the items included in an order should be sent.</p>
+                  </li>
+               </ul>
+               <figure id="refIllustration9">
+                  <p>
+                     <img src="img/100000000000050D00000196FF30B04B.png"
+                          alt="The Graffoo diagram summarising the module “users”."/>
+                  </p>
+                  <figcaption>The Graffoo diagram summarising the module <q>users</q>.</figcaption>
+               </figure>
+            </section>
+         </section>
+         <section>
+            <h1>Advantages of using a unifying model</h1>
+            <p>As already introduced in the previous sections, the Imperial Data Ontology (IDO) has been proposed as the unifying model for allowing the integration and querying of Imperial Fashion data, which are stored in several databases that can be organised in different ways and can also contain heterogeneous data. The advantages of using IDO within the context of the company is twofolds. On the one hand, it allows us to push the applicative research of Semantic Web technologies in this context even further. On the other hand, it has clear impact at a pure industrial level as well.</p>
+            <p>From a research perspective, while there already exist models for the description of selling events of products such as GoodRelations, IDO is one of the first that provides a detailed description of the fast-fashion domain, with particular reference to the management of selling and product-related data. In addition, the use of FRBR is one of the first concrete tentative of applying such specification to a domain that was not considered originally by the authors of FRBR – which basically means that the theoretical model described by FRBR is even more flexible than what has been originally thought. Finally, the use of Semantic Web technologies allows an easy extension and integration with additional and external open data that can be useful for analytic purposes, but that are not currently held by Imperial Fashion (population of selling areas, weather forecasting data, etc.).</p>
+            <p>From an industrial perspective, the strategic advantage in the adoption of IDO is to be able to discuss about products (at any level of granularity: style, item, stock keeping unit, and piece) in a way that is independent on how the related data are actually stored in the various databases. This eases the analysis of data and allows, potentially, the definition of possible strategies for the integration of third-party data that could be owned by the company in the future. In addition, the use of such model makes possible a development of smart interfaces for enabling humans (and automatic software as well) to make sense of the data in order to, e.g., forecast sales of certain products according to the particular distribution platform, the sales channel, and other contextual factors. In addition, the reuse of well-known existing models – such as Schema.org, FOAF, SIOC, SKOS, and GoodRelations – allows the application and integration of IDO within the data models of other companies in the fashion domain, so as to enable (eventually) the the cross-industry interchange of data.</p>
+         </section>
+         <section>
+            <h1>Challenges and lessons learnt</h1>
+            <p>Introducing the use of Semantic Web technologies, which are unconventional from a pure industrial perspective (at least in the context in consideration in this work), has been a quite huge social challenge to address. The company did not have any particular expertise in such technologies and, even if there has been a whole team dedicated to the management of databases, Semantic Web technologies, and in particular OWL, has been approached skeptically. However, during several presentations with the company, we have introduced the main advantages in developing and using OWL ontologies – and related technologies – for harmonising data coming from different databases. Among these advantages, those that have stimulated a actual interest of the company headquarters have been the following ones:</p>
+            <ul>
+               <li>
+                  <p>the whole experimentation with Semantic Web technologies could be run in parallel with the usual workflow of Imperial Fashion, without affecting and breaking the way their data are currently collected and reused by the company;</p>
+               </li>
+               <li>
+                  <p>the flexibility shown by OWL ontologies and the ontology development process adopted, i.e. SAMOD, that have allowed us to extend easily IDO in several iteration, so as to address and describe specific scenarios one by one;</p>
+               </li>
+               <li>
+                  <p>the systematic reuse of existing models, such as GoodRelations and Schema.org, that have been already adopted for describing commercial products and that are supported by several services, such as Google;</p>
+               </li>
+               <li>
+                  <p>the possibility of reusing and linking data that are not the ones already stored in the company's databases, such as all the open demographic data<a href="#ftn5"> </a> and other geopolitical and/or encyclopedic information (e.g. <a href="http://dbpedia.org/">DBpedia</a>) that can be used for interesting statistical analysis on the selling items and their customers.</p>
+               </li>
+            </ul>
+            <p>In addition to the aforementioned points, the use of SAMOD has been very appropriate due to its feature of handling changes in the requirements (even in late development), as prescribed by agile methodologies in general. In particular, the first two iterations of the methodologies have involved people working in the Web sales channel as domain experts. The result has been a first sketch of the model for describing information about the items sold and their orders. In the mean time, the company hired a professional data analyst for interpreting the basic data that have been stored in the databases since years. This person has had a more appropriate knowledge of the nomenclature and the organisation of all the aspects related to the items sold and their related entities. Her involvement as domain expert from the third iteration of SAMOD has been crucial for the development of IDO as it is currently available. In particular, her comments has caused a quite important re-engineering of all the ontological entities that have been included in the ontology after the first two steps of the methodology. This re-engineering phase has been addressed quite easily by following the guidelines that SAMOD prescribes.</p>
+         </section>
+      </section>
+      <section id="__RefHeading__628_1461357291">
+         <h1>Data conversion</h1>
+         <p>While in the previous section we have focussed on the introduction of the Imperial Data Ontology (IDO), in this section we introduce the conversion mechanisms we have developed for allowing the conversion of data from the Imperial Fashion databases into RDF statements compliant with IDO. So as to implement concretely such conversion mechanisms and, thus, to comprehend their feasibility in the context of the company, we have started analysing a small set of data as exemplar, coming from two distinct databases: the data proper to the distribution platforms B2C and B2B (considering only the online sales channel) related to January 2015. D2RQ <a href="#__RefNumPara__4163_226469758"> </a> has been used for implementing the conversion, while additional extensions of such application have been developed in order to facilitate the creation of conversion rules, as discussed in the following sections.</p>
+         <section>
+            <h1>Methods and Materials</h1>
+            <p>The D2RQ <a href="#__RefNumPara__4163_226469758"> </a> is a platform developed for allowing the access to relational databases, based on SQL, by means of Semantic Web technologies. In particular, D2RQ allows one to shown (virtually) the data in a database as if they are described in RDF <a href="#__RefNumPara__4882_226469758"> </a>, and to enable one to query them by means of SPARQL <a href="#__RefNumPara__4884_226469758"> </a>.</p>
+            <p>However, this virtual interface is pretty effective for small databases, while it becomes slow and difficult to manage computationally when the amount of data is large and continuously extended, as the Imperial Fashion data are. So as to try to avoid this issue, the D2RQ platform makes also available conversion mechanisms that allow the conversion of the source data in a database into RDF, so as to be stored in appropriate, persistent, and non-virtual storages (e.g. a triplestore), so as to speed the navigation and querying of such data up.</p>
+            <p>The alignment between the data in the databases and an OWL ontology such as IDO can be specified by means of a Turtle document <a href="#__RefNumPara__5222_226469758"> </a> compliant with the vocabulary for proposing alignments included in the D2RQ specification <a href="#__RefNumPara__6899_226469758"> </a>.</p>
+         </section>
+         <section>
+            <h1>Modularising the data conversion</h1>
+            <p>Even if D2RQ makes already available all the tools for implementing data conversion strategies for the Imperial Fashion databases, the creation of a unique Turtle document, containing all the conversion rules for the data coming from each database, is not the best manageable choice for the scenario we have to address. In particular, the main issues are:</p>
+            <ul>
+               <li>
+                  <p>the cognitive load for creating the conversion document – the huge amount of concepts (classes, properties, etc.) to handle for describing all the Imperial Fashion data would result in having a quite long set of conversion rules which are not easy to write, read and modify;</p>
+               </li>
+               <li>
+                  <p>the re-engineering of the translation rules – it is possible that similar rules can be used in different conversion documents, since two databases, for instance, can actually have homogeneous data. This scenario, of course, will complicate a possible refactor of such rules, since they are basically spread out in different documents. This makes more difficult to allow one to modify the rules easily, as consequence of corrections or some future changes in IDO itself. For instance, in such scenario, one would have to change each modified rule <q>by hand</q> in all the documents that actually include it, and this may introduce additional errors due to distraction or wrong cut&amp;paste actions;</p>
+               </li>
+               <li>
+                  <p>conversion validation – to understanding if the conversion of the data related to a certain entity (e.g. a class) has been correctly written implies the necessary conversion of the data of <strong>all</strong> the entities considered by the conversion rules. However, if the conversion document includes several entities, the conversion task can take several minutes, even hours, and must be repeated every time that some data are wrong somehow. This would result in spending too much time in validating the data, since every time one has to perform the entire conversion.</p>
+               </li>
+            </ul>
+            <p>We have developed a <a href="https://github.com/essepuntato/dimm">Python script</a> called <em>D2RQ Interactive Module Manager</em> (<em>DIMM</em>) so as to avoid all aforementioned issues. DIMM is able to convert modules of data according to specific needs, and allows one to specify conversion strategies referred to single conversion modules as well as entire directories containing several conversion modules. Independently from the conversion modules used, the result of the conversion is a Turtle document compliant with the D2RQ specification that is created by gathering the rules specified in the conversion modules used as input of the application.</p>
+            <section>
+               <h1>The conversion modules</h1>
+               <p>Each conversion module is an RDF graph in Turtle that must be compliant with the D2RQ language <a href="#__RefNumPara__6899_226469758"> </a>, and it must refer to one and only one:</p>
+               <ul>
+                  <li>
+                     <p>particular class (and its related properties, i.e. those ones having such class as domain) of the target ontology; or</p>
+                  </li>
+                  <li>
+                     <p>to a translation table, or</p>
+                  </li>
+                  <li>
+                     <p>to a database. </p>
+                  </li>
+               </ul>
+               <p>For instance, the conversion module for the class <em>Style</em> is introduced in <a href="#refText0"> </a>.</p>
+               <figure id="refText0">
+                  <pre>
+                     <code># Class Style
+map:Style a d2rq:ClassMap ;
+  d2rq:class ido:Style ;
+  d2rq:dataStorage map:db-b2c-online ;
+  d2rq:uriSqlExpression "CONCAT('https://w3id.org/ido/data/style/', SUBSTRING(t_articoli.CodArt, 1, 4))" .
+
+# rdfs:label (@it)
+map:Style_label_it a d2rq:PropertyBridge ;
+  d2rq:property rdfs:label ;
+  d2rq:lang "it" ;
+  d2rq:sqlExpression "CONCAT('modello ', SUBSTRING(t_articoli.CodArt, 1, 4))" .
+
+# rdfs:label (@en)
+map:Style_label_en a d2rq:PropertyBridge ;
+  d2rq:property rdfs:label ;
+  d2rq:lang "en" ;
+  d2rq:sqlExpression "CONCAT('style ', SUBSTRING(t_articoli.CodArt, 1, 4))" .
+
+# dcterms:identifier
+map:Style_identifier a d2rq:PropertyBridge ;
+  d2rq:property dcterms:identifier ;
+  d2rq:sqlExpression "SUBSTRING(t_articoli.CodArt, 1, 4)" .
+
+# wasDesignedFor
+map:Style_wasDesignedFor a d2rq:PropertyBridge ;
+  d2rq:property ido:wasDesignedFor ;
+  d2rq:column "t_articoli.CodGrp" ;
+  d2rq:translateWith map:GenderTable .
+
+# wasRealisedAs
+map:Style_wasRealisedAs a d2rq:PropertyBridge ;
+  d2rq:property ido:wasRealisedAs ;
+  d2rq:refersToClassMap map:Item .
+
+# hasArticleCategory
+map:Style_hasArticleCategory a d2rq:PropertyBridge ;
+  d2rq:property ido:hasArticleCategory ;
+  d2rq:uriColumn "t_articoli.CodSGrp" ;
+  d2rq:translateWith map:ArticleCategoryTable .</code>
+                  </pre>
+                  <figcaption>The conversion module for the class Style defined in IDO (the prefixes declaration are not listed for the sake of readability).</figcaption>
+               </figure>
+               <p>In particular, the rules of each conversion module must be stored in a Turtle file called with the name of the class (identified by the type <code>d2rq:ClassMap</code>) to which the module refers to. For instance, the excerpt in <a href="#refText0"> </a> refers to the class <code>map:Style</code>, which allows the specification of all the information related with the IDO class <em>Style</em> (e.g. as specified in the statement <code>map:Style d2rq:class ido:Style</code>). Note that all the conversion rules related to the properties (identified by the type <code>d2rq:PropertyBridge</code>, and linked to the actual properties in IDO by means of the property <code>d2rq:property</code>) will be linked to the aforementioned alignment class by means of the property <code>d2rq:belongsToClassMap</code>, which will be added automatically by DIMM and, thus, can be left unspecified in the conversion modules.</p>
+            </section>
+            <section>
+               <h1>Generating the mapping</h1>
+               <p>The general algorithm implemented by DIMM is summarised in <a href="#refText1"> </a> as a Python-like pseudocode. The algorithm is just one routine taking a set of files, each depicting a conversion module, and a destination file where the mapping will be finally stored. The routine reuses several subroutines for addressing specific tasks. In particular:</p>
+               <ul>
+                  <li>
+                     <p>
+                        <code>is_valid</code> takes a file containing a conversion module as input and checks if the module contains a <code>d2rq:ClassMap</code> with the local name equal to the name of the file in consideration<a href="#ftn6"> </a>;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_class_map_statements</code> takes a file containing a conversion module as input, identifies the resource of type <code>d2rq:ClassMap</code> and returns all the statements having such resource as subject;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_property_bridge_statements</code> takes a file containing a conversion module as input, identifies all the resources of type <code>d2rq:PropertyBridge</code> and returns all the statements having such resources as subjects;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_all_statements</code> takes a file containing a conversion module as input and returns all the statements it contains;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_referenced_class_maps</code> takes a file containing a conversion module as input and returns all the resources of type <code>d2rq:ClassMap</code> that are referenced by resources of type <code>d2rq:PropertyBridge</code> through the property <code>d2rq:refersToClassMap</code>;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_referenced_trans_table</code> takes a file containing a conversion module as input and returns all the resources of type <code>d2rq:TranslationTable</code> that are referenced by resources of type <code>d2rq:PropertyBridge</code> through the property <code>d2rq:translateWith</code>;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_referenced_trans_table</code> takes a file containing a conversion module as input and returns all the resources of type <code>d2rq:Database</code> that are referenced by resources of type <code>d2rq:ClassMap</code> through the property <code>d2rq:dataStorage</code>;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_file_from_entity</code> takes a resource of type <code>d2rq:ClassMap</code>/<code>d2rq:TranslationTable</code>/<code>d2rq:Database</code> and a directory as inputs, and returns the file in the input directory named with the local name of the input resource;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>get_issues</code> takes a mapping document and returns a list of all the entities (among <code>d2rq:ClassMap</code>/<code>d2rq:TranslationTable</code>/<code>d2rq:Database</code> resources) that have been referred by the conversion module in consideration and have not been found in any file;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>generate_working</code> takes an issue as input and advertises the DIMM user about that potential mistake;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>add</code> adds a set of input statements to the RDF graph specified as input;</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>store</code> takes a mapping document and a destination file as input, and generates the final RDF file exemplifying the mapping.</p>
+                  </li>
+               </ul>
+               <figure id="refText1">
+                  <pre>
+                     <code>1 def create_mapping(file_set, dest_file):
+2  mapping = Graph()
+3
+4  for file in [f for f in file_set if is_valid(f)]: 
+5    base_dir = get_dir(file)
+6
+7    add(get_all_statements(f), mapping)
+8
+9    for ref_class_map in get_referenced_class_maps(f):
+10      ref_f = get_file_from_entity(ref_class_map, base_dir)
+11      if is_valid(ref_f):
+12        add(get_class_map_statements(ref_f), mapping)
+13
+14    for ref_trans_table in get_referenced_trans_table(f):
+15      ref_f = get_file_from_entity(ref_trans_table, base_dir)
+16      if is_valid(ref_f):
+17        add(get_all_statements(ref_f), mapping)
+18
+19    for ref_database in get_referenced_database(f):
+20      ref_f = get_file_from_entity(ref_database, base_dir)
+21      if is_valid(ref_f):
+22        add(get_all_statements(ref_f), mapping)
+23  
+24  for issue in get_issues(mapping):
+25    generate_warning(issue)
+26
+27  store(mapping, dest_file)</code>
+                  </pre>
+                  <figcaption>A Python-like pseudocode of the algorithm run by DIMM for producing the mapping file.</figcaption>
+               </figure>
+               <p>The run of the algorithm proceeds as follows. For each file in the file set specified as input, DIMM first checks if it is valid (line 4) – i.e. it is compliant with the specific organisation DIMM expects from a conversion module. Then, it adds all the mapping rules defined in the file to the final mapping (lines 7). In case the file in consideration does not include explicit definitions of all the resources referenced through the properties <code>d2rq:refersToClassMap</code>, <code>d2rq:translateWith</code>, and <code>d2rq:dataStorage</code>, then the following approach is used according to their type, i.e. <code>d2rq:ClassMap</code> (lines 9-12), <code>d2rq:TranslationTable</code> (lines 14-17), and <code>d2rq:Database</code> (lines 19-22):</p>
+               <ol>
+                  <li>
+                     <p>DIMM sees if additional modules (containing information about the referred resources) exist in the same directory of the file in consideration;</p>
+                  </li>
+                  <li>
+                     <p>then, if the conversion module found is valid, it adds all the appropriate conversion rules from this module to the mapping – in particular, all the statements are added if DIMM is looking for a <code>d2rq:TranslationTable</code> or a <code>d2rq:Database</code>, while only the statements having as subject an instance of the class <code>d2rq:ClassMap</code> are added otherwise.</p>
+                  </li>
+               </ol>
+               <p>This process is handled automatically by DIMM, and it allows the creation of a complete D2RQ mapping document even if the input modules contain references to resources that are defined in external conversion modules. The last lines of the algorithm in <a href="#refText1"> </a> reports the issues (lines 24-25) that could be generated during the process (e.g. no modules have been found for a referenced entity), and finally it stores the mapping document in the specified location (line 27).</p>
+               <p>Therefore, running DIMM on the conversion module related to the alignment class <em>Style</em> introduced in <a href="#refText0"> </a>, the final D2RQ mapping document produced includes all the mapping rules listed as follows (in Turtle):</p>
+               <pre>
+                  <code>
+# Class Style and its properties
+map:Style a d2rq:ClassMap ;
+d2rq:class ido:Style ;
+d2rq:dataStorage map:db-b2c-online ;
+d2rq:uriSqlExpression "CONCAT('https://w3id.org/ido/data/style/', SUBSTRING(t_articoli.CodArt, 1, 4))" .
+
+map:Style_hasArticleCategory a d2rq:PropertyBridge ;
+d2rq:belongsToClassMap map:Style ;
+d2rq:property ido:hasArticleCategory ;
+d2rq:translateWith map:ArticleCategoryTable ;
+d2rq:uriColumn "t_articoli.CodSGrp" .
+
+map:Style_identifier a d2rq:PropertyBridge ;
+d2rq:belongsToClassMap map:Style ;
+d2rq:property dcterms:identifier ;
+d2rq:sqlExpression "SUBSTRING(t_articoli.CodArt, 1, 4)" .
+
+map:Style_label_en a d2rq:PropertyBridge ;
+d2rq:belongsToClassMap map:Style ;
+d2rq:lang "en" ;
+d2rq:property rdfs:label ;
+d2rq:sqlExpression "CONCAT('style ', SUBSTRING(t_articoli.CodArt, 1, 4))" .
+
+map:Style_label_it a d2rq:PropertyBridge ;
+d2rq:belongsToClassMap map:Style ;
+d2rq:lang "it" ;
+d2rq:property rdfs:label ;
+d2rq:sqlExpression "CONCAT('modello ', SUBSTRING(t_articoli.CodArt, 1, 4))" .
+
+map:Style_wasDesignedFor a d2rq:PropertyBridge ;
+d2rq:belongsToClassMap map:Style ;
+d2rq:column "t_articoli.CodGrp" ;
+d2rq:property ido:wasDesignedFor ;
+d2rq:translateWith map:GenderTable .
+
+map:Style_wasRealisedAs a d2rq:PropertyBridge ;
+d2rq:belongsToClassMap map:Style ;
+d2rq:property ido:wasRealisedAs ;
+d2rq:refersToClassMap map:Item .
+
+# Other entities referred and contained in external modules
+# Class Item
+map:Item a d2rq:ClassMap ;
+d2rq:class ido:Item ;
+d2rq:dataStorage map:db-b2c-online ;
+d2rq:uriSqlExpression "CONCAT('https://w3id.org/ido/data/item/', TRIM(t_articoli.CodArt))" .
+
+# Translation tables
+map:ArticleCategoryTable a d2rq:TranslationTable ;
+d2rq:translation 
+[ d2rq:databaseValue "5" ;
+d2rq:rdfValue category:hat ],
+[ d2rq:databaseValue "A" ;
+d2rq:rdfValue category:dress ],
+[ d2rq:databaseValue "C" ;
+d2rq:rdfValue category:shirt ],
+[ d2rq:databaseValue "E" ;
+d2rq:rdfValue category:perfume ],
+[ d2rq:databaseValue "G" ;
+d2rq:rdfValue category:skirt ],
+[ d2rq:databaseValue "J" ;
+d2rq:rdfValue category:blazer ],
+[ d2rq:databaseValue "K" ;
+d2rq:rdfValue category:coat ],
+[ d2rq:databaseValue "U" ;
+d2rq:rdfValue category:heavy-jacket ],
+[ d2rq:databaseValue "L" ;
+d2rq:rdfValue category:waistcoat ],
+[ d2rq:databaseValue "M" ;
+d2rq:rdfValue category:sweater ],
+[ d2rq:databaseValue "P" ;
+d2rq:rdfValue category:trousers ],
+[ d2rq:databaseValue "R" ;
+d2rq:rdfValue category:vest ],
+[ d2rq:databaseValue "V" ;
+d2rq:rdfValue category:jacket ],
+[ d2rq:databaseValue "1" ;
+d2rq:rdfValue category:leather-jacket ],
+[ d2rq:databaseValue "Y" ;
+d2rq:rdfValue category:tracksuit ],
+[ d2rq:databaseValue "9" ;
+d2rq:rdfValue category:fur-neck ] .
+
+map:GenderTable a d2rq:TranslationTable ;
+d2rq:translation 
+[ d2rq:databaseValue "D" ;
+d2rq:rdfValue "female" ],
+[ d2rq:databaseValue "M" ;
+d2rq:rdfValue "male" ],
+[ d2rq:databaseValue "F" ;
+d2rq:rdfValue "female" ],
+[ d2rq:databaseValue "U" ;
+d2rq:rdfValue "male" ] .
+
+# Database settings
+map:db-b2c-online a d2rq:Database ;
+jdbc:autoReconnect "true" ;
+jdbc:zeroDateTimeBehavior "convertToNull" ;
+d2rq:jdbcDSN "jdbc:mysql://localhost/imperial_online_b2c" ;
+d2rq:jdbcDriver "com.mysql.jdbc.Driver" ;
+d2rq:password "pass" ;
+d2rq:username "root" .</code>
+               </pre>
+               <p>Concluding, DIMM allows the conversion of data in a modular way, so as to simplify the analysis of data without converting them all every time an issue is arisen.</p>
+            </section>
+         </section>
+         <section>
+            <h1>Conversion modules</h1>
+            <p>Several conversion modules have been created for guaranteeing the correct conversion of the data in the exemplar databases provided by Imperial Fashion. In particular:</p>
+            <ul>
+               <li>
+                  <p>we created a module for each of the classes defined in IDO, introduced in <a href="#__RefHeading__626_1461357291"> </a>;</p>
+               </li>
+               <li>
+                  <p>we have created two additional modules, one for each database considered;</p>
+               </li>
+               <li>
+                  <p>finally, we have developed two additional modules that include due translation tables for predefined values, one for the genres (male and female) and another for the article categories.</p>
+               </li>
+            </ul>
+         </section>
+         <section>
+            <h1>Advantages</h1>
+            <p>The application <em>D2RQ Interactive Module Manager</em> (<em>DIMM</em>) is a software that extends the functionalities of D2RQ so as to allow the modularisation of D2RQ conversion documents in several sub-modules that can be specified as input. While the development of DIMM is a research contribution per se, its use has brought several advantages within the industrial context we are working in. </p>
+            <p>First of all, DIMM permits one to spend less time in the conversion, analysis and production of target data, and guarantees a more effective assessment of the quality of the data produced thanks to its support in the management of conversion modules. Its use has drastically reduced the introduction of new mistakes in the conversion rules.</p>
+            <p>Referring to the diagram in <a href="#refIllustration1"> </a>, DIMM is mechanism that we are using to creating the various interpreters (i.e. the D2RQ mapping files) of the data included in the databases available in the Imperial Fashion infrastructure so as they are compliant with IDO.</p>
+         </section>
+         <section>
+            <h1>Current infrastructure for data storage</h1>
+            <p>For the initial tests with the exemplar sets of data that have been made available by Imperial Fashion (i.e. the selling data of the distribution platforms B2C and B2B, online sales channel, related to January 2015), we have adopted Fuseki 2 as triplestore and SPARQL endpoint for storing and querying the data. In particular, the source data are converted into RDF by means of the D2RQ application <code>dump-rdf</code>, and then they have been stored in the triplestore.</p>
+            <p>Imperial Fashion collects new data continuously, since, when an item is sold in any distribution platform and any sales channel, new rows are added in the appropriate databases. Of course, according to the infrastructure introduced in <a href="#__RefHeading__41866_1209124841"> </a>, every time a new data is added to any of the Imperial Fashion databases, it is also copied in a mirror database, that is used as source for applying the RDF conversion thought D2RQ so as to store it in the RISED triplestore. However, due to the huge amount of data collected everyday, Fuseki 2 cannot be a feasible solution due to <a href="https://www.w3.org/wiki/LargeTripleStores">its limitation in the maximum number of statements</a>. Thus, in order to provide a solution that can be scalable for handling such huge amount of RDF data, we have decided to adopt <a href="https://www.blazegraph.com/">Blazegraph</a>, which is able to store billions of RDF statements. Currently, we have already migrated the exemplar data into Blazegraph, and we are currently preparing the ground for testing the triplestore by adding the converted RDF statements of more than sixty gigabytes of data stored as SQLServer database tables.</p>
+            <p>Finally, it is worth noticing that, at this stage, we are not interested in applying any sort of reasoning on the data stored in the triplestore, rather we only aim at using its SPARQL interface for querying the data. In particular, the SPARQL endpoint is systematically used for retrieving data for all the visualisations introduced in <a href="#__RefHeading__630_1461357291"> </a>.</p>
+         </section>
+      </section>
+      <section id="__RefHeading__630_1461357291">
+         <h1>Data visualisation and interaction</h1>
+         <p>One of the most important goals of the RISED project is to make available tools and interfaces for allowing humans to make sense easily of the data stored in the various Imperial Fashion databases. While this aspect is important for any kind of task related to data analysis, it is one of the most crucial activities for companies that have to take strategic choices concerning, for instance, the production for the imminent following period.</p>
+         <p>In order to come up with a first set of prototypical interfaces for visualising the data returned by the conversion process introduced in the previous section, we have involved several Imperial Fashion employees in informal meetings so as to understand possible needs for data analysis, with the intent of proposing interfaces for simplifying such analytical tasks. The questions that have been identified as outcomes of these meetings are:</p>
+         <ol>
+            <li>
+               <p>What are the best-selling colours within a certain time frame?</p>
+            </li>
+            <li>
+               <p>What are the percentage of the colours of the all sold items within a certain time frame?</p>
+            </li>
+            <li>
+               <p>How do the sales vary region by region within a certain time frame?</p>
+            </li>
+            <li>
+               <p>How do the sales evolved in time according to the quantity and the average age of the customers?</p>
+            </li>
+         </ol>
+         <p>All the interfaces developed for answering to the aforementioned questions are presented in the following sub-sections. It is worth mentioning that such interfaces are just prototypes, and they were not intended to be stable for being assessed through an appropriate user-testing session. Rather, their goal is to show to the company different ways of visualising the Imperial Fashion selling data compliant with IDO by means of existing and customisable Web and Semantic Web technologies. In addition, they are also used to explore the interest of Imperial Fashion in specific kinds of interfaces so as to collect some requirements for the development of an appropriate application that leverages the use of Semantic Web technologies for making sense of selling data. </p>
+         <section id="__RefHeading__4850_714178577">
+            <h1>Methods and materials</h1>
+            <p>Mainly, we have used two frameworks for data presentation among those available online. The first one is <a href="http://mgskjaeveland.github.io/sgvizler/">Sgvizler</a> 
+               <a href="#__RefNumPara__12560_226469758"> </a>, which is a Javascript library for visualising the result of SPARQL query by means of well-known widgets such as tables, graphs, maps, etc., within HTML pages.</p>
+            <p>However, even if Sgvizler is a powerful library, it implements a very limited mechanism for adapting visualisations to particular needs and interaction methods. Thus, in order to model other specific interfaces with a huge set of customisable features and views, we have decided to use another Javascript library, i.e. <a href="https://d3js.org/">D3</a> 
+               <a href="#__RefNumPara__26903_1146418327"> </a>. D3 offers a complete control among an HTML document and about the way this should evolve according to the data coming from existing data sources. The flexibility of this library is great, and allows one to implement very complex methods for data visualisation and interaction. On the other hand, this flexibility comes with an additional level of complexity for what concern the implementation of such tools.</p>
+         </section>
+         <section id="__RefHeading__6079_714178577">
+            <h1>Summarising graphs, geo-localisation, dynamic views</h1>
+            <p>One of the most important aspects that Imperial Fashion wants to track down concerns the most popular colour(s) within a given interval. There exist a quite extensive amount of colours for each item available in Imperial Fashion: main colours (e.g. <q>green</q>), and possible variations (<q>military green</q>, <q>olive green</q>, etc.). Understanding which of these colours are popular at a given time is a quite important information to use for varying the production of the items according to the market.</p>
+            <p>So as to facilitate the visualisation of these data, we have experimented the use of some diagrams shown in <a href="#refIllustration10"> </a>, one using bars and the other areas, that show the most top three sold colours in January 2015, with a focus on their day by day selling amount. These two simple diagrams already provide a simple and easy-to-understand way for analysing the trend of such colours in few seconds.</p>
+            <figure id="refIllustration10">
+               <p>
+                  <img src="img/1000020100000A36000004CE8053485C.png"
+                       alt="Two diagrams showing the best selling three colours in January 2015 (B2C platform, e-commerce sales channel). Labels are in Italian and stand for black (“nero”), white (“bianco”) and blue jeans (“denim”)."/>
+               </p>
+               <figcaption>Two diagrams showing the best selling three colours in January 2015 (B2C platform, e-commerce sales channel). Labels are in Italian and stand for black (<q>nero</q>), white (<q>bianco</q>) and blue jeans (<q>denim</q>).</figcaption>
+            </figure>
+            <p>However, this two dimensional visualisations are quite complex to follow when one increases the number of colour to visualise. In addition, they do not provide an overall overview of all the sold products, e.g. it is not possible to understand which one between the white colour and the blue jeans colour has been sold the most in a given period. So as to avoid this problem, we have experimented the use of another kind of graph, i.e. the pie cake visualisation shown in <a href="#refIllustration11"> </a>. This view allows one to understand how the colours have been sold during January 2015 overall – e.g. it is possible to understand quickly that the black colour has sold more then half of the e-commerce market during January 2015, followed by white (9,5%) and blue jeans (7,3%).</p>
+            <figure id="refIllustration11">
+               <p>
+                  <img src="img/10000201000005A4000003F436F87BFA.png"
+                       alt="A pie cake diagram showing the percentage of colours of all the items sold in January 2015 (B2C platform, e-commerce sales channel)."/>
+               </p>
+               <figcaption>A pie cake diagram showing the percentage of colours of all the items sold in January 2015 (B2C platform, e-commerce sales channel).</figcaption>
+            </figure>
+            <p>Another aspect highlighted in the third of the aforementioned questions is to understand in which ways the sales are going region by region (and, in the future, country by country as well), so as to identify which one has the highest number of product sold in a particular period, to understand what are the best selling article category in a particular region, etc. Of course the graphics illustrated in <a href="#refIllustration10"> </a> and <a href="#refIllustration11"> </a> are not appropriate to convey such information effectively. Thus, the approach we have adopted in this case is fully based on geo-localisation techniques on a geographic map of Italy, accompanied also by a horizontal bar diagram where regions are sorted in descending order according to the number of product sold in the selected time, as show in <a href="#refIllustration12"> </a>. In this way it is quick to understand what is the most productive region and what is the most popular article category at a given period.</p>
+            <p>In addition to this quick overall description of the whole status of the sales at a given period, the interface allows one also some interactions, such as to specify a difference period using the top-right menu, and to get more details about selected regions by clicking on them – which create one orange and grey box for each region clicked. It is worth mentioning that such boxes will stay available on the interface until the user will not close them explicitly, and they will be available also after a change of the particular sales period in consideration. This, basically, allows one to compare different selling period related to the same region easily.</p>
+            <figure id="refIllustration12">
+               <p>
+                  <img src="img/1000020100000908000005587BDEE262.png"
+                       alt="A geo-located visualisation that highlights (in dark green) the regions that have sold the most in the selected period (January 25-31, 2015, B2C platform, e-commerce sales channel), what was the most bought article category region by region (e.g. “maglia”, “shirt” in English), and some additional details of some of the regions in the orange and grey boxes that show information about the most sold items."/>
+               </p>
+               <figcaption>A geo-located visualisation that highlights (in dark green) the regions that have sold the most in the selected period (January 25-31, 2015, B2C platform, e-commerce sales channel), what was the most bought article category region by region (e.g. <q>maglia</q>, <q>shirt</q> in English), and some additional details of some of the regions in the orange and grey boxes that show information about the most sold items.</figcaption>
+            </figure>
+            <p>Finally, another important aspect to address would be the visualisation of how some data dynamically change in time according to multi-dimensional features. For instance, in <a href="#refIllustration13"> </a> we show four screenshots of a visualisation that allows one to understand, within a particular period, how the sales of the male (in green) and female (in blue) items have evolved according to the quantity of item sold (X axis), and the average age of their customers (Y axis). As shown in the latest screenshot (at the bottom), it is immediately clear that the best selling items are were designed for female, and that the average age of the related customers is around 40. On the other hand, the male customers are characterised by an lower average age, around 30.</p>
+            <figure id="refIllustration13">
+               <p>
+                  <img src="img/100002010000054600000B002DF25F2D.png"
+                       alt="Four screenshots of a dynamic visualisation showing the quantity (X axis) and the average age of the customers (Y axis) of male (in green) and female (in blue) items sold in January 2015 (January 25-31, 2015, B2C platform, e-commerce sales channel)."/>
+               </p>
+               <figcaption>Four screenshots of a dynamic visualisation showing the quantity (X axis) and the average age of the customers (Y axis) of male (in green) and female (in blue) items sold in January 2015 (January 25-31, 2015, B2C platform, e-commerce sales channel).</figcaption>
+            </figure>
+         </section>
+         <section>
+            <h1>Advantages</h1>
+            <p>Even if all the visualisation proposed are just prototypes, they already allow one to demonstrate how such interactive interfaces can provide a quick and effective summarisation of particular aspects of interest of the domain in consideration – such as showing particular views that aggregates sales data for assessing a particular scenario. Of course, having such data exposed according to a specific model, such as IDO, simplify the development of these interfaces, which become easy to maintain even when new data are actually added to the whole knowledge base.</p>
+            <p>From a pure research point of view, the prototypes developed are interesting since they seem to be plausible ways for enabling human sense-making of existing data, even if additional evidences – e.g. supported by empirical tests – should be collected for supporting such hypothesis. However, these prototypes have been described positively by all the Imperial Fashion employees who have tried them. From an industrial perspective, these interfaces allows the querying and interaction of sales data in a very simplified way, so as to be easy to understand by the various actors within the company (e.g. communication and production managers). In particular, the use of such kinds of interfaces, guided by the data available according to IDO, can have a disruptive action for supporting commercial/production/communication strategic choices.</p>
+         </section>
+      </section>
+      <section id="__RefHeading__34065_1146418327">
+         <h1>Related works</h1>
+         <p>As far as we know, this work is the first attempt of using Semantic Web technologies for modelling data within the fast-fashion design industry. Thus, we have not found any closely related project to discuss as related work in the area. Of course, there have been already several attempts in using such technologies within companies, as well as some projects that have concerned the fashion design domain and Web technologies.</p>
+         <p>Starting from this latter aspect, two projects are currently active in the domain. First of all, we have the <a href="http://www.europeanafashion.eu/">Europeana Fashion International Association</a>, which is a non-profit organisation involving fashion institutions with the aim of exploiting the fashion heritage on the Web. The main goal of the the association is the creation of the Europeana Fashion portal, which currently includes metadata of more than 700,000 fashion objects available in public and private archives and museums.</p>
+         <p>Along the same lines, the <a href="http://cordis.europa.eu/project/rcn/89318_en.html">SERVIVE project</a> was one of the first attempts to provide tools for allowing the mass customisation of fashion items. In particular, the aims of the project was to propose a new production model which should involved several small- and medium-sized enterprises (SMEs) in working together as a network of <q>microfactories</q>, as introduced in details in the <a href="http://cordis.europa.eu/result/rcn/56060_en.html">final report of the project available online</a>.</p>
+         <p>Even if there are no other models available on the Web that allow a precise representation of the aspects of the (fast-)fashion domain discussed in this article, there are at least two existing ontologies, we have already reused in IDO, that provide the specification of some part of this domain. On the one hand, we reused GoodRelations <a href="#__RefNumPara__58711_1461357291"> </a>, which is the most powerful and used vocabulary for publishing details about any product and service online, in a way that facilitates their discoverability and reuse by Web agents and tools, such as search engines, mobile applications, and browsers. Closely related to GoodRelations, there is also Schema.org <a href="#__RefNumPara__58713_1461357291"> </a> which aligns and, in some cases, extends the coverage of information already provided by the former model. Even if these are not specific to the fashion design domain, they have been very useful to modelling data describing sales.</p>
+         <p>While in the fashion industry the use of Semantic Web technologies seems to be still quite preliminary, there are other fields that are actually adopting it since years with quite good outcomes. In fact, in the last years we have seen the massive creation of so-called knowledge graphs by several companies about social networks (e.g. <a href="https://developers.facebook.com/docs/graph-api">Facebook</a>), search engines (e.g. <a href="https://www.google.com/intl/es419/insidesearch/features/search/knowledge.html">Google</a>), publishers (e.g. <a href="http://lod.springer.com/">Springer Nature</a>), scholarly data (e.g. <a href="https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/">Microsoft</a>).</p>
+      </section>
+      <section id="__RefHeading__632_1461357291">
+         <h1>Conclusions</h1>
+         <p>In this paper we have presented the first outcomes of the <em>RISED</em> (<em>Refactoring Imperial Selling Data</em>) project, which is the result of a partnership between the University of Bologna and Imperial Fashion with the aim of providing a unifying model for the description of all the data stored by Imperial Fashion by means of Semantic Web technologies. The final goal of this project is to enable a unique access point for building applications such as visualisation mechanisms, interactive interfaces, and automatic analytics tools. In particular, we have developed an ontology called <em>Imperial Data Ontology </em>(<em>IDO</em>), which is currently able to describe all the data about the sales of the products coming from a plethora of different databases. The conversion of the original data into IDO has been handled by creating appropriate extensions to existing tools, in particular D2RQ, while a demonstration of use of such data by means of Semantic Web technologies has been proved by introducing some prototypical visualisation interfaces, customised starting from existing tools, that provide specific insights to address relevant question according to the Imperial Fashion needs.</p>
+         <p>As part of the future works on the project, we are currently extending IDO so as to manage exiting open data available on the Web as well as other relevant information for providing a more granular geo-localisation, such as countries, cities, city areas, so as to cluster in a more effective ways all the information about sales and customers. All these new information will be used by us, together with several departments within Imperial Fashion, so as to provide sensitive and effective interfaces for assessing trends, sales status, and other informative data which can be used for guiding the production and the communication of the Imperial Fashion products to all the possible customers worldwide. We are currently developing additional conversion modules, so as to integrate as more data as possible from all the databases that Imperial Fashion has currently available, with the goal of having a mass of big data available for running algorithms for the automatic analysis of trends and sales forecasting. Finally, we are currently collecting the requirements for the development of a visual application that would allow Imperial Fashion workers to query and make sense of selling data without having particular knowledge in the technologies used for describing such data.</p>
+      </section>
+      <section role="doc-acknowledgements">
+         <h1>Acknowledgements</h1>
+         <p>This work has been funded by the <q>CreativeLab</q> project started on June 2015 as consequence of a collaboration agreement between the University of Bologna and Imperial Fashion.</p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>References</h1>
+         <ol>
+            <li id="__RefNumPara__709_1461357291" role="doc-biblioentry">
+               <p>Berners-Lee, T., Hendler, J., Lassila, O. (2001). The Semantic Web. Scientific American. <a href="http://www.scientificamerican.com/article/the-semantic-web/">http://www.scientificamerican.com/article/the-semantic-web/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__711_1461357291" role="doc-biblioentry">
+               <p>Lehmann, J., Isele, R., Jakob, M., Jentzsch, A., Kontokostas, D., Mendes, P. N., Hellmann, S., Morsey, M., van Kleef, P., Auer, S., Bizer, C. (2015). DBpedia - A large-scale, multilingual knowledge base extracted from Wikipedia. Semantic Web 6 (2): 167–195. <a href="http://dx.doi.org/10.3233/SW-140134">https://doi.org/10.3233/SW-140134</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__713_1461357291" role="doc-biblioentry">
+               <p>Istat (2015). LinkedOpenData – Piattaforma sperimentale per i LOD dell'Istituto Nazionale di Statistica. <a href="http://datiopen.istat.it/">http://datiopen.istat.it</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__872_1461357291" role="doc-biblioentry">
+               <p>Suárez-Figueroa, M. C., Gómez-Pérez, A., Fernández-López, M. (2011). The NeOn methodology for ontology engineering. In Suárez-Figueroa, M. C., et al. (Eds.), Ontology Engineering in a Networked World: 9–34. <a href="http://dx.doi.org/10.1007/978-3-642-24794-1_2">https://doi.org/10.1007/978-3-642-24794-1_2</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__874_1461357291" role="doc-biblioentry">
+               <p>Corcho, O., Fernández-López, M., Gómez-Pérez, A., López-Cima, A. (2005). Building legal ontologies with METHONTOLOGY and WebODE. Law and the Semantic Web: 142–157. <a href="http://dx.doi.org/10.1007/978-3-540-32253-5_9">https://doi.org/10.1007/978-3-540-32253-5_9</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__876_1461357291" role="doc-biblioentry">
+               <p>Presutti, V., Daga, E., Gangemi, A., Blomqvist, E. (2009). eXtreme Design with content ontology design patterns. In Blomqvist, E., et al. (Eds), Proceedings of the Workshop on Ontology Patterns (WOP 2009). <a href="http://ceur-ws.org/Vol-516/pap21.pdf">http://ceur-ws.org/Vol-516/pap21.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__20411_1461357291" role="doc-biblioentry">
+               <p>Peroni, S. (2017). A simplified agile methodology for ontology development. In Proceedings of the 13th OWL: Experiences and Directions Workshop and 5th OWL reasoner evaluation workshop (OWLED-ORE 2016). DOI: <a href="http://doi.org/10.1007/978-3-319-54627-8_5">https://doi.org/10.1007/978-3-319-54627-8_5</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__20595_1461357291" role="doc-biblioentry">
+               <p>Motik, B., Patel-Schneider, P. F., Parsia, B. (2009). OWL 2 Web Ontology Language – Structural specification and functional-style syntax. W3C Recommendation 11 December 2012. <a href="http://www.w3.org/TR/owl2-syntax/">http://www.w3.org/TR/owl2-syntax/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__20961_1461357291" role="doc-biblioentry">
+               <p>Falco, R., Gangemi, A., Peroni, S., Vitali, F. (2014). Modelling OWL ontologies with Graffoo. In The Semantic Web: ESWC 2014 Satellite Events: 320–325. <a href="http://dx.doi.org/10.1007/978-3-319-11955-7_42">https://doi.org/10.1007/978-3-319-11955-7_42</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__20963_1461357291" role="doc-biblioentry">
+               <p>Peroni, S., Shotton, D., Vitali, F. (2012). The Live OWL Documentation Environment: a tool for the automatic generation of ontology documentation. In Proceedings of the 18<sup>th</sup> International Conference on Knowledge Engineering and Knowledge Management (EKAW 2012): 398–412. <a href="http://dx.doi.org/10.1007/978-3-642-33876-2_35">https://doi.org/10.1007/978-3-642-33876-2_35</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__21072_1461357291" role="doc-biblioentry">
+               <p>Gangemi, A., Peroni, S. (2013). DiTTO: Diagrams Transformation inTo OWL. In Proceedings of the ISWC 2013 Posters &amp; Demonstrations Track. <a href="http://ceur-ws.org/Vol-1035/iswc2013_demo_2.pdf">http://ceur-ws.org/Vol-1035/iswc2013_demo_2.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__21110_1461357291" role="doc-biblioentry">
+               <p>Knublauch, H., Horridge, M., Musen, M. A., Rector, A. L., Stevens, R., Drummond, N., … Wang, H. (2005). The Protégé OWL experience. In Proceedings of the 1<sup>st</sup> International Workshop on OWL: Experiences and Directions (OWLED 2005). <a href="http://ceur-ws.org/Vol-188/sub14.pdf">http://ceur-ws.org/Vol-188/sub14.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__58711_1461357291" role="doc-biblioentry">
+               <p>Martin, H. (2008). GoodRelations: an ontology for describing products and services offers on the Web. In Gangemi, A., et al. (Eds), Proceedings of the 16<sup>th</sup> International Conference on Knowledge Engineering and Knowledge Management (EKAW 2008): 329–346. <a href="http://dx.doi.org/10.1007/978-3-540-87696-0_29">http://dx.doi.org/10.1007/978-3-540-87696-0_29</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__58713_1461357291" role="doc-biblioentry">
+               <p>Martin, H. (2015). The Web of Data for e-commerce: Schema.org and GoodRelations for researchers and practitioners. In Cimiano, P., et al. (Eds.), Proceedings of 15<sup>th</sup> International Conference on Web Engineering (ICWE 2015): 723–727. <a href="http://dx.doi.org/10.1007/978-3-319-19890-3_66">https://doi.org/10.1007/978-3-319-19890-3_66</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__59866_1461357291" role="doc-biblioentry">
+               <p>International Federation of Library Associations and Institutions. (2009). Functional requirements for bibliographic records. Final report. <a href="http://www.ifla.org/files/assets/cataloguing/frbr/frbr_2008.pdf">http://www.ifla.org/files/assets/cataloguing/frbr/frbr_2008.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__60066_1461357291" role="doc-biblioentry">
+               <p>Daquino, M., Mambelli, F., Peroni, S., Tomasi, F., Vitali, F. (2017). Enhancing semantic expressivity in the cultural heritage domain: exposing the Zeri Photo Archive as Linked Open Data. To appear in ACM Journal on Computing and Cultural Heritage. <a href="http://arxiv.org/abs/1605.01188">http://arxiv.org/abs/1605.01188</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__60136_1461357291" role="doc-biblioentry">
+               <p>Raimond, Y., Abdallah, S. A., Sandler, M. B., Giasson, F. (2007). The Music Ontology. In Dixon, S., et al. (Eds.), Proceedings of the 8<sup>th</sup> International Conference on Music Information Retrieval (ISMIR 2007): 417–422. <a href="http://ismir2007.ismir.net/proceedings/ISMIR2007_p417_raimond.pdf">http://ismir2007.ismir.net/proceedings/ISMIR2007_p417_raimond.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__4163_226469758" role="doc-biblioentry">
+               <p>Bizer, C., Seaborne, A. (2004). D2RQ – Treating non-RDF databases as virtual RDF graphs. In Proceedings of the ISWC 2004 Poster and Demo Track. <a href="http://iswc2004.semanticweb.org/posters/PID-SMCVRKBT-1089637165.pdf">http://iswc2004.semanticweb.org/posters/PID-SMCVRKBT-1089637165.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__4882_226469758" role="doc-biblioentry">
+               <p>Cyganiak, R., Wood, D., Lanthaler, M. (2015). RDF 1.1 concepts and abstract syntax. W3C Recommendation 25 February 2014. <a href="https://www.w3.org/TR/rdf11-concepts/">https://www.w3.org/TR/rdf11-concepts/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__4884_226469758" role="doc-biblioentry">
+               <p>Harris, S., Seaborne, A. (2013). SPARQL 1.1 query language. W3C Recommendation 21 March 2013. <a href="https://www.w3.org/TR/sparql11-query/">https://www.w3.org/TR/sparql11-query/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__5222_226469758" role="doc-biblioentry">
+               <p>Prud'hommeaux, E., Carothers, G. (2014). RDF 1.1 Turtle: Terse RDF Triple Language. W3C Recommendation 25 February 2014. <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__6899_226469758" role="doc-biblioentry">
+               <p>Cyganiak, R., Bizer, C., Garbers, J., Maresch, O., Becker, C. (2012). The D2RQ mapping language. Version 0.8 – 2012-03-12. <a href="http://d2rq.org/d2rq-language">http://d2rq.org/d2rq-language</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__12560_226469758" role="doc-biblioentry">
+               <p>Skjæveland, M. G. (2015). Sgvizler: A Javascript wrapper for easy visualization of SPARQL result sets. In The Semantic Web: ESWC 2012 Satellite Events: 361–365. Heidelberg, Germany: Springer. <a href="http://dx.doi.org/10.1007/978-3-662-46641-4_27">https://doi.org/10.1007/978-3-662-46641-4_27</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__26903_1146418327" role="doc-biblioentry">
+               <p>Bostock, M., Ogievetsky, V., Heer, J. (2011). D3 Data-Driven Documents. IEEE Transactions on Visualization and Computer Graphics, 17 (12): 2301-2309. <a href="http://dx.doi.org/10.1109/TVCG.2011.185">https://doi.org/10.1109/TVCG.2011.185</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__26264_1591320820" role="doc-biblioentry">
+               <p>Schwab, K. (2016). The fourth industrial revolution. World Economic Forum. ISBN: 1944835008</p>
+            </li>
+         </ol>
+      </section>
+      <section role="doc-endnotes">
+         <section id="ftn1" role="doc-endnote">
+            <p>
+               <q>Made in Italy</q> means that the whole workflow production of a fashion product happens entirely in Italy.</p>
+         </section>
+         <section id="ftn2" role="doc-endnote">
+            <p>In this context, with <q>real-time data</q> we intend that, due to the nature of the Imperial Fashion selling framework, every time an item is sold in any distribution platform and according to any sales channel, new rows are added in the appropriate databases. As a rough estimate, Imperial Fashion counts hundreds of transactions per minute, that result in a continuous update of the databases.</p>
+         </section>
+         <section id="ftn3" role="doc-endnote">
+            <p>If one is running the first iteration of SAMOD, the modelet becomes the current model, since no model was available in the past.</p>
+         </section>
+         <section id="ftn4" role="doc-endnote">
+            <p>The inverse relation are symmetric, and this characteristic comes with complex mechanisms related to the equivalence between domain and range classes of the properties involved that we wanted to avoid.</p>
+         </section>
+         <section id="ftn5" role="doc-endnote">
+            <p>For instance, the Italian National Institute of Statistics (ISTAT) makes already available at <a href="http://datiopen.istat.it/index.php?language=eng">http://datiopen.istat.it/index.php?language=eng</a> demographic data about Italian population as Linked Open Data, which can be also queried through a SPARQL endpoint.</p>
+         </section>
+         <section id="ftn6" role="doc-endnote">
+            <p>Please note that no assessment is performed by DIMM so as to understand whether the module follows the D2RQ specification.</p>
+         </section>
+      </section>
+   </body>
+</html>
