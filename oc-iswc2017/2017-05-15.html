@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="../css/rash.css"/>
+      <script src="../js/jquery.min.js"> </script>
+      <script src="../js/bootstrap.min.js"> </script>
+      <script src="../js/rash.js"> </script>
+      
+      <title>One year of the OpenCitations Corpus -- Releasing RDF-based scholarly citation data into the Public Domain</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-2"
+            property="schema:name"
+            content="Oxford e-Research Centre, University of Oxford, Oxford, UK"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="David Shotton"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="david.shotton@oerc.ox.ac.uk"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-3"
+            name="dc.creator"
+            property="schema:name"
+            content="Fabio Vitali"/>
+      <meta about="#author-3"
+            property="schema:email"
+            content="fabio.vitali@unibo.it"/>
+      <link about="#author-3"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta property="prism:keyword" content="OpenCitations"/>
+      <meta property="prism:keyword" content="OpenCitations Corpus"/>
+      <meta property="prism:keyword" content="SPAR Ontologies"/>
+      <meta property="prism:keyword" content="OCC"/>
+      <meta property="prism:keyword" content="Open Citation Data"/>
+      <meta property="prism:keyword" content="Public Domain"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>Abstract</h1>
+         <p>Reference lists from academic articles are core elements of scholarly communication that permit the attribution of credit and integrate our independent research endeavours. Hitherto, however, they have not been freely available in an appropriate machine-readable format such as RDF and in aggregate for use by scholars. To address this issue, one year ago we started ingesting citation data from the Open Access literature into the OpenCitations Corpus (OCC), creating an RDF dataset of scholarly citation data that is open to all. In this paper we introduce the OCC and we discuss its outcomes and uses after the first year of life.</p>
+         <p><strong>Notes:</strong> preprint submitted to the Resource Track of the <a href="https://iswc2017.semanticweb.org">16th International Semantic Web Conference</a>.</p>
+         <p><strong>This version:</strong> <a href="https://w3id.org/people/essepuntato/oc-iswc2017/2017-05-15.html">https://w3id.org/people/essepuntato/oc-iswc2017/2017-05-15.html</a></p>
+         <p><strong>Last version:</strong> <a href="https://w3id.org/people/essepuntato/oc-iswc2017.html">https://w3id.org/people/essepuntato/oc-iswc2017.html</a></p>
+      </section>
+      <section>
+         <h1>Introduction</h1>
+         <p>The availability of open citation data has been recently recognised as an important objective for the scholarly community at large. One of the most important movements in this direction has been the recently launched Initiative for Open Citations (I4OC, <a href="https://i4oc.org/">https://i4oc.org</a>). The premise of this initiative has been the fact that, while citations are unanimously recognised as crucial for knitting together our scientific and cultural knowledge, regrettably they are mostly not freely accessible. Rather, the best citation databases charge high subscription rates, and are oriented towards human readability rather than machine readability and data re-use. In response to this situation, I4OC has established a collaboration between scholarly publishers, researchers, and other interested parties to promote the unrestricted availability of scholarly citation data, initially by encouraging scholarly publishers to make open the article reference lists they already deposit to Crossref. This initiative has achieved massive initial success, with almost all the major scientific publishers now opening their reference lists in this way.</p>
+         <p>Among the I4OC founders, one specific organization, OpenCitations <a href="#__RefNumPara__116132_1209124841"> </a> 
+            <a href="#__RefNumPara__112759_1209124841"> </a>, has the objective of employing Semantic Web technologies to create an open repository of the citation data that publishers have made available. In this paper, we introduce the main service developed by that organization, namely the OpenCitations Corpus (OCC), an open repository of RDF-based scholarly citation data, made freely available so that others may use and build upon them. All the resources published by OpenCitations – namely the data within the OCC, the ontologies describing the data, and the software developed to build the OCC – are available to the public with open licenses. In particular, the OCC strictly follows the FAIR principles for data-intensive science, namely that the data should be findable, accessible, interoperable, and re-usable <a href="#__RefNumPara__114299_1209124841"> </a>, and employs the three basic criteria promoted by I4OC, namely that the citation data must be structured, separable, and open (<a href="https://i4oc.org/#goals">https://i4oc.org/#goals</a>).</p>
+         <p>The rest of this paper is structured as follows. In <a href="#__RefHeading__115394_1209124841"> </a>, we introduce some of the most important related works in the area. In <a href="#__RefHeading__115396_1209124841"> </a>, we briefly introduce the models and tools used to create the OCC, explain which data it contains, and summarize the nature of the services used for the automatic ingestion of citation data. In <a href="#__RefHeading__115398_1209124841"> </a>, we present descriptive statistics about the OpenCitations Corpus almost one year since its launch, to show its impact to the scholarly community at large. Finally, in <a href="#__RefHeading__115400_1209124841"> </a>, we summarize and outline future developments.</p>
+      </section>
+      <section id="__RefHeading__115394_1209124841">
+         <h1>Related Works</h1>
+         <p>In recent years we have seen a growing interest within the Semantic Web community for creating and making available RDF datasets concerning the bibliographic metadata of scholarly documents.</p>
+         <p>Semantic Lancet <a href="#__RefNumPara__1015_869913257"> </a> aims at building a Linked Open Data (LOD) dataset of scholarly publication metadata starting from articles published by Elsevier. In particular, the current dataset contains SPAR-based <a href="#__RefNumPara__1017_869913257"> </a> metadata about several papers published in theJournal of Web Semantics, including citation links marked with the motivations justifying them using <a href="http://purl.org/spar/cito">CiTO properties</a>.</p>
+         <p>
+            <a href="https://meta.wikimedia.org/wiki/WikiCite">WikiCite</a> is a proposal, with a related series of workshops, which aims at building a bibliographic database in Wikidata to serve all Wikimedia projects. As of 30 April 2017, Wikidata contains around three million citation links between bibliographic resources.</p>
+         <p>The <a href="http://www.springernature.com/scigraph">Springer Nature SciGraph</a> is a new (LOD) platform aggregating data sources from Springer Nature and other partners, and it contains data about funders, research projects, conferences, affiliations and publications.</p>
+         <p>Springer LOD <a href="#__RefNumPara__1019_869913257"> </a> is an RDF dataset made available by Springer Nature that publishes Springer metadata about conferences as LOD. Its main focus is on proceedings volumes and the related conferences, but it does not contain metadata describing the individual articles within such proceedings.</p>
+         <p>OpenAIRE <a href="#__RefNumPara__1021_869913257"> </a> is an Horizon 2020 open data project which publishes metadata of more than 14 millions of publications and thousands of datasets, but does not include their citations. It makes available a mechanism for searching, discovering and monitoring scientific outputs.</p>
+         <p>Finally, Scholarly Data <a href="#__RefNumPara__1023_869913257"> </a> is a project that refactors the Semantic Web Dog Food so as to keep the dataset growing in good health, and that has adopted the new ontology (aligned with other existing models, including the SPAR Ontologies <a href="#__RefNumPara__1017_869913257"> </a>), for describing the data.</p>
+      </section>
+      <section id="__RefHeading__115396_1209124841">
+         <h1>Building the OpenCitations Corpus</h1>
+         <p>OpenCitations (<a href="http://opencitations.net/">http://opencitations.net</a>) <a href="#__RefNumPara__112759_1209124841"> </a> formally started in 2010 as a one-year Open Citations Project at the University of Oxford, that was funded by <a href="http://www.jisc.ac.uk/whatwedo/programmes/inf11/jiscexpo/jiscopencitation.aspx">JISC</a> and subsequently extended for an additional half year. The main goal of the project was the creation of a collection of open citation data called the OpenCitations Corpus (OCC), harvested from the open access literature in PubMed Central and made available in RDF. To our knowledge, it was the first RDF-based dataset of open citation data. At the end of 2015, a formal collaboration between the University of Oxford and the University of Bologna was initiated to build from that initial Oxford prototype by setting up a new instantiation of the OCC based on a revised metadata schema and employing several new technologies to automate the daily ingestion of fresh citation metadata from authoritative sources. The OCC is now the largest truly open collection of RDF-based citation data available on the Web.</p>
+         <p>This new instantiation of the OCC holds accurate scholarly citation data derived from bibliographic references harvested from the scholarly literature, and makes them available under a <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode">Creative Commons public domain dedication (CC0)</a>. These are described using the SPAR Ontologies <a href="#__RefNumPara__1017_869913257"> </a> and other standard vocabularies according to the OCC metadata document <a href="#__RefNumPara__1199_869913257"> </a> that is briefly summarized in <a href="#refIllustration0"> </a>, and are implemented by means of the OpenCitations Ontology (OCO, <a href="https://w3id.org/oc/ontology">https://w3id.org/oc/ontology</a>). OCO is not yet another bibliographic ontology, but rather simply a mechanism for grouping together existing complementary ontological entities from several other ontologies, for the purpose of providing descriptive metadata for the OCC all in one place. Specifically, it provides a way to describe the citing/cited bibliographic resources (conference papers, book chapters, journal articles, etc.) and their containers (academic proceedings, books, journals, etc.), the formats in which they have been embodied (digital vs. print, first and ending pages, etc.), the roles of relevant bibliographic agents (author, editor, publisher, etc.) related to the bibliographic resources, the textual content of each reference in the reference list of a citing bibliographic resource, all the identifiers (e.g. DOI, PubMed ID, PubMed Central ID, ORCID, ISSN, etc.) for the bibliographic resources and the agents involved, and the names of those agents such as their given and family names. A detailed description of the whole model is given in <a href="#__RefNumPara__1485_869913257"> </a>.</p>
+         <figure id="refIllustration0">
+            <p>
+               <img src="img-2017-05-15/10000201000009B6000004B42B6F6820.png"
+                    alt="No alternate description has been provided."/>
+            </p>
+            <figcaption>The Graffoo diagram <a href="#__RefNumPara__2074_869913257"> </a>of the main ontological entities described by the OCC metadata model – all the prefix declarations are defined in OCO.</figcaption>
+         </figure>
+         <p>The OCC stores all the aforementioned metadata in RDF. The corpus URL (<a href="https://w3id.org/oc/corpus/">https://w3id.org/oc/corpus/</a>) identifies the entire OCC, which is composed of several sub-datasets, one for each of following kinds of bibliographic entities included in the corpus: bibliographic resources (<q>br</q>, identified by the class <code>fabio:Expression</code>), resource embodiments (<q>re</q>, class <code>fabio:Manifestation</code>), bibliographic entries (<q>be</q>, class <code>fabio:BibliographicReference</code>), responsible agents (<q>ra</q>, class <code>foaf:Agent</code>), agent roles (<q>ar</q>, class <code>pro:RoleInTime</code>), and identifiers (<q>id</q>, class <code>datacite:Identifier</code>). Each of these has a URL composed by suffixing the corpus URL with the two-letter short name for the class of entity (e.g. <q>be</q> for a bibliographic entry) followed by an oblique slash (e.g. <a href="https://w3id.org/oc/corpus/be/">https://w3id.org/oc/corpus/be/</a>). Each dataset is described appropriately by means of the <a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary</a> and the <a href="https://www.w3.org/TR/void/">VoID Vocabulary</a>.</p>
+         <p>The ingestion of new data into the OCC is curated by two Python scripts, the <em>Bibliographic Entries Extractor</em>, a.k.a. <em>BEE</em>, and the <em>SPAR Citation Indexer</em>, a.k.a. <em>SPACIN.</em> Both of these are available on the OpenCitations GitHub repository (<a href="https://github.com/essepuntato/opencitations">https://github.com/essepuntato/opencitations</a>) and are released as open source code according to the <a href="https://opensource.org/licenses/ISC">ISC Licence</a>. BEE is responsible for the creation of JSON files<a href="#ftn1"> </a> containing reference lists from articles in the OA subset of PubMed Central (retrieved by using the <a href="https://europepmc.org/RestfulWebService">Europe PubMed Central API</a>). SPACIN processes each JSON file created by BEE, retrieves additional metadata information about all the citing/cited articles described in it by querying the <a href="https://api.crossref.org/">Crossref API</a> and the <a href="http://members.orcid.org/api/">ORCID API</a>, and finally stores all the data in the OCC triplestore, which is a Blazegraph instance that makes available a SPARQL endpoint with the full text search enabled for all the entities included in the entire OCC.</p>
+         <p>Upon initial curation into the OCC, a URL is assigned to each entity within each sub-dataset, which via content negotiation can be accessed in different formats (HTML, RDF/XML, Turtle, and JSON-LD). Each entity URL is composed by suffixing the sub-dataset URL with a number assigned to each resource, unique among resources of the same type, which increments for each new entry added to that resource class. For instance, the resource <a href="https://w3id.org/oc/corpus/be/537">https://w3id.org/oc/corpus/be/537</a> is the 537<sup>th</sup> bibliographic entry recorded within the OCC. Each of these entities has associated metadata describing its provenance using <a href="https://www.w3.org/TR/prov-o/">PROV-O</a> and its <a href="https://www.w3.org/TR/prov-dc/">PROV-DC extension</a> (e.g. <a href="https://w3id.org/oc/corpus/be/537/prov/se/1">https://w3id.org/oc/corpus/be/537/prov/se/1</a>). In particular, we keep track of the curatorial activities related to each OCC entity, the curatorial agents involved, and their roles, as described in <a href="#__RefNumPara__2012_869913257"> </a>.</p>
+         <p>In addition to being accessible via a SPARQL interface, all the OCC data are also made available as data dumps, which are created monthly and <a href="https://figshare.com/authors/OpenCitations_Project/3068259">are stored online by means of the support of Figshare</a>. Each dump is composed of several zip archives, each containing either data or provenance information, stored in JSON-LD, relating to a particular sub-dataset within the OCC. In addition, one of these archives includes the whole triplestore for easy reuse (e.g. the April 2017 dump of the entire OCC triplestore – approx. 16 Gbytes of zipped data – is available at <a href="#__RefNumPara__112517_1209124841"> </a>). As introduced by an appropriate README file included in each archive, after unzipping it, one needs to use Disk ARchive (DAR) – a multi-platform archive tool for managing huge amounts of data – to recreate the entire OCC structure.</p>
+      </section>
+      <section id="__RefHeading__115398_1209124841">
+         <h1>Community uptake and statistics</h1>
+         <p>The intended goal of the new instantiation of the OCC, which started data acquisition in early July 2016, was to ingest around five hundred thousand new citation links per month, so as to reach the goal of six million citation links after one year of processing, as anticipated in <a href="#__RefNumPara__1485_869913257"> </a>. As of 15 May 2017, the OCC has ingested the references from one hundred and fifty thousand citing bibliographic resources, and it contains information about six million and half citation links to more than four million cited resources – thus achieving our original goal in only ten months. Since May 2016, the OpenCitations website has been accessed more than five hundred and forty thousands times<a href="#ftn2"> </a> (as of 8 May 2017) by users from several countries (identified by IP address of the request), as shown in <a href="#refIllustration1"> </a>. It is worth mentioning that the pages related to the data available and the services for querying them (i.e. <q>corpus</q> and <q>sparql</q> portions of the right-most pie chart in <a href="#refIllustration1"> </a>) have together gained a very high percentage of the overall accesses (i.e. 88%), showing that the main reason people access the OpenCitations website is to explore and use the data in the OCC. These statistics provide clear evidence of the interest that the scholarly communication community is showing in OpenCitations.</p>
+         <figure id="refIllustration1">
+            <p>
+               <img src="img-2017-05-15/10000201000007EA0000020052B1A49A.png"
+                    alt="No alternate description has been provided."/>
+            </p>
+            <figcaption>The page accesses the OpenCitations website has received in the past year, grouped by month, by country, and by each of the nine OC website pages, as of 8 May 2017.</figcaption>
+         </figure>
+         <p>In <a href="#refIllustration2"> </a>, we show the statistics (as of 8 May 2017) concerning the OCC data dumps that have been made available on Figshare. With the exception of the first dump we released September 24, 2016, where the archive containing the entire triplestore has been downloaded over 2,500 times (probably by several software agents via the Figshare APIs), the absolute numbers of downloads show an increasing trend with time, while the percentage of the users visiting the OCC data dumps on Figshare who also download the datasets is also increasing for the most recent dumps. </p>
+         <figure id="refIllustration2">
+            <p>
+               <img src="img-2017-05-15/10000201000004E000000102D0AB0FCD.png"
+                    alt="No alternate description has been provided."/>
+            </p>
+            <figcaption>The number of times the OCC data dumps released on Figshare have been visited and downloaded (as of 8 May 2017). The low numbers for the April 26, 2017 dump is because only twelve days had elapsed since data deposit when the counts were made. Note that dumps were not made in November 2016, nor in January, February and March 2017, for technical reasons that have now been resolved.</figcaption>
+         </figure>
+         <p>We have also analysed the statistics related to the OpenCitations social web resources, namely the OpenCitations Twitter account (<a href="https://twitter.com/opencitations">https://twitter.com/opencitations</a>) and the OpenCitations Blog on Wordpress (<a href="https://opencitations.wordpress.com/">https://opencitations.wordpress.com</a>). As shown in <a href="#refIllustration3"> </a>, there is a clear increase in usage following the 6 April 2017 launch of the Initiative for Open Citations, of which OpenCitations is a founding member.</p>
+         <figure id="refIllustration3">
+            <p>
+               <img src="img-2017-05-15/10000201000007F800000226C966FA13.png"
+                    alt="No alternate description has been provided."/>
+            </p>
+            <figcaption>The number of interactions that the OpenCitations social media accounts have had over the past year.</figcaption>
+         </figure>
+         <p>In addition to the aforementioned evidences of interest in OpenCitations within the global scholarly community, the citation data provided by the OCC are being used by a number of independent international projects, among which areWikidata,OpenAIRE, and <a href="https://locdb.bib.uni-mannheim.de/">LOC-DB</a>. In particular, the first includes the property <a href="https://www.wikidata.org/wiki/Property:P3181">OpenCitations bibliographic resource ID</a> when linking Wikidata resources to those included in the OCC; the second is in the process of re-publishing within their database all the article metadata included in the December 2016 dump of the OCC; while the third is using the OpenCitations data model <a href="#__RefNumPara__1199_869913257"> </a> for modelling their citation data. This demonstrates reuse by those projects of the metadata structures developed for OpenCitations and the citation data produced by the OpenCitations ingestion workflow. It is worth mentioning that the OCC resources have been made available and accessible in different ways, so as to facilitate their reuse in different contexts: as monthly dumps (<a href="http://opencitations.net/download">http://opencitations.net/download</a>), via the (<a href="https://w3id.org/oc/sparql">https://w3id.org/oc/sparql</a>), and by accessing them directly by means of the HTTP URIs of the stored resources (via content negotiation, e.g. <a href="https://w3id.org/oc/corpus/br/1">https://w3id.org/oc/corpus/br/1</a>). </p>
+         <p>The data collected by the new instantiation of the OCC since its start in July 2016, and now available via the most recent dump made on 26 April 2017, are summarized in <a href="#refTable0"> </a>.</p>
+         <figure id="refTable0">
+            <table>
+               <tr>
+                  <th>Entity type</th>
+                  <th>Number of entities in the OCC</th>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Bibliographic resource (br)</p>
+                  </td>
+                  <td>
+                     <p>5.4 millions</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Resource embodiment (re)</p>
+                  </td>
+                  <td>
+                     <p>3.1 millions</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Bibliographic entries (be)</p>
+                  </td>
+                  <td>
+                     <p>6.5 millions</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Responsible agents (ra)</p>
+                  </td>
+                  <td>
+                     <p>16.7 millions</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Agent roles (ar)</p>
+                  </td>
+                  <td>
+                     <p>21.2 millions</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p>Identifiers (id)</p>
+                  </td>
+                  <td>
+                     <p>11 millions</p>
+                  </td>
+               </tr>
+            </table>
+            <figcaption>The number of different bibliographic entity types presently described within the most recent OCC dump made on 26 April 2017.</figcaption>
+         </figure>
+      </section>
+      <section id="__RefHeading__115400_1209124841">
+         <h1>Conclusions</h1>
+         <p>In this paper we have introduced the OpenCitations Corpus (OCC), which is an open repository of RDF-based scholarly citation data. All the data included in the OCC are made available under a Creative Commons CC0 Public Domain dedication, while the other resources used for building the OCC (software, documentation, etc.) are also made available to the public with appropriate open licenses. The initial sustainability of this new instantiation of the OCC was made possible using the IT services of the Department of Computer Science and Engineering of the University of Bologna, to whom we are most grateful. We have now received funding from the <a href="https://sloan.org/">Alfred P. Sloan Foundation</a>, which will enable us substantially to extend the current infrastructure and the rate of data ingest. Our immediate goal is to increment the daily ingestion of citation data from half a million citations per month to half a million <strong>
+               <em>per day</em>
+            </strong>. In addition, we plan to develop new user interfaces that will expand the means whereby users can interact with the OpenCitations data.</p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>References</h1>
+         <ol>
+            <li id="__RefNumPara__1015_869913257" role="doc-biblioentry">
+               <p>Bagnacani, A., Ciancarini, P., Di Iorio, A., Nuzzolese, A. G., Peroni, S., Vitali, F. (2014). The Semantic Lancet Project: A Linked Open Dataset for Scholarly Publishing. In EKAW 2014 Satellite Events: 101–105. <a href="http://dx.doi.org/10.1007/978-3-319-17966-7_10">https://doi.org/10.1007/978-3-319-17966-7_10</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1021_869913257" role="doc-biblioentry">
+               <p>Alexiou, G., Vahdati, S., Lange, C., Papastefanatos G., Lohmann, S. (2016). OpenAIRE LOD services: Scholarly Communication Data as Linked Data. Proceedings of SAVE-SD 2016: 45–50. <a href="https://doi.org/10.1007/978-3-319-53637-8_6">https://doi.org/10.1007/978-3-319-53637-8_6</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1199_869913257" role="doc-biblioentry">
+               <p>Peroni, S., Shotton, D. (2016). Metadata for the OpenCitations Corpus. Figshare. <a href="https://dx.doi.org/10.6084/m9.figshare.3443876">https://doi.org/10.6084/m9.figshare.3443876</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__112759_1209124841" role="doc-biblioentry">
+               <p>Peroni, S., Dutton, A., Gray, T., Shotton, D. (2015). Setting our bibliographic references free: towards open citation data. Journal of Documentation, 71 (2): 253–277. <a href="http://dx.doi.org/10.1108/JD-12-2013-0166">https://doi.org/10.1108/JD-12-2013-0166</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1017_869913257" role="doc-biblioentry">
+               <p>Peroni, S. (2014). The Semantic Publishing and Referencing Ontologies. In Semantic Web Technologies and Legal Scholarly Publishing: 121–193. <a href="https://doi.org/10.1007/978-3-319-04777-5_5">https://doi.org/10.1007/978-3-319-04777-5_5</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1023_869913257" role="doc-biblioentry">
+               <p>Nuzzolese, A. G., Gentile, A. L., Presutti, V., Gangemi, A. (2016). Conference Linked Data: The ScholarlyData Project. In Proceedings of ISWC 2016: 150–158. DOI: <a href="https://doi.org/10.1007/978-3-319-46547-0_16">https://doi.org/10.1007/978-3-319-46547-0_16</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1019_869913257" role="doc-biblioentry">
+               <p>Bryl, V., Birukou, A., Eckert, K., Kessler, M. (2014). What's in the proceedings? Combining publisher's and researcher's perspectives. In Proceedings of SePublica 2014. <a href="http://ceur-ws.org/Vol-1155/paper-01.pdf">http://ceur-ws.org/Vol-1155/paper-01.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__116132_1209124841" role="doc-biblioentry">
+               <p>Shotton, D. (2013). Open Citations. Nature, 502 (7471): 295–297. <a href="http://dx.doi.org/10.1038/502295a">https://doi.org/10.1038/502295a</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__2074_869913257" role="doc-biblioentry">
+               <p>Falco, R., Gangemi, A., Peroni, S., Vitali, F. (2014). Modelling OWL ontologies with Graffoo. In The Semantic Web: ESWC 2014 Satellite Events: 320–325. <a href="http://dx.doi.org/10.1007/978-3-319-11955-7_42">https://doi.org/10.1007/978-3-319-11955-7_42</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1485_869913257" role="doc-biblioentry">
+               <p>Peroni, S., Shotton, D., Vitali, F. (2016). Freedom for bibliographic references: OpenCitations arise. In Proceedings of LD4IE 2016: 32–43. <a href="http://ceur-ws.org/Vol-1699/paper-05.pdf">http://ceur-ws.org/Vol-1699/paper-05.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__2012_869913257" role="doc-biblioentry">
+               <p>Peroni, S., Shotton, D., Vitali, F. (2016). A document-inspired way for tracking changes of RDF data – The case of the OpenCitations Corpus. In Proceedings of Drift-a-LOD 2016: 26–33. <a href="http://ceur-ws.org/Vol-1799/Drift-a-LOD2016_paper_4.pdf">http://ceur-ws.org/Vol-1799/Drift-a-LOD2016_paper_4.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__112517_1209124841" role="doc-biblioentry">
+               <p>OpenCitations (2017). The entire OCC triplestore data dump, made on April 26, 2017. figshare. DOI: <a href="https://doi.org/10.6084/m9.figshare.4959869">https://doi.org/10.6084/m9.figshare.4959869</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__114299_1209124841" role="doc-biblioentry">
+               <p>Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., Appleton, G., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data 3. DOI: <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a> 
+               </p>
+            </li>
+         </ol>
+      </section>
+      <section role="doc-endnotes">
+         <section id="ftn1" role="doc-endnote">
+            <p>An example of these JSON files is introduced at <a href="http://opencitations.net/corpus">http://opencitations.net/corpus</a>. </p>
+         </section>
+         <section id="ftn2" role="doc-endnote">
+            <p>We have excluded from this list the hits done by well-known spiders and crawlers – e.g. Google crawlers.</p>
+         </section>
+      </section>
+   </body>
+</html>
