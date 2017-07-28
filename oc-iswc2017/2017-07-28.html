@@ -4,11 +4,11 @@
    <head>
       <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
-      <link rel="stylesheet" href="css/bootstrap.min.css"/>
-      <link rel="stylesheet" href="css/rash.css"/>
-      <script src="js/jquery.min.js"> </script>
-      <script src="js/bootstrap.min.js"> </script>
-      <script src="js/rash.js"> </script>
+      <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="../css/rash.css"/>
+      <script src="../js/jquery.min.js"> </script>
+      <script src="../js/bootstrap.min.js"> </script>
+      <script src="../js/rash.js"> </script>
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
       <title>One year of the OpenCitations Corpus -- Releasing RDF-based scholarly citation data into the Public Domain</title>
       <meta about="#affiliation-1"
@@ -86,7 +86,7 @@
          <p>This new instantiation of the OCC holds accurate scholarly citation data derived from bibliographic references harvested from the scholarly literature, and makes them available under a <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode">Creative Commons public domain dedication (CC0)</a>. These are described using the SPAR Ontologies <a href="#__RefNumPara__1017_869913257"> </a> and other standard vocabularies according to the OCC metadata document <a href="#__RefNumPara__1199_869913257"> </a> that is briefly summarized in <a href="#refIllustration0"> </a>, and are implemented by means of the OpenCitations Ontology (OCO, <a href="https://w3id.org/oc/ontology">https://w3id.org/oc/ontology</a>). OCO is not yet another bibliographic ontology, but rather simply a mechanism for grouping together existing complementary ontological entities from several other ontologies, for the purpose of providing descriptive metadata for the OCC all in one place. Specifically, it provides a way to describe the citing/cited bibliographic resources (conference papers, book chapters, journal articles, etc.) and their containers (academic proceedings, books, journals, etc.), the formats in which they have been embodied (digital vs. print, first and ending pages, etc.), the roles of relevant bibliographic agents (author, editor, publisher, etc.) related to the bibliographic resources, the textual content of each reference in the reference list of a citing bibliographic resource, all the identifiers (e.g. DOI, PubMed ID, PubMed Central ID, ORCID, ISSN, etc.) for the bibliographic resources and the agents involved, and the names of those agents such as their given and family names. A detailed description of the whole model is given in <a href="#__RefNumPara__1485_869913257"> </a>.</p>
          <figure id="refIllustration0">
             <p>
-               <img src="img/10000201000009B6000004B42B6F6820.png"
+               <img src="img-2017-07-28/10000201000009B6000004B42B6F6820.png"
                     alt="No alternate description has been provided."/>
             </p>
             <figcaption>The Graffoo diagram <a href="#__RefNumPara__2074_869913257"> </a>of the main ontological entities described by the OCC metadata model – all the prefix declarations are defined in OCO.</figcaption>
@@ -101,7 +101,7 @@
          <p>The intended goal of the new instantiation of the OCC, which started data acquisition in early July 2016, was to ingest around five hundred thousand new citation links per month, so as to reach the goal of 6,000,000 citation links after one year of processing, as anticipated in <a href="#__RefNumPara__1485_869913257"> </a>. As of 15 May 2017, the OCC has ingested the references from 150,000 citing bibliographic resources, and it contains information about 6,500,000 citation links to more than 4,000,000 cited resources – thus achieving our original goal in only ten months. Since May 2016, the OpenCitations website has been accessed more than 540,000 times<a href="#ftn2"> </a> (as of 8 May 2017) by users from several countries (identified by IP address of the request), as shown in <a href="#refIllustration1"> </a>. It is worth mentioning that the pages related to the data available and the services for querying them (i.e. <q>corpus</q> and <q>sparql</q> portions of the right-most pie chart in <a href="#refIllustration1"> </a>) have together gained a very high percentage of the overall accesses (i.e. 88%), showing that the main reason people access the OpenCitations website is to explore and use the data in the OCC. These statistics provide clear evidence of the interest that the scholarly communication community is showing in OpenCitations.</p>
          <figure id="refIllustration1">
             <p>
-               <img src="img/10000201000007EA0000020052B1A49A.png"
+               <img src="img-2017-07-28/10000201000007EA0000020052B1A49A.png"
                     alt="No alternate description has been provided."/>
             </p>
             <figcaption>The page accesses the OpenCitations website has received in the past year, grouped by month, by country, and by each of the nine OC website pages, as of 8 May 2017.</figcaption>
@@ -109,7 +109,7 @@
          <p>In <a href="#refIllustration2"> </a>, we show the statistics (as of 8 May 2017) concerning the OCC data dumps that have been made available on Figshare. With the exception of the first dump we released on 24 September 2016, where the archive containing the entire triplestore has been downloaded over 2,500 times (probably by several software agents via the Figshare APIs), the absolute numbers of downloads show an increasing trend with time, while the percentage of the users visiting the OCC data dumps on Figshare who also download the datasets is also increasing for the most recent dumps. </p>
          <figure id="refIllustration2">
             <p>
-               <img src="img/10000201000004D8000000FE9965C9DD.png"
+               <img src="img-2017-07-28/10000201000004D8000000FE9965C9DD.png"
                     alt="The number of times the OCC data dumps released on Figshare have been visited and downloaded (as of 8 May 2017). The low numbers for the 26 April 2017 dump is because only twelve days had elapsed since data deposit when the counts were made. Note that dumps were not made in November 2016, nor in January, February and March 2017, for technical reasons that have now been resolved."/>
             </p>
             <figcaption>The number of times the OCC data dumps released on Figshare have been visited and downloaded (as of 8 May 2017). The low numbers for the 26 April 2017 dump is because only twelve days had elapsed since data deposit when the counts were made. Note that dumps were not made in November 2016, nor in January, February and March 2017, for technical reasons that have now been resolved.</figcaption>
@@ -117,7 +117,7 @@
          <p>We have also analysed the statistics related to the OpenCitations social web resources, namely the OpenCitations Twitter account (<a href="https://twitter.com/opencitations">https://twitter.com/opencitations</a>) and the OpenCitations Blog on Wordpress (<a href="https://opencitations.wordpress.com/">https://opencitations.wordpress.com</a>). As shown in <a href="#refIllustration3"> </a>, there is a clear increase in usage following the 6 April 2017 launch of the Initiative for Open Citations, of which OpenCitations is a founding member.</p>
          <figure id="refIllustration3">
             <p>
-               <img src="img/10000201000007F800000226C966FA13.png"
+               <img src="img-2017-07-28/10000201000007F800000226C966FA13.png"
                     alt="No alternate description has been provided."/>
             </p>
             <figcaption>The number of interactions that the OpenCitations social media accounts have had over the past year.</figcaption>

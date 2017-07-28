@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/rash.css"/>
+      <script src="js/jquery.min.js"> </script>
+      <script src="js/bootstrap.min.js"> </script>
+      <script src="js/rash.js"> </script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+      <title>UNDO: the United Nations System Document Ontology</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-2"
+            property="schema:name"
+            content="CIRSFID, University of Bologna, Bologna, Italy"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="Monica Palmirani"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="monica.palmirani@unibo.it"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta about="#author-3"
+            name="dc.creator"
+            property="schema:name"
+            content="Fabio Vitali"/>
+      <meta about="#author-3"
+            property="schema:email"
+            content="fabio.vitali@unibo.it"/>
+      <link about="#author-3"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta property="prism:keyword" content="Akoma Ntoso"/>
+      <meta property="prism:keyword" content="Parliamentary documents"/>
+      <meta property="prism:keyword" content="Normative documents"/>
+      <meta property="prism:keyword" content="Judicial documents"/>
+      <meta property="prism:keyword" content="United Nations"/>
+      <meta property="prism:keyword" content="UNDO"/>
+      <meta property="prism:keyword" content="OWL 2 DL"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>Abstract</h1>
+         <p>Akoma Ntoso is an OASIS Committee Specification Draft standard for the electronic representations of parliamentary, normative and judicial documents in XML. Recently, it has been officially adopted by the United Nations (UN) as the main electronic format for making UN documents machine-processable. However, Akoma Ntoso does not force nor define any formal ontology for allowing the description of real-world objects, concepts and relations mentioned in documents. In order to address this gap, in this paper we introduce the United Nations System Document Ontology (UNDO), i.e. an OWL 2 DL ontology developed and adopted by the United Nations that aims at providing a framework for the formal description of all these entities.</p>
+      </section>
+      <section>
+         <h1>Introduction</h1>
+         <p>The parliamentary, normative and judicial documents published by the United Nations System of organizations are full of references to real-world objects and concepts, such as other documents, people, organizations, legal terms, roles and deliberation steps. The United Nations has recently started to adopt Akoma Ntoso <a href="#__RefNumPara__1307_84971660"> </a>, an XML language that is in the process of becoming an OASIS standard, for providing an electronic representations of all UN Documents and the entities they contain. While it is not defined formally, Akoma Ntoso introduce a sort of informal ontological structure for all the entities it allows one to describe, according to two kinds of classes:</p>
+         <ul>
+            <li>
+               <p>document classes focus on representing the different aspects of a document as intellectual creation, the forms (versions, translations, etc.), its physical embodiment (e.g. PDF, XML, HTML, paper, etc.);</p>
+            </li>
+            <li>
+               <p>non-document classes focus on representing the responsible for the production of the content and what the content is about (e.g. concept, object, event, locations, roles, deliberation steps, etc.).</p>
+            </li>
+         </ul>
+         <p>While the informal definition of document classes is based on the Functional Requirements for Bibliographic Records (FRBR) standard <a href="#__RefNumPara__1303_84971660"> </a> of the International Federation of Library Associations (IFLA), in the Akoma Ntoso specification there is no explicit mention of a possible adoption of a certain model for addressing the description of non-document entities.</p>
+         <p>As one of the outcomes of the work that the High-Level Committee on Management (HLCM) Working Group on Document Standards of the United Nations has done in the past year, in this paper we introduce the United Nations System Document Ontology (UNDO), i.e. an OWL 2 DL ontology developed and adopted by the United Nations that aims at providing a framework for the formal description of all entities and the relations that can exist among them in UN Documents. The idea behind the development of this model is to have a mechanism for sharing data about any legal/legislative/parliamentary document and its content in RDF format in an interchangeable way and, eventually, to allow the various agencies of the United Nations to extend it so as to meet their own domain specific requirements. In addition, UNDO follows the FAIR principles: it is identified with a w3id.org persistent identifier, it has been made available in different formats accessible by means of the classic content negotiation mechanism, it reuses several existing ontologies so as to increase interoperability, and it has been made available with a CC-BY license for enabling its reuse.</p>
+         <p>The rest of the document is organized as follows. In <a href="#__RefHeading__2_84971660"> </a> we introduce all the methods and existing models that have been adopted and reuse for the development of UNDO. In <a href="#__RefHeading__4_84971660"> </a> we provide a brief introduction of UNDO, highlighting its main intended coverage and features. In <a href="#__RefHeading__6_84971660"> </a> we address some possible applications of the ontology for modelling the documents published by the United Nations. Finally, in <a href="#__RefHeading__8_84971660"> </a>, we conclude the paper sketching out some future works.</p>
+      </section>
+      <section id="__RefHeading__2_84971660">
+         <h1>Methods and material</h1>
+         <p>
+            <strong>Akoma Ntoso and ALLOT.</strong> Akoma Ntoso <a href="#__RefNumPara__1307_84971660"> </a> is an XML vocabulary for legal and legislative documents whose primary objective is to provide semantic information on top of a received legal text. Akoma Ntoso does not prescribe the use of a particular ontology. Actually Akoma Ntoso defines a minimal and loose ontology based on FRBR and other eight <em>Top Level Classes</em> (TLCs) informally defining generic concepts such as person, role, event, etc. ALLOT (<a href="https://w3id.org/akn/ontology/allot">https://w3id.org/akn/ontology/allot</a>) is an implementation of such TLCs as a formal OWL 2 DL ontology. It has been aligned to two important foundational ontologies, i.e. BFO <a href="#__RefNumPara__1309_84971660"> </a> and DOLCE <a href="#__RefNumPara__1311_84971660"> </a>, so as to enable the reusability of the model in different contexts and domains (e.g. BFO is already used in several models adopted by the United Nations) and to provide a methodological organization of all the TLCs and their relations. The adoption of ALLOT as starting point for the development of UNDO is crucial for guaranteeing the best interoperability with Akoma Ntoso documents.</p>
+         <p>
+            <strong>Development tools.</strong> SAMOD <a href="#__RefNumPara__1313_84971660"> </a> is a novel agile methodology for the development of ontologies that is organised in three simple steps within an iterative process that focuses on creating well-developed and documented models. It has been used to develop UNDO since the beginning, in combination with LODE, Graffoo, and DiTTO. LODE <a href="#__RefNumPara__1315_84971660"> </a> is a service that renders entities defined in an OWL ontology in a human-readable HTML page designed for browsing and navigation by means of embedded links. Graffoo <a href="#__RefNumPara__1317_84971660"> </a> is an open source tool that can be used to present the classes, properties and restrictions within OWL ontologies, or sub-sections of them, as clear and easy-to-understand diagrams. DiTTO <a href="#__RefNumPara__1319_84971660"> </a> is a Web application that is able to translate diagrams expressed in Graffoo into OWL ontologies. In the context of the development of UNDO, LODE has been used to produce its HTML documentation, Graffoo has been used to create draft diagrams during the development of UNDO and the final diagram summarising the ontology, while DiTTO has been used to convert the Graffoo diagrams of the draft of the ontology into OWL automatically. </p>
+         <p>
+            <strong>Other ontologies reused.</strong> For describing a domain concerning documents, and the entities they describe, other ontologies are relevant and, therefore, have been directly reused in UNDO. Time-indexed Value in Context (TVC) <a href="#__RefNumPara__13691_1998548733"> </a> is an ontology pattern that allows one to describe scenarios in which someone (e.g., a person) has a value (e.g., a particular role) during a particular time and for a particular context. Time Interval (<a href="http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl">http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl</a>) is an ontology pattern that enables the description of period of times characterised by a starting date and an ending date. Web Annotation Ontology (<a href="http://w3.org/ns/oa">http://w3.org/ns/oa</a>) is a set of RDF classes, predicates and named entities that are used by the Web Annotation Data Model for creating annotations in RDF. DC Terms (<a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a>) is an ontology implementing all the metadata terms maintained by the Dublin Core Metadata Initiative, including properties, vocabulary encoding schemes, syntax encoding schemes, and classes. FOAF (<a href="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</a>) is an ontology for describing people and their relations with other people, documents, and other information objects. ISO 639-1 (<a href="http://id.loc.gov/vocabulary/iso639-1">http://id.loc.gov/vocabulary/iso639-1</a>) is a vocabulary describing the first part of the ISO 639 international-standard language-code family. LKIF Core (<a href="http://www.estrellaproject.org/lkif-core/lkif-core.owl">http://www.estrellaproject.org/lkif-core/lkif-core.owl</a>) is a library of ontologies relevant for describing concepts from both legal and common-sense domains. The SKOS (<a href="http://www.w3.org/2004/02/skos/core">http://www.w3.org/2004/02/skos/core</a>) is a common data model for sharing and linking knowledge organization systems via the Web. Finally, several ontological modules among the SPAR Ontologies <a href="#__RefNumPara__13691_1998548733"> </a> have been used as well, since they have been developed to deal with several aspects of the document and publishing domain at large, such as document metadata, document statuses, publishing agent's roles, and publishing workflow processes. </p>
+      </section>
+      <section id="__RefHeading__4_84971660">
+         <h1>Describing United Nations documents</h1>
+         <p>The United Nations System Document Ontology (UNDO), available at <a href="https://w3id.org/un/ontology/undo">https://w3id.org/un/ontology/undo</a>, is an OWL 2 DL ontologies that enables the description of UN Documents (and the entities they mention) in RDF. While UNDO has been developed from scratch by using SAMOD (after three iterations of the process, as documented in the GitHub repository of the ontology, i.e. <a href="https://w3id.org/un/repository/undo">https://w3id.org/un/repository/undo</a>, in the directory <q>development</q>), we have also reused existing and well-known models (briefly introduced in <a href="#__RefHeading__2_84971660"> </a>) so as to make the ontology interoperable in different context. In particular, UNDO does not redefine properties that have been already defined elsewhere. For instance, all the data properties for describing the title (<code>dcterms:title</code>) , the year of publication (<code>fabio:hasPublicationYear</code>), and other similar metadata, are already available in the FRBR-aligned Bibliographic Ontology (FaBiO, <a href="http://purl.org/spar/fabio">http://purl.org/spar/fabio</a>) <a href="#__RefNumPara__13691_1998548733"> </a> to which UNDO is explicitly aligning with, and thus, in these cases, such properties should be preferred and used. </p>
+         <p>So as to regulate the way the entities defined in such external models have been reused, we have applied the following guidelines:</p>
+         <ul>
+            <li>
+               <p>some of these ontologies (e.g. ALLOT, TVC, and Web Annotation Ontology) have been imported as a whole (by means of the property <code>owl:imports</code>), since some of them have entities that are directly reused in UNDO for providing a description of the domain in consideration (e.g. we use <code>allot:hasRealization</code> to link a document to its version in a specific language) ; </p>
+            </li>
+            <li>
+               <p>some ontological entities defined in external models (e.g. DCTerms, FOAF, and ISO 639-1, referred via <code>rdfs:isDefinedBy</code>) have been reused in UNDO (e.g. <code>dcterms:language</code>) without importing the original models since they have not been defined formally as OWL 2 DL ontologies; </p>
+            </li>
+            <li>
+               <p>other ontological entities defined in external models (e.g. FaBiO, LKIF Core, and SKOS, referred via <code>rdfs:isDefinedBy</code>), which are proper OWL 2 DL ontologies, have been included for the sake of aligning UNDO with other relevant and existing models. </p>
+            </li>
+         </ul>
+         <p>However, since UNDO should be intended as a domain ontology that could be extend by any party (e.g. a United Nations agency) for specific purposes, it is also possible to develop or reuse a different set of ontological entities for describing the part of the domain that are not explicitly defined in UNDO – being care of keeping the ontology consistent with the underlying description logic of OWL 2. Currently, UNDO is able to describe the entities introduced in the following subsections, summarised in <a href="#refIllustration0"> </a>.</p>
+         <figure id="refIllustration0">
+            <p>
+               <img src="img/10000000000004EF0000038FE9E4CDD1.png"
+                    alt="The Graffoo diagram of UNDO, summarising its main classes and properties."/>
+            </p>
+            <figcaption>The Graffoo diagram of UNDO, summarising its main classes and properties.</figcaption>
+         </figure>
+         <section>
+            <h1>Documents, versions, and mentioned entities</h1>
+            <p>By means of the Functional Requirements for Bibliographic Records (FRBR) <a href="#__RefNumPara__1303_84971660"> </a>, UNDO separates documents (e.g. UN resolution A/RES/50/100) and versions (e.g. language versions) in two specific and distinct layers, characterized by two classes: <code>undo:Document</code> (which has several subclasses defining specific types such as <code>undo:Resolution</code>, <code>undo:Constitution</code>, and <code>undo:Standard</code>) and <code>undo:DocumentVersion</code>. It is worth mentioning that, in case it is needed, the characterisation of the document components (paragraphs, sections, figures, tables, etc.) should be handled by means of the Document Components Ontology (DoCO, <a href="http://purl.org/spar/doco">http://purl.org/spar/doco</a>) <a href="#__RefNumPara__13691_1998548733"> </a>.</p>
+            <p>There are four properties available in UNDO that can be used for defining relations among these classes: </p>
+            <ul>
+               <li>
+                  <p>property <code>allot:hasRealization</code>, which links a document with its versions;</p>
+               </li>
+               <li>
+                  <p>property <code>frbr:revision</code>, which links a specific version to another version of it (e.g. a draft that has been amended and revised) – it is possible to add appropriate information concerning which document produced the revision, when the new revision is effective, and the list of the revisions produced by means of some of the models that have been aligned/imported by UNDO, i.e. PWO and FaBiO <a href="#__RefNumPara__13691_1998548733"> </a>;</p>
+               </li>
+               <li>
+                  <p>property <code>dcterms:language</code>, which allows one to specify the language associated to the specific version in consideration – the link between translations in different languages can be linked by means of the property <code>frbr:translation</code> defined in FRBR DL (<a href="http://purl.org/spar/frbr">http://purl.org/spar/frbr</a>) to which UNDO aligns; </p>
+               </li>
+               <li>
+                  <p>property <code>frbr:transformation</code>, used for describing documents that are transformed somehow in another original document (even of another type – see the following section) in a sufficient degree to warrant their being considered as new works (e.g. when the General Assembly publish a new resolution from a draft provided by someone).</p>
+               </li>
+            </ul>
+            <p>In addition to these properties, UNDO makes also available the property <code>allot:mentions</code> for linking a document (or one specific version of it) to a particular entity (defined by the class <code>allot:Reference</code>) that is mentioned within (e.g. that the resolution A/RES/50/100 mentions the Government of Turkey). This property allows one to build a sophisticated network of references to entities that enables the cross-navigation between documents and other related resources. </p>
+         </section>
+         <section>
+            <h1>Relations </h1>
+            <p>While the aforementioned property is important, on the one hand, it does not allow one to specify the particular semantics justifying a particular mention of an entity in a document – e.g., recalling the example in the previous section, the reasons why the resolution A/RES/50/100 mentions the Government of Turkey. On the other hand, other relevant relations between non-document entities, that are by reading the natural language argumentations carried by the document content, cannot be described – e.g. the sentence of the aforementioned resolution where <q>the General Assembly reiterates its gratitude to the Government of Turkey</q>. </p>
+            <p>Since it is not possible to define all the kinds of relations that could be hidden behind the content of any United Nations document, UNDO makes available a mechanism for defining such relations in a flexible way without changing its Tbox every time one needs a new relation. In fact, we have chosen to define relations between entities by means of a particular class, i.e. <code>undo:Relation</code>, so as to enable their specification by means of the following properties: </p>
+            <ul>
+               <li>
+                  <p>
+                     <code>undo:hasProponent</code>, which is used for identifying the subject entity of a relation (e.g. the <q>General Assembly</q> described in the sentence <q>the General Assembly reiterates its gratitude to the Government of Turkey</q>); </p>
+               </li>
+               <li>
+                  <p>
+                     <code>undo:hasReceiver</code>, which is used for identifying the object entity of a relation (e.g. the <q>Government of Turkey</q>, in the previous example); </p>
+               </li>
+               <li>
+                  <p>
+                     <code>undo:hasSemantics</code>, which is used for specifying the particular concept defining the semantics of the relation. </p>
+               </li>
+            </ul>
+         </section>
+         <section>
+            <h1>Annotations to documents </h1>
+            <p>By reading a document content, several people can derive different (even contrasting) interpretations upon the same text. For instance, the same sentence, e.g. <q>Encourages all relevant non-governmental organizations […] to participate in and contribute to the Conference</q> can be read as an invitation or as a reproach for having not doing any action yet. Therefore, it is important to have some mechanism for allowing the existence of all these different interpretations in a way that is understandable and still consistent from an ontological perspective. </p>
+            <p>For this reason, UNDO reuses the framework defined in the Web Annotation Ontology that allows one to annotate documents (or even portions of them) by means of another entity, such as a relation as introduced in the previous subsection. In particular, every annotation in UNDO is defined as an individual of the class <code>undo:Annotation</code>, and the following properties are used to linking an entity to the document (or one of its parts) it annotates: </p>
+            <ul>
+               <li>
+                  <p>the property <code>oa:hasBody</code> is used to specify the body of the annotation to be attached to the document; </p>
+               </li>
+               <li>
+                  <p>the property <code>oa:hasTarget</code> is used to indicate the particular document to which the annotation is specified. </p>
+               </li>
+            </ul>
+         </section>
+         <section>
+            <h1>Terms and their semantics </h1>
+            <p>Broadly speaking, terms are words or groups of words whose meanings are defined in a formal and precise manner by means of specific concepts. Thus, terms can refer to nouns (e.g. <q>computer keyboard</q>), verbs (e.g. <q>decide</q>), persons (e.g. <q>John</q>), cities (e.g. <q>New York</q>), etc., they can share the same textual content while being polysemous (e.g. the city <q>Paris</q> and the person <q>Paris</q>), they can refer to the same meaning (e.g. the third person verb <q>decides</q> in English and its related in Spanish, <q>decide</q>), and so on. </p>
+            <p>In UNDO the class <code>allot:Term</code> is used to define terms, while the property <code>undo:hasRelatedConcept</code> enables to link a term to the concept (introduced by the class <code>allot:Concept</code>) defining the meaning of the term in consideration. </p>
+         </section>
+         <section>
+            <h1>Values, time and context </h1>
+            <p>Several kinds of objects can be involved in situations describing them as holding a certain value associated for a specific interval or according to a specific context. For instance, agents having a particular role (e.g. being the President of the United Nations General Assembly for the whole 2016) or documents holding particular status (e.g. a document that has been under-review from September 2016 to October 2016) in a specific time and/or related to a particular context are examples for these situations. </p>
+            <p>In UNDO these situations can be described by means of the class <code>undo:ValueInTimeAndContext</code>, which introduces the framework defined by the TVC ontology pattern introduced in <a href="#__RefHeading__2_84971660"> </a>. In particular, it allows one to specify: </p>
+            <ul>
+               <li>
+                  <p>the entity holding such value (e.g. an agent or a document) by means of the property <code>tvc:hasValue</code>; </p>
+               </li>
+               <li>
+                  <p>the value held (e.g. a role or a status) by means of the property <code>tvc:withValue</code>; </p>
+               </li>
+               <li>
+                  <p>the time defining when such value is held (e.g. from 2006 to 2015) using the property <code>tvc:atTime</code>; </p>
+               </li>
+               <li>
+                  <p>the context to which the scenario applies (e.g. the United Nations General Assembly) using the property <code>tvc:withinContext</code>. </p>
+               </li>
+            </ul>
+         </section>
+         <section>
+            <h1>Workflows and their executions </h1>
+            <p>Keeping track of the processes concerning the creation and modification of documents is a crucial task to address in the legal and legislative domain. Each of these processes, commonly called workflow, is actually composed by a sequence of steps. Each step is responsible to produce some outputs (e.g. a review) starting from some inputs (e.g. a document).</p>
+            <p>In UNDO, workflows can be described from two different points of view, by reusing the framework implemented included in the SPAR Ontologies, i.e. the Publishing Workflow Ontology (PWO, <a href="http://purl.org/spar/pwo">http://purl.org/spar/pwo</a>) <a href="#__RefNumPara__13691_1998548733"> </a>. On the one hand, there is the declaration of the workflow schema, or simply the workflow (<code>undo:Workflow</code>), which is how a specific process (e.g. the publication of a document, the deliberative process) is organized in sequential steps (<code>undo:Step</code>). On the other hand, each particular execution of a workflow (<code>undo:WorkflowExecution</code>) is a specific entity per se, and it is usually composed by sets of actions (<code>undo:Action</code>), and each action is executed within a particular interval (<code>pwo:happened</code>). It is worth mentioning that this module of UNDO is able to describe the full characterisation that Akoma Ntoso provides in its specification about document workflows and lifecycles – the latter by means of the class <code>undo:Lifecycle</code>.</p>
+         </section>
+      </section>
+      <section id="__RefHeading__6_84971660">
+         <h1>Uses of UNDO in the United Nations</h1>
+         <p>The development of UNDO is the result of a joint effort of some of the United Nations agencies for producing a Semantic Interoperability Framework (UNSIF) for normative and parliamentary documents (<a href="http://www.unsceb.org/content/akn4un">http://www.unsceb.org/content/akn4un</a>) – it is worth mentioning that all the authors of this paper have been involved as external experts by the UN in the UNSIF. This framework includes UNDO and a particular customization of Akoma Ntoso for the United Nations System (AKN4UN), which defines the guidelines for the localisation of the Akoma Ntoso XML standard to the specific requirements of UN parliamentary and normative documents. </p>
+         <p>As result of this work, the United Nations have already started to adopt the first version of the AKN4UN Guidelines (<a href="https://www.w3id.org/un/schema/akn4un/">https://www.w3id.org/un/schema/akn4un/</a>) for the markup of UN normative and parliamentary documents and UNDO as the main reference for the implementation of UNSIF (<a href="http://www.unsystem.org/content/akn4un">http://www.unsystem.org/content/akn4un</a>). Both AKN4UN and UNDO are considered living documents by the UN, since they can evolve in the future so as to address and incorporate new developments and requirements. However, even if these resources are living standards, their adoption has put the foundations for making UN documents machine-readable, so as to foster collaboration and to reduce costs in information management across the system. The aim is to transform the information inclosed within word-processor documents into a Linked Open Data that can be navigated and interpreted by machines to create innovative services.</p>
+         <p>Thus, while the sustainability of UNDO is guaranteed by the United Nations, as it is one of its assets, there is no explicit evidence of its broad adoption worldwide so far, since it is has been released recently. However, it is the basic ontology that the United Nations and their agencies will use for describing their documents and their relations in RDF.</p>
+      </section>
+      <section id="__RefHeading__8_84971660">
+         <h1>Conclusions</h1>
+         <p>In this document we have provided an overview of the United Nations Document Ontology (UNDO), i.e. an OWL 2 DL ontology that aims at providing a framework for the description of all the entities mentioned in United Nations documents stored in Akoma Ntoso, and the relations that can exists among them. The idea behind the development of this model is to provide a common framework to be used and, eventually, extended by the various agencies of the United Nations for sharing data about documents and their content in RDF format in an interchangeable way. There are several works that can be done in the future in the context of UNDO and related entities, so as to guarantee its broad usage within the United Nations. The most urgent one is to study and implement an algorithm (e.g. based on XSLT) that takes Akoma Ntoso documents as input and returns a set of RDF statements compliant with UNDO, so as to foster the adoption of the ontology. </p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>References</h1>
+         <ol>
+            <li id="__RefNumPara__1307_84971660" role="doc-biblioentry">
+               <p>Barabucci, G., Cervone, L., Di Iorio, A., Palmirani, M., Peroni, S., Vitali, F. (2010). Managing semantics in XML vocabularies: an experience in the legal and legislative domain. In Proceedings of Balisage 2009. DOI: <a href="https://doi.org/10.4242/BalisageVol5.Barabucci01">https://doi.org/10.4242/BalisageVol5.Barabucci01</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1303_84971660" role="doc-biblioentry">
+               <p>IFLA Study Group on the FRBR. (2009). Functional Requirements for Bibliographic Records. <a href="http://www.ifla.org/publications/functional-requirements-for-bibliographic-records">http://www.ifla.org/publications/functional-requirements-for-bibliographic-records</a> (last visited May 7, 2017)</p>
+            </li>
+            <li id="__RefNumPara__1309_84971660" role="doc-biblioentry">
+               <p>Arp, R., Smith, B., Spear, A. D. (2015). Building ontologies with basic formal ontology. MIT Press. ISBN: 978-0262527811</p>
+            </li>
+            <li id="__RefNumPara__1311_84971660" role="doc-biblioentry">
+               <p>Gangemi, A., Guarino, N., Masolo, C., Oltramari, A., Schneider, L. (2002). Sweetening Ontologies with DOLCE. In Proceedings of EKAW 2002. DOI: <a href="https://doi.org/10.1007/3-540-45810-7_18">https://doi.org/10.1007/3-540-45810-7_18</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1313_84971660" role="doc-biblioentry">
+               <p>Peroni, S. (2017). A Simplified Agile Methodology for Ontology Development. In Proceedings of the OWLED-ORE 2016. DOI: <a href="https://doi.org/10.1007/978-3-319-54627-8_5">https://doi.org/10.1007/978-3-319-54627-8_5</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1317_84971660" role="doc-biblioentry">
+               <p>Falco, R., Gangemi, A., Peroni, S., Vitali, F. (2014). Modelling OWL ontologies with Graffoo. In Proceedings of ESWC 2014 Satellite Events. DOI: <a href="https://doi.org/10.1007/978-3-319-11955-7_42">https://doi.org/10.1007/978-3-319-11955-7_42</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1315_84971660" role="doc-biblioentry">
+               <p>Peroni, S., Shotton, D., Vitali, F. (2012). The Live OWL Documentation Environment: a tool for the automatic generation of ontology documentation. In Proceedings of EKAW 2012. DOI: <a href="https://doi.org/10.1007/978-3-642-33876-2_35">https://doi.org/10.1007/978-3-642-33876-2_35</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1319_84971660" role="doc-biblioentry">
+               <p>Gangemi, A., Peroni, S. (2013). DiTTO: Diagrams Transformation inTo OWL. In Proceedings of the ISWC 2013 Posters &amp; Demonstrations Track. <a href="http://ceur-ws.org/Vol-1035/iswc2013_demo_2.pdf">http://ceur-ws.org/Vol-1035/iswc2013_demo_2.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__13691_1998548733" role="doc-biblioentry">
+               <p>Peroni, S. (2014). The Semantic Publishing and Referencing Ontologies. In Semantic Web Technologies and Legal Scholarly Publishing. DOI: <a href="https://doi.org/10.1007/978-3-319-04777-5_5">https://doi.org/10.1007/978-3-319-04777-5_5</a> 
+               </p>
+            </li>
+         </ol>
+      </section>
+   </body>
+</html>
