@@ -1,4 +1,4 @@
-@prefix amo: <http://www.essepuntato.it/2011/02/argumentmodel/> .
+@prefix amo: <http://www.essepuntato.it/2011/02/argumentmodel/> . 
 @prefix biro: <http://purl.org/spar/biro/> .
 @prefix c4o: <http://purl.org/spar/c4o/> .
 @prefix cito: <http://purl.org/spar/cito/> .
