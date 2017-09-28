@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/rash.css"/>
+      <script src="js/jquery.min.js"> </script>
+      <script src="js/bootstrap.min.js"> </script>
+      <script src="js/rash.js"> </script>
+      <title>OpenCitations: enabling the FAIR use of open citation data</title>
+      <meta about="#affiliation-1"
+            property="schema:name"
+            content="DASPLab, DISI, University of Bologna, Bologna, Italy"/>
+      <meta about="#affiliation-2"
+            property="schema:name"
+            content="Oxford eResearch Centre, University of Oxford, Oxford, UK"/>
+      <meta about="#author-1"
+            name="dc.creator"
+            property="schema:name"
+            content="Silvio Peroni"/>
+      <meta about="#author-1"
+            property="schema:email"
+            content="silvio.peroni@unibo.it"/>
+      <link about="#author-1"
+            property="schema:affiliation"
+            href="#affiliation-1"/>
+      <meta about="#author-2"
+            name="dc.creator"
+            property="schema:name"
+            content="David Shotton"/>
+      <meta about="#author-2"
+            property="schema:email"
+            content="david.shotton@oerc.ox.ac.uk"/>
+      <link about="#author-2"
+            property="schema:affiliation"
+            href="#affiliation-2"/>
+      <meta property="prism:keyword" content="OpenCitations"/>
+      <meta property="prism:keyword" content="OpenCitations Corpus"/>
+      <meta property="prism:keyword" content="OCC"/>
+      <meta property="prism:keyword" content="FAIR Data Principles"/>
+   </head>
+   <body>
+      <section role="doc-abstract">
+         <h1>Abstract</h1>
+         <p>In this paper we introduce the OpenCitations Corpus, an open repository of scholarly citation data available in RDF and published according to the FAIR principles.</p>
+         <p><strong>License:</strong> <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+         <p><strong>Notes:</strong> submitted to <a href="https://www.eventi.garr.it/en/conf17/">GARR Conference 2017</a>.</p>
+         <p><strong>This version:</strong> <a href="https://w3id.org/people/essepuntato/papers/oc-garr2017/2017-09-28.html">https://w3id.org/people/essepuntato/papers/oc-garr2017/2017-09-28.html</a></p>
+         <p><strong>Last version:</strong> <a href="https://w3id.org/people/essepuntato/papers/oc-garr2017.html">https://w3id.org/people/essepuntato/papers/oc-garr2017.html</a>
+      </section>
+      <section>
+         <h1>Citation data: the story so far</h1>
+         <p>Sharing scholarly data to foster their reuse is one of the main goals of the current practices in Data Science and, more generally, in scholarly communication. While some parties are trying to boycott the <em>unscrupulous</em> reuse of experimental data – for instance see the <q>research parasites</q> issue <a href="#__RefNumPara__141_845575727"> </a> that generated a strong response from the scientific community –, others have recently proposed common practices and guidelines to support a better sharing and reuse of scholarly data in order to support secondary data analysis.</p>
+         <p>In particular, a FORCE11 (<a href="https://force11.org/">https://force11.org</a>) working group has recently proposed the FAIR Data Principles <a href="#__RefNumPara__157_845575727"> </a>. The acronym <em>FAIR</em> stands for Findable, Accessible, Interoperable, and Reusable, which are the main leading principles that, if applied, would facilitate the discovery, access, integration, and analysis of scholarly knowledge by humans and machines.</p>
+         <p>Citation data are among the scholarly data to which the application of FAIR principles would benefit the whole scholarly community, particularly since analysis of citation events is one of the main ways of finding key publications on a particular topic. Citation data are also important for the assessment of the quality of research by means of metrics and indicators calculated from citation databases. However, the cruel reality that the most authoritative citation indexes, i.e. Scopus (<a href="https://www.scopus.com/">https://www.scopus.com</a>) and Web of Science (<a href="http://webofscience.com/">http://webofscience.com</a>), do not follow the FAIR principles, primarily because they can only be accessed by paying significant subscription fees. In the current age, in which Open Access is considered a necessary practice in research, <q>citation data now needs to be recognized as a part of the Commons […] and placed in an open repository</q> 
+            <a href="#__RefNumPara__199_845575727"> </a>.</p>
+         <p>The Initiative for Open Citations (I4OC, <a href="https://i4oc.org/">https://i4oc.org</a>) has been recently launched to promote the aforementioned idea. I4OC is a collaboration between scholarly publishers, researchers, and other interested parties to promote the unrestricted availability of scholarly citation data, initially by encouraging scholarly publishers to make open the article reference lists they already deposit to Crossref (<a href="https://crossref.org/">https://crossref.org</a>). Among the I4OC founders, one specific organization, OpenCitations (<a href="http://opencitations.net/">http://opencitations.net</a>), has the further objective of employing Semantic Web technologies to create an open repository of the scholarly citation data published in RDF according to the FAIR principles.</p>
+      </section>
+      <section id="__RefHeading__255_845575727">
+         <h1>The OpenCitations Corpus: a FAIR-compliant resource</h1>
+         <p>OpenCitations <a href="#__RefNumPara__345_845575727"> </a> 
+            <a href="#__RefNumPara__199_845575727"> </a> formally started in 2010 as a one-year Jisc-funded Open Citations Project at the University of Oxford. The main goal of the project was the creation of a database of open citation data, the OpenCitations Corpus (OCC), made available in RDF (<a href="https://www.w3.org/TR/rdf11-concepts/">https://www.w3.org/TR/rdf11-concepts/</a>). At the end of 2015, a formal collaboration between the University of Oxford and the University of Bologna was initiated to build from that initial Oxford prototype, setting up a new instantiation of the OCC based on a revised metadata schema <a href="#__RefNumPara__527_845575727"> </a>, and employing several new technologies to automate the daily ingestion of fresh citation metadata from authoritative sources <a href="#__RefNumPara__427_845575727"> </a>. The OCC is now the largest truly open collection of RDF-based citation data available on the Web, and includes more than 10.5 million citation links to around 5.7 million cited resources (as of 28 September 2017). In the following subsections we describe the tools and technologies used by the OCC to comply with the FAIR principles.</p>
+         <section>
+            <h1>To be Findable</h1>
+            <p>The OCC uses <a href="https://w3id.org/">https://w3id.org</a> – a service run by the W3C Permanent Identifier Community Group to provide a secure, permanent URL re-direction service for Web applications – as the root URL for assigning persistent identifiers to all its entities. For example, <a href="https://w3id.org/oc/corpus/br/7295288">https://w3id.org/oc/corpus/br/7295288</a> identifies the paper referenced in <a href="#__RefNumPara__199_845575727"> </a> within the OCC. All the citation data are described according a specific metadata model <a href="#__RefNumPara__527_845575727"> </a> that is based on SPAR Ontologies (<a href="http://www.sparontologies.net/">http://www.sparontologies.net</a>) and other standard vocabularies. All the data within the OCC are queryable by means of the OpenCitations SPARQL endpoint (<a href="https://w3id.org/oc/sparql">https://w3id.org/oc/sparql</a>), and dumps of the entire database are uploaded monthly to Figshare (<a href="https://figshare.com/">https://figshare.com</a>). In addition, all the original sources from which the information within the OCC has been obtained are linked by means of provenance information according to PROV-O (<a href="https://www.w3.org/TR/prov-o/">https://www.w3.org/TR/prov-o/</a>).</p>
+         </section>
+         <section>
+            <h1>To be Accessible</h1>
+            <p>All the data in the OCC can additionally be retrieved by using their unique identifiers – which are URLs – via HTTP. The resource metadata are made available either in human-readable HTML or in a variety of machine-readable forms (RDF/XML, Turtle or JSON-LD) via content negotiation. All the citation data within the OCC can be accessed independently from the current Web existence (or absence) of the original publications from where they have been obtained.</p>
+         </section>
+         <section>
+            <h1>To be Interoperable</h1>
+            <p>The data within the OCC are described by means of RDF, which is the main data model for representing information in machine-readable form on the Web, and this enables qualified links from/to any entity included in the Corpus. The data are modelled in RDF according to a set of ontologies, grouped together and formalized in the OpenCitations Ontology (<a href="https://w3id.org/oc/ontology">https://w3id.org/oc/ontology</a>), as summarised in the diagram in <a href="#refIllustration0"> </a>. These ontologies themselves follow the FAIR principles.</p>
+         </section>
+         <section>
+            <h1>To be Re-usable</h1>
+            <p>The entities described within the OCC includes citing and cited bibliographic resources (conference papers, journal articles, etc.) and their containers (academic proceedings, journals, etc.), the formats in which they have been embodied (digital vs. print), the names and roles of relevant bibliographic agents related to these resources (author, publisher, etc.), the literal textual content of each reference in the reference list of each citing bibliographic resource, and all the identifiers (DOI, ORCID, etc.) employed to identify these bibliographic resources and the agents involved. Provenance information is associated with all the entities in the OCC via PROV-O, and changes in the data can be tracked by means of SPARQL UPDATE queries <a href="#__RefNumPara__1429_845575727"> </a>. All the data included in the OCC are available under a Creative Commons public domain dedication (CC0, <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode">https://creativecommons.org/publicdomain/zero/1.0/legalcode</a>). </p>
+            <figure id="refIllustration0">
+               <p>
+                  <img src="img/10000000000004F1000003C457D7161C.png"
+                       alt="A Graffoo diagram describing the OpenCitations Ontology."/>
+               </p>
+               <figcaption>A Graffoo diagram describing the OpenCitations Ontology.</figcaption>
+            </figure>
+         </section>
+      </section>
+      <section id="__RefHeading__259_845575727">
+         <h1>Conclusions</h1>
+         <p>In this contribution we have introduced the tools and technologies that ensure that the OpenCitations Corpus – an RDF database of open scholarly citation data – is fully compliant with the FAIR Data Principles. As an immediate future development of the project, made possible by means of recent funding from the Alfred P. Sloan Foundation (<a href="https://sloan.org/">https://sloan.org</a>), we will extend the current infrastructure and the rate of data ingest. Our immediate goal is to increment the daily ingestion rate of citation data from ~500,000 citations per month to ~500,000 citations per day.</p>
+      </section>
+      <section role="doc-bibliography">
+         <h1>References</h1>
+         <ol>
+            <li id="__RefNumPara__141_845575727" role="doc-biblioentry">
+               <p>Longo D. L., Drazen J. M. (2016) Data sharing. New England Journal of Medicine, 374: 276–277. DOI: <a href="https://doi.org/10.1056/NEJMe1516564">https://doi.org/10.1056/NEJMe1516564</a>
+               </p>
+            </li>
+            <li id="__RefNumPara__199_845575727" role="doc-biblioentry">
+               <p>Peroni S., Dutton A., Gray T., Shotton D. (2015). Setting our bibliographic references free: towards open citation data. Journal of Documentation, 71 (2): 253–277. DOI: <a href="https://doi.org/10.1108/JD-12-2013-0166">https://doi.org/10.1108/JD-12-2013-0166</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__527_845575727" role="doc-biblioentry">
+               <p>Peroni S., Shotton D. (2016). Metadata for the OpenCitations Corpus. Figshare. DOI: <a href="https://doi.org/10.6084/m9.figshare.3443876">https://doi.org/10.6084/m9.figshare.3443876</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__1429_845575727" role="doc-biblioentry">
+               <p>Peroni S., Shotton D., Vitali F. (2016). A document-inspired way for tracking changes of RDF data. In Proc. of Drift-a-LOD 2016: 26–33 <a href="http://ceur-ws.org/Vol-1799/Drift-a-LOD2016_paper_4.pdf">http://ceur-ws.org/Vol-1799/Drift-a-LOD2016_paper_4.pdf</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__427_845575727" role="doc-biblioentry">
+               <p>Peroni S., Shotton D., Vitali F. (2017). One year of the OpenCitations Corpus: Releasing RDF-based scholarly citation data into the Public Domain. In Proc. of ISWC 2017. <a href="https://w3id.org/people/essepuntato/papers/oc-iswc2017.html">https://w3id.org/people/essepuntato/papers/oc-iswc2017.html</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__345_845575727" role="doc-biblioentry">
+               <p>Shotton D. (2013). Open citations. Nature, 502 (7471): 295–297. DOI: <a href="https://doi.org/10.1038/502295a">https://doi.org/10.1038/502295a</a> 
+               </p>
+            </li>
+            <li id="__RefNumPara__157_845575727" role="doc-biblioentry">
+               <p>Wilkinson M. D., Dumontier M., Aalbersberg I. J., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, 3: 160018. DOI: <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>
+               </p>
+            </li>
+         </ol>
+      </section>
+   </body>
+</html>
