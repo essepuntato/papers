@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="schema: http://schema.org/ prism: http://prismstandard.org/namespaces/basic/2.0/"><head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/rash.css" />
+  <!-- Local MathJax -->
+  <!-- <script src="js/MathJax/MathJax.js"></script> -->
+
+  <!-- online MathJax -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+  <!-- JQuery -->
+  <script src="js/jquery.min.js"></script>
+
+  <!-- Bootstrap.js -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Rash.js -->
+  <script src="js/rash.js"></script>
+
+  <title>Enabling the creation of web-first scholarly articles: the RAJE editor</title>
+  
+  
+  
+  
+  
+<meta about="mailto:gianmarco.spinaci@studio.unibo.it" typeof="schema:Person" property="schema:name" name="dc.creator" content="Gianmarco Spinaci" /><meta about="mailto:gianmarco.spinaci@studio.unibo.it" property="schema:email" content="gianmarco.spinaci@studio.unibo.it" /><link about="mailto:gianmarco.spinaci@studio.unibo.it" property="schema:affiliation" href="#affiliation_1" /><meta about="mailto:silvio.peroni@unibo.it" typeof="schema:Person" property="schema:name" name="dc.creator" content="Silvio Peroni" /><meta about="mailto:silvio.peroni@unibo.it" property="schema:email" content="silvio.peroni@unibo.it" /><link about="mailto:silvio.peroni@unibo.it" property="schema:affiliation" href="#affiliation_2" /><meta about="mailto:angelo.diiorio@unibo.it" typeof="schema:Person" property="schema:name" name="dc.creator" content="Angelo Di Iorio" /><meta about="mailto:angelo.diiorio@unibo.it" property="schema:email" content="angelo.diiorio@unibo.it" /><link about="mailto:angelo.diiorio@unibo.it" property="schema:affiliation" href="#affiliation_2" /><meta about="#affiliation_1" typeof="schema:Organization" property="schema:name" content="Digital Humanities and Digital Knowledge, University of Bologna, Bologna, Italy" /><meta about="#affiliation_2" typeof="schema:Organization" property="schema:name" content="Digital and Semantic Publishing Laboratory, Department of Computer Science and Engineering, University of Bologna, Bologna, Italy" /><meta name="dcterms.subject" content="Applied computing, Document management and text processing, Document management, Text editing" /><meta name="dcterms.subject" content="Applied computing, Computers in other domains, Personal computers and PC applications, Word processors" /><meta property="prism:keyword" content="RAJE" /><meta property="prism:keyword" content="RASH" /><meta property="prism:keyword" content="Web-first publishing formats" /><meta property="prism:keyword" content="Word processors" /><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0" /></head>
+
+<body>
+<section role="doc-abstract" id="doc-abstract">
+<h1>Abstract</h1>
+<p>In this demo paper, we introduce the new version of the <em>RASH Javascript Editor</em> (RAJE), an open source standalone wordprocessor for writing HTML scholarly articles compliant with the <em>Research Articles in Simplified HTML</em> (RASH) format.</p>
+</section>
+<section id="section1">
+<h1>Introduction</h1>
+<p>In the last years, the use of PDF as submission/publication format for scientific articles has been criticised by several people, and several discussions have been raised about using HTML instead - in fact several conferences (e.g. the International Semantic Web Conference) and journals (e.g. Data Science published by IOS Press) are now adopting HTML-based formats for preparing and sharing scholarly works. One of the most used formats is <em>RASH - Research Articles in Simplified HTML</em><span style="font-size: 12pt;"> </span><a href="#biblioentry_10" style="background-color: #ffffff; font-size: 12pt;"> </a><span style="font-size: 12pt;">. </span>RASH restricts the use of HTML elements to only 32 elements, so as to guarantee a better long-term preservability of these documents and to keep the cognitive load of its users affordable. Minimality and a rigorous pattern-based approach are the key features of RASH, compared to other extensions or subsets of HTML proposed by the community towards the same goal (e.g. <a href="https://github.com/w3c/scholarly-html" rel="noopener noreferrer">ScholarlyHTML</a>). </p>
+<p>Even if converters from ODT/DOCX documents into RASH are available, one of the main obstacles to its broad adoption was <span style="font-size: 12pt;">the absence of a well-developed and a multi-platform <em>what you see is what you get</em> (WYSIWYG) word processor compliant with RASH natively.</span></p>
+<p>A few months ago we have made available a preliminary release of the <em>RASH Javascript Editor</em> (RAJE) <a href="#biblioentry_7"> </a> to solve this issue. RAJE is an open source standalone wordprocessor designed for being totally compatible with RASH and the other existing tools included in the RASH Framework. We run some test sessions on RAJE that allowed us to collect several comments that showed some crucial flaws in the functionalities and interface. T<span style="font-size: 12pt;">his paper presents the new version of RAJE built upon this feedback.</span><span style="font-size: 12pt;"></span></p>
+<p><span style="font-size: 12pt;">This new version simplifies the interaction, the interface, and </span>the installation<span style="font-size: 12pt;"> of RAJE. During the demo presentation, we will show all its main features and we will directly involve people in using it. We are also interested in fostering the discussion of the community on HTML-based formats for scholarly articles and to collect more feedback.</span></p>
+<p><span style="font-size: 12pt;">The rest of the paper is organised as follows. In </span><a href="#section2" style="background-color: #ffffff; font-size: 12pt;"> </a><span style="font-size: 12pt;">, we introduce some of the most relevant HTML-based word processors. In </span><a href="#section3" style="background-color: #ffffff; font-size: 12pt;"> </a><span style="font-size: 12pt;">, we introduce the new version of RAJE, and we discuss the main differences and added features with respect to the old one. Finally, in <a href="#section4"> </a>, we conclude the paper sketching out some future works.</span></p>
+</section>
+<section id="section2">
+<h1>Related works</h1>
+<p>In the past years, several editors have been proposed for the creation of native HTML documents. In this section, we briefly list some of the most representatives.</p>
+<p><a href="https://www.fiduswriter.org/">Fidus Writer</a> is an open source WYSIWYG collaborative HTML-based word processor made for academics who need to use citations and formulas within papers. All the articles created with it can be exported in many ways: as a website, a paper, or an ebook. The main focus of the editor is on the content of the paper, and the final layout of the paper can be chosen once the content is finalised.</p>
+<p><a href="https://www.authorea.com">Authorea</a> is an online platform which allows one to write and edit scientific papers by means of a particular Web-based word processor. In fact, each article is an HTML document stored in a particular Git repository. In particular, Git is used to keeping track of the different versions of a document. It uses LaTeX so as to produce the article layout ready for being submitted to academic events. In addition, Authorea allows authors to write mathematical notations, tables, plots and figures either in LaTeX or MathML, and a DOI is automatically assigned to it once it is publicly shared through the platform.</p>
+<p>&#x200B;&#x200B;<a href="https://dokie.li/">Dokieli</a> is a client-side editor for decentralised article publishing, annotations, and social interactions <a href="#biblioentry_9"> </a>. Since Dokieli follows a pure decentralisation principle, authors can publish the paper where they prefer. In particular, Dokieli is based on <a href="https://solid.mit.edu/">Solid</a> so as to allow one to edit the article in the browser and to save it directly to server storage.</p>
+</section>
+<section id="section3">
+<h1>The re-engineered version of RAJE</h1>
+<p>Last year we have released a pre-alpha version of the <em>RASH Javascript Editor</em> (<em>RAJE</em>)<a href="#biblioentry_7"> </a>. We tested it involving 6 people in a user testing session, where we asked them to reproduce a particular document by using the editor. While the evaluation of the perceived usability of RAJE was acceptable, the test also highlighted some critical issues of the system. In particular, the users stressed on three weaknesses: (i) lack of some shortcuts and keys to make the navigation smooth, (ii) difficulties in inserting and modifying some content elements and (iii) issues on portability and installation. Thus, we have entirely re-engineered RAJE so as to address these problems.</p>
+<p><span style="font-size: 12pt;">The new architecture of RAJE is shown in <a href="#img_1"> </a>. In particular, it is now defined by means of two specific modules. The first module, i.e. <a href="https://github.com/rash-framework/raje-core"><em>RAJE-core</em></a>, implements the main editing functionalities, and it is based on <a href="https://www.tinymce.com/">TinyMCE</a> &#x2013; contrarily, the previous version of RAJE was totally developed from scratch. </span><span style="font-size: 12pt;">The other module, i.e. </span><a href="https://github.com/rash-framework/raje-app/" style="font-size: 12pt; background-color: #ffffff;"><em>RAJE-app</em></a><span style="font-size: 12pt;">, is a wrapper that uses RAJE core to implement the standalone wordprocessor. RAJE-app allows one to store RASH documents either in the file system or in online storages such as Github (as of 7 January 2018, still an experimental feature) and Dropbox (not implemented yet). The main idea of this new infrastructure is to keep the core separated from the wrapper separated so as to enable the reuse of the editing capabilities of RAJE in different environments (within a Web application, imported in existing frameworks, etc.) &#x2013; while, in the previous version, RAJE was a monolithic artefact.</span></p>
+<figure id="img_1">
+<p><img src="img/Untitled Diagram.png" alt="img/Untitled Diagram.png" /></p>
+<figcaption>The re-engineered version of the RAJE structure. Core and Wrapper are two different projects. The wrapper integrates the core inside its body and it takes care of the communication between core and the various storages both local and online.</figcaption>
+</figure>
+<section id="section5">
+<h1>RAJE core</h1>
+<p>RAJE-core manages everything that concerns the editing of the RASH documents. As introduced in <a href="#biblioentry_10"> </a>, RASH is a rather simple HTML-based markup language, which focuses on representing the content of an article avoiding to repeat the same information and without caring of the specification of presentational objects, such as the label to associate to in-text reference pointers or to any other complex objects (e.g. sections, figures, tables). The rendering of these labels &#x2013; &quot;Figure 2&quot;, &quot;[3]&quot;, the number associated to sections, the metadata associated to the paper, etc. &#x2013; is done automatically by the view package available in RASH and implemented in CSS3+Javascript, which enables to show the whole content of the paper. </p>
+<p>This distinction between the original RASH file (<em>RASH source</em> from now on) and the way it is visualised in the browser after the application of CSS3 stylesheets and Javascript scripts (<em>Rash view</em> from now on) is a peculiar choice of the design of RASH. It was made to improve modularity and flexibility, and to speed up the editing process.</p>
+<p>It is also fundamental to understand how RAJE-core works. In fact, <span style="font-size: 12pt;">RAJE-core addresses two main tasks: the </span><strong style="font-size: 12pt;">editing the RASH view</strong><span style="font-size: 12pt;"> (through its WYSIWYG interface) and the </span><strong style="font-size: 12pt;">conversion of the RASH view into the RASH source</strong> (called <em>de-RASHing process</em>)<span style="font-size: 12pt;">. These two operations are necessary so as to enable the modification of the document and to prepare the current visualised content to be properly stored according to RASH (source). </span><span style="font-size: 12pt;">It is worth mentioning that the storing operation is not implemented by the core since this is designed to only deal with the editing process itself.</span></p>
+<p>The new version of the RAJE core was entirely rewritten and extended on top of TinyMCE<span style="font-size: 12pt;">. The adoption of TinyMCE has simplified several typical operations such as the undo/redo. This has been implemented by using the TinyMCE undo manager as the basic layer: the RAJE core handles complex undo-redo operation by combining data from the lower layer. There have been several other pros in the adoption of TinyMCE, besides the aforementioned undo/redo handling, among which a better stability in the creation and deletion of inline elements (</span><code>&#x200B;em</code><span style="font-size: 12pt;">, </span><code>&#x200B;strong</code><span style="font-size: 12pt;">&#x200B;, etc.). </span></p>
+<p><span style="font-size: 12pt;">On the other hand, the use of TinyMCE has required us to solve several other issues for handling formulas and footnotes. </span><span style="font-size: 12pt;">In RASH, the best and most-Webby choice for defining mathematical formulas is to use MathML, that is rendered by means of </span><a href="http://www.mathjax.org/" style="background-color: #ffffff; font-size: 12pt;">MathJax</a><span style="font-size: 12pt;">. However, the problem with this approach is that TinyMCE blocks any injected script</span><span style="font-size: 12pt;">, including those that are needed by Mathjax for rendering such formulas. Thus, in order to allow RAJE-core to edit formulas, we have developed a modal dialog that has been defined outside TinyMCE. This modal dialog, shown in </span><a href="#img_3"> </a><span style="font-size: 12pt;">, allows one to write the formulas in <a href="http://asciimath.org/">AsciiMath</a> (input panel) and to visualise them in real-time as SVG content (output panel) by means of MathJax.</span></p>
+<figure id="img_3">
+<p><img src="img/math_formula_editor.png" alt="img/math_formula_editor.png" /></p>
+<figcaption>The modal dialog implementing the RAJE-core editor for mathematical formulas. This editor also provides a toolbar with the AsciiMath templates for several operations, symbols and formulas.</figcaption>
+</figure>
+<p>When a formula is added (by pressing the button <em>add formula</em>), the related SVG content is added in the TinyMCE content with an additional attribute, i.e. <code>&#x200B;data-mathml&#x200B;</code>, which includes the MathML representation of the formula so as to be used when storing the document. This allows us to easily transform the formula from the SVG format into MathML during the de-RASHing process, obtaining a RASH source with only MathML formulas. Similarly, during the start-up of RAJE-core, all the formulas (which are stored in MathML in the RASH source) are temporarily moved in a wrapper element outside TinyMCE, processed in SVG, and then put again in the editor body as SVG content.</p>
+<p>Another important difference with the previous version of RAJE is the way the article metadata (title, authors, keywords, etc.) are handled in the new version. In particular, we have developed a modal dialog which is opened once one click on any metadata. In addition, the order of the authors can be changed by dragging and dropping them in the favourite position. All these choices made the interaction with RAJE much easier and comfortable for the final users.</p>
+</section>
+<section id="section7">
+<h1>RAJE-app</h1>
+<p><span style="font-size: 12pt;">The <a href="https://rash-framework.github.io/raje-app/">RAJE-app</a> is the wordprocessor that enables one to load, save and modify HTML documents compliant with RASH. Technically speaking, it is a wrapper (as defined in <a href="#img_1"> </a>) that reuses RAJE-core and adopts</span><span style="font-size: 12pt;"> </span><a href="https://electronjs.org/" style="background-color: #ffffff; font-size: 12pt;">Electron</a><span style="font-size: 12pt;"> for developing a standalone application &#x2013; available for Apple OS X, Microsoft Windows, and Linux. The main responsibility of the RAJE-app is to wrap the core and manage communications between it and other external actors. For instance, it implements the storing of RASH documents by following the process introduced in <a href="#img_5"> </a>. </span></p>
+<figure id="img_5">
+<p><img src="img/UML-save process.png" alt="img/UML-save process.png" /></p>
+<figcaption>A UML diagram that shows how the save process implemented by RAJE-app (i.e. the wrapper) works.</figcaption>
+</figure>
+<p>The system uses a similar approach to implement other functionalities as well. For instance, RAJE-app integrates <a href="http://nodegit.org/">NodeGit</a>, i.e. a Node.js module that imports a light git standalone, so as to implement the storing of an article within a GitHub repository. While it would be possible to use directly the GitHub API for addressing this operation (which was the approach used in the old version of RAJE), having a real local git repository works better since a single commit can wrap more files &#x2013; something that cannot be done by using the GitHub API &#x2013; and it can also be performed offline. Thus, the use of NodeGit enables RAJE to have an easier versions management, and it also opens up to the development of further complex actions (to be implemented). Examples are merging shared articles and restoring a particular version of an article; note also that the whole set of Git functionalities is supported by NodeGit. It is worth mentioning that, while RAJE-app is already integrated with Git, the integration with GitHub is still under development.</p>
+</section>
+<section id="section8">
+<h1>Testing the wordprocessor</h1>
+<p>The new version of the wordprocessor, i.e. RAJE-app, is depicted in <a href="#img_6"> </a>. It is a quite simple and intuitive interface, composed by a toolbar, which allows one to add all the elements introduced in RASH, and the content of the article one is writing. This demo paper has been written by using RAJE-app, and it is available at <a href="https://w3id.org/people/essepuntato/papers/raje-www2018.html">https://w3id.org/people/essepuntato/papers/raje-www2018.html</a>.</p>
+<figure id="img_6">
+<p><img src="img/RAJE with doc.png" alt="img/RAJE with doc.png" /></p>
+<figcaption>A screenshot of RAJE-app, showing the RASH version of <a href="#biblioentry_7"> </a>.</figcaption>
+</figure>
+<p>In the past months, we have also tested extensively the new version of the editor by using it to create the entire set of <a href="https://github.com/essepuntato/comp-think/">lecture notes of the Computational Thinking and Programming course</a> of the Digital Humanities and Digital Knowledge second-cycle degree at the University of Bologna, Italy. In practice, after the first stable version of the new RAJE-app was released in early November, one of the authors of this paper started to use it on daily basis for writing the lecture notes of the course. The official GitHub repository of RAJE-app was used to collect issues. This has brought to the creation of <a href="https://github.com/rash-framework/raje-app/releases">12 releases</a> so far (as of 7 January 2018), which every time improved the stability of the editor and the functionalities it provides.</p>
+</section>
+</section>
+<section id="section4">
+<h1>Conclusions</h1>
+<p>In this paper, we have briefly introduced the re-engineered version of RAJE, i.e. a wordprocessor for writing scholarly papers in HTML compliant with RASH. In particular, we have presented the new modules developed for implementing the tool, i.e. RAJE-core, which implements the editing features, and RAJE-app, i.e. the standalone wordprocessor that reuses RAJE-core and extends it with storing capabilities. We have also briefly described the main differences with the previous version of RAJE described in <a href="#biblioentry_7"> </a> in terms of functionalities, modularity and stability of the editor.</p>
+<p>In the future, we plan to develop additional functionalities. For instance, we currently developing a mechanism for reading and writing annotations compliant with the Web Annotation Vocabulary <a href="#biblioentry_11"> </a>, and we also plan to include a spell-checker in the editor so as to facilitate users in correcting grammar mistakes and typos. </p>
+</section>
+<section id="doc-acknowledgements" role="doc-acknowledgements">
+<h1>Acknowledgements</h1>
+<p>We would like to thank all the participants in the user testing sessions described in <a href="#biblioentry_7"> </a>, who have provided us useful feedback that has been reused for improving RAJE &#x2013; and that resulted in the re-enginering process described in this paper.</p>
+</section>
+<section id="doc-bibliography" role="doc-bibliography">
+<h1>References</h1>
+<ul>
+<li role="doc-biblioentry" id="biblioentry_9">
+<p>Capadisli, S., Guy, A., Verborgh, R., Lange, C., Auer, S., Berners-Lee, T. (2017). Decentralised Authoring, Annotations and Notifications for a Read-Write-Web with dokieli. In Proceedings of the 17th International Conference on Web Engineering (ICWE 2017): 469-481. DOI: <a href="https://doi.org/10.1007/978-3-319-60131-1_33">https://doi.org/10.1007/978-3-319-60131-1_33</a></p>
+</li>
+<li role="doc-biblioentry" id="biblioentry_10">
+<p>Peroni S., Osborne F., Di Iorio A., Nuzzolese A. G., Poggi F., Vitali F., Motta E. (2017). Research Articles in Simplified HTML: a Web-first format for HTML-based scholarly articles. PeerJ Computer Science, 3: e132. DOI: <a href="https://doi.org/10.7717/peerj-cs.132">https://doi.org/10.7717/peerj-cs.132</a></p>
+</li>
+<li role="doc-biblioentry" id="biblioentry_11">
+<p>Sanderson, R., Ciccarese, P., Young, B. (2017). Web Annotation Vocabulary. W3C Recommendation 23 February 2017. <a href="https://www.w3.org/TR/annotation-vocab/">https://www.w3.org/TR/annotation-vocab/</a> (last visited 7 January 2018)</p>
+</li>
+<li role="doc-biblioentry" id="biblioentry_7">
+<p>Spinaci, G., Peroni, S., Di Iorio, A., Poggi, F., Vitali, F. (2017). The RASH JavaScript Editor (RAJE): A Wordprocessor for Writing Web-first Scholarly Articles. In Proceedings of the 2017 ACM Symposium on Document Engineering (DocEng 2017): 85-94. DOI: <a href="http://doi.acm.org/10.1145/3103010.3103018">http://doi.acm.org/10.1145/3103010.3103018</a></p>
+</li>
+</ul>
+</section></body></html>
