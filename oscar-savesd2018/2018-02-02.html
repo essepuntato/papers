@@ -4,11 +4,11 @@
    <head>
       <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
-      <link rel="stylesheet" href="css/bootstrap.min.css"/>
-      <link rel="stylesheet" href="css/rash.css"/>
-      <script src="js/jquery.min.js"> </script>
-      <script src="js/bootstrap.min.js"> </script>
-      <script src="js/rash.js"> </script>
+      <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="../css/rash.css"/>
+      <script src="../js/jquery.min.js"> </script>
+      <script src="../js/bootstrap.min.js"> </script>
+      <script src="../js/rash.js"> </script>
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
       <title>OSCAR: A customisable tool for free-text search over SPARQL endpoints</title>
       <meta about="#affiliation-1"
@@ -58,6 +58,9 @@
       <section role="doc-abstract">
          <h1>Abstract</h1>
          <p>SPARQL is a very powerful query language, that can be used to retrieve data that follow specific patterns. In order to foster the availability of scholarly data on the Web, several project and institutions make available Web interfaces to their SPARQL endpoints so as to enable a user to search for information in the RDF datasets they expose. However, SPARQL is quite complex to learn, and usually it is fully accessible only to experts in Semantic Web technologies, remaining completely obscure to ordinary Web users. In this paper we introduce OSCAR, the OpenCitations RDF Search Application, which is a user-friendly search platform that can be used with any RDF triplestore providing a SPARQL endpoint. We present its main features and demonstrate how it can be adapted to work with different SPARQL endpoints containing scholarly data, <em>vis</em> OpenCitations, ScholarlyData and Wikidata. We conclude by discussing the results of a user testing session that reveal the usability of the OSCAR search interface when used to access information within the OpenCitations Corpus.</p>
+         <p><strong>Notes:</strong> prepring submitted to <a href="https://save-sd.github.io/2018/">SAVE-SD 2018</a>.</p>
+         <p><strong>This version:</strong> <a href="https://w3id.org/people/essepuntato/papers/oscar-savesd2018/2018-02-02.html">https://w3id.org/people/essepuntato/papers/oscar-savesd2018/2018-02-02.html</a></p>
+         <p><strong>Last version:</strong> <a href="https://w3id.org/people/essepuntato/papers/oscar-savesd2018.html">https://w3id.org/people/essepuntato/papers/oscar-savesd2018.html</a></p>
       </section>
       <section>
          <h1>Introduction</h1>
@@ -152,7 +155,7 @@
             <p>The workflow implemented by OSCAR is described in <a href="#refIllustration0"> </a>, where we introduce all the operations that OSCAR enables, and the various steps it runs as consequence of such operations. The process starts with the generation of the search interface, which is the mechanism used to permit someone to input a textual query within in the text search box provided by the interface.</p>
             <figure id="refIllustration0">
                <p>
-                  <img src="img/100000000000042100000182D2277F2E.png"
+                  <img src="img-2018-02-02/100000000000042100000182D2277F2E.png"
                        alt="The workflow implemented by OSCAR (in blue, at the top) and the set of operations that a user can perform by using the interface. Each operation is connected to the particular step within the workflow that will be executed as a consequence of that operation."/>
                </p>
                <figcaption>The workflow implemented by OSCAR (in blue, at the top) and the set of operations that a user can perform by using the interface. Each operation is connected to the particular step within the workflow that will be executed as a consequence of that operation.</figcaption>
@@ -325,7 +328,7 @@
             <a href="#__RefNumPara__1618_132580619"> </a> is an open repository of scholarly citation data bibliographic information we we have developed, which has been the main target for the development of OSCAR. The OCC triplestore contains such open scholarly citation and bibliographic data. The OSCAR search interface for the OpenCitations Corpus can be seen and used at see <a href="http://opencitations.net/search">http://opencitations.net/search</a>. The use of OSCAR in this context concerns the search for two basic entities included in the OCC: documents (bibliographic resources) and authors. Currently, the free-text search allows the recognition of three different types of input:: DOIs, ORCIDs, and any other textual string which can refer to a document or identify an author. In <a href="#refIllustration1"> </a>, we depict a screenshot of OSCAR after the execution of a free text search using the string <q>machine learning</q>.</p>
          <figure id="refIllustration1">
             <p>
-               <img src="img/100002010000073A000004A03371B3F0.png"
+               <img src="img-2018-02-02/100002010000073A000004A03371B3F0.png"
                     alt="The tool in OpenCitations Web site: results after the application of a search using the text string “machine learning”."/>
             </p>
             <figcaption>The tool in OpenCitations Web site: results after the application of a search using the text string <q>machine learning</q>.</figcaption>
